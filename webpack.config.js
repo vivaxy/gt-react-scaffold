@@ -8,6 +8,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var devPort = 8080;
 var SOURCE_PATH = 'source';
 var RELEASE_PATH = 'release';
 
@@ -26,7 +27,9 @@ var webpackConfig = { // eslint-disable-line no-var
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                loaders: [
+                    'babel-loader'
+                ]
             },
             {
                 test: /\.json$/,
@@ -41,32 +44,16 @@ var webpackConfig = { // eslint-disable-line no-var
     plugins: []
 };
 
-switch (NODE_ENV) {
-    case 'dev':
-        webpackConfig.devtool = 'eval';
-        webpackConfig.devServer = {
-            inline: true,
-            open: true // for webpack-dev-server version > 2
-        };
-        break;
-    case 'production':
-        webpackConfig.devtool = 'source-map';
-        webpackConfig.plugins.push(new webpack.DefinePlugin({
-            'process.env': { // eslint-disable-line quote-props
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }));
-        break;
-    default:
-        throw new Error('NODE_ENV not found, NODE_ENV=' + NODE_ENV); // eslint-disable-line prefer-template
-}
+var entryFileNameList = glob.sync(path.join(SOURCE_PATH, 'html') + '/*.html');
+var entryNameList = entryFileNameList.map(function (entryFileName) {
+    return path.basename(entryFileName, '.html');
+});
 
-var entryList = glob.sync(path.join(SOURCE_PATH, 'entry') + '/*.js');
-
-entryList.forEach(function (entryFileName) {
-    var entryName = path.basename(entryFileName, '.js');
+entryNameList.forEach(function (entryName) {
     var entry = webpackConfig.entry;
-    entry[entryName] = path.join(__dirname, `./${SOURCE_PATH}/entry/${entryName}.js`);
+    entry[entryName] = [
+        path.join(__dirname, `./${SOURCE_PATH}/entry/${entryName}.js`)
+    ];
 
     var plugins = webpackConfig.plugins;
     plugins.push(new HtmlWebpackPlugin({
@@ -80,5 +67,46 @@ entryList.forEach(function (entryFileName) {
         ]
     }));
 });
+
+switch (NODE_ENV) {
+    case 'dev':
+
+        webpackConfig.module.loaders[0].loaders.unshift('react-hot');
+
+        webpackConfig.output.publicPath = `/${RELEASE_PATH}/`;
+
+        var entry = webpackConfig.entry;
+        entryNameList.forEach(function (entryName) {
+            entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + devPort);
+            entry[entryName].unshift('webpack/hot/log-apply-result');
+            entry[entryName].unshift('webpack/hot/only-dev-server');
+        });
+
+        webpackConfig.devtool = 'eval';
+
+        webpackConfig.devServer = {
+            hot: true,
+            historyApiFallback: true,
+            port: devPort,
+            stats: {
+                colors: true
+            }
+        };
+
+        var plugins = webpackConfig.plugins;
+        plugins.push(new webpack.HotModuleReplacementPlugin());
+
+        break;
+    case 'production':
+        webpackConfig.devtool = 'source-map';
+        webpackConfig.plugins.push(new webpack.DefinePlugin({
+            'process.env': { // eslint-disable-line quote-props
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }));
+        break;
+    default:
+        throw new Error('NODE_ENV not found, NODE_ENV=' + NODE_ENV); // eslint-disable-line prefer-template
+}
 
 module.exports = webpackConfig;

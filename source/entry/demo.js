@@ -6,7 +6,6 @@
 import React, {Component} from 'react';
 import {combineReducers} from 'redux';
 import {connect} from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import render from '../library/render';
 import DemoComponent from '../component/Demo';
@@ -25,10 +24,11 @@ class Demo extends Component {
 
     render () {
         let {buttonLoading, setButtonLoading, setButtonDefault} = this.props;
-        return <MuiThemeProvider>
-            <DemoComponent buttonLoading={buttonLoading} setButtonLoading={setButtonLoading}
-                           setButtonDefault={setButtonDefault}/>
-        </MuiThemeProvider>;
+        return <div>
+            <div>343</div>
+                <DemoComponent buttonLoading={buttonLoading} setButtonLoading={setButtonLoading}
+                               setButtonDefault={setButtonDefault}/>
+        </div>
     }
 
 }
@@ -37,4 +37,4 @@ let reducers = combineReducers({
     buttonLoading
 });
 
-render(Demo, reducers);
+export default render(Demo, reducers);

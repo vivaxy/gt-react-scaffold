@@ -10,7 +10,7 @@ react redux material-ui
 ## local develop
 
 - > npm run dev
-- open in browser http://127.0.0.1:8080/html/demo.html
+- open in browser http://127.0.0.1:8080/release/html/demo.html
 
 ## build
 

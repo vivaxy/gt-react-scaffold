@@ -8,6 +8,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, compose} from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const NOOP = () => {
 };
@@ -20,6 +21,16 @@ class App extends Component {
     render () {
         let {reducers} = this.props;
         let store = createStore(reducers, window.devToolsExtension && window.devToolsExtension());
+
+        if (module.hot) {
+            // Enable Webpack hot module replacement for reducers
+            module.hot.accept('../reducer', () => {
+                console.log(arguments);
+                const nextRootReducer = require('../reducer').default;
+                store.replaceReducer(nextRootReducer);
+            });
+        }
+
         return <Provider store={store}>
             {this.props.children}
         </Provider>;
@@ -28,9 +39,11 @@ class App extends Component {
 
 let renderApp = (Entry, reducers = NOOP, element = document.getElementById('app')) => {
     injectTapEventPlugin();
-    render(
+    return render(
         <App reducers={reducers}>
-            <Entry />
+            <MuiThemeProvider>
+                <Entry />
+            </MuiThemeProvider>
         </App>,
         element
     );
