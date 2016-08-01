@@ -25,9 +25,7 @@ class App extends Component {
         if (module.hot) {
             // Enable Webpack hot module replacement for reducers
             module.hot.accept('../reducer', () => {
-                console.log(arguments);
-                const nextRootReducer = require('../reducer').default;
-                store.replaceReducer(nextRootReducer);
+                store.replaceReducer(reducers);
             });
         }
 
