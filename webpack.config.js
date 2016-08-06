@@ -17,11 +17,12 @@ var NODE_ENV = process.env.NODE_ENV || 'production'; // eslint-disable-line no-v
 var webpackConfig = { // eslint-disable-line no-var
     entry: {
         'common': [
+            'babel-polyfill',
+            'whatwg-fetch',
             'react',
             'react-dom',
             'redux',
             'react-redux',
-            'whatwg-fetch',
             'material-ui',
             'react-tap-event-plugin'
         ]
