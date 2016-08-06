@@ -49,7 +49,9 @@ var webpackConfig = { // eslint-disable-line no-var
             }
         ]
     },
-    plugins: []
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin('common', 'js/common.js')
+    ]
 };
 
 var entryFileNameList = glob.sync(path.join(SOURCE_PATH, 'html') + '/*.html');
@@ -107,7 +109,6 @@ switch (NODE_ENV) {
     case 'production':
         webpackConfig.devtool = 'source-map';
         webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
-        webpackConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin('common', 'js/common.js'));
         webpackConfig.plugins.push(new webpack.DefinePlugin({
             'process.env': { // eslint-disable-line quote-props
                 'NODE_ENV': JSON.stringify('production')
