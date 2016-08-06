@@ -3,6 +3,7 @@
  * @author vivaxy
  */
 
+import 'whatwg-fetch';
 import url from 'url';
 import querystring from 'querystring';
 
