@@ -16,7 +16,7 @@ var NODE_ENV = process.env.NODE_ENV || 'production'; // eslint-disable-line no-v
 
 var webpackConfig = { // eslint-disable-line no-var
     entry: {
-        'vendors': [
+        'common': [
             'react',
             'react-dom',
             'redux',
@@ -70,7 +70,7 @@ entryNameList.forEach(function(entryName) {
         hash: true,
         inject: 'body',
         chunks: [
-            'vendors',
+            'common',
             entryName
         ]
     }));
@@ -107,7 +107,7 @@ switch (NODE_ENV) {
     case 'production':
         webpackConfig.devtool = 'source-map';
         webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
-        webpackConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'));
+        webpackConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin('common', 'js/common.js'));
         webpackConfig.plugins.push(new webpack.DefinePlugin({
             'process.env': { // eslint-disable-line quote-props
                 'NODE_ENV': JSON.stringify('production')
