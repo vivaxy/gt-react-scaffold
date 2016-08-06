@@ -8,6 +8,7 @@ import {combineReducers} from 'redux';
 import {connect} from 'react-redux';
 
 import render from '../library/render';
+import Logo from '../component/Logo';
 import DemoComponent from '../component/Demo';
 import buttonLoading from '../reducer/button-loading';
 import {setButtonLoading, setButtonDefault} from '../action/button-loading';
@@ -25,6 +26,7 @@ class Demo extends Component {
     render () {
         let {buttonLoading, setButtonLoading, setButtonDefault} = this.props;
         return <div>
+            <Logo/>
             <div>343</div>
                 <DemoComponent buttonLoading={buttonLoading} setButtonLoading={setButtonLoading}
                                setButtonDefault={setButtonDefault}/>
