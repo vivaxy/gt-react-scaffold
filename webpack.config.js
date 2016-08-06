@@ -16,7 +16,15 @@ var NODE_ENV = process.env.NODE_ENV || 'production'; // eslint-disable-line no-v
 
 var webpackConfig = { // eslint-disable-line no-var
     entry: {
-        'vendors': ['whatwg-fetch']
+        'vendors': [
+            'react',
+            'react-dom',
+            'redux',
+            'react-redux',
+            'whatwg-fetch',
+            'material-ui',
+            'react-tap-event-plugin'
+        ]
     },
     output: {
         path: path.resolve(__dirname, `${RELEASE_PATH}`),
@@ -45,11 +53,11 @@ var webpackConfig = { // eslint-disable-line no-var
 };
 
 var entryFileNameList = glob.sync(path.join(SOURCE_PATH, 'html') + '/*.html');
-var entryNameList = entryFileNameList.map(function (entryFileName) {
+var entryNameList = entryFileNameList.map(function(entryFileName) {
     return path.basename(entryFileName, '.html');
 });
 
-entryNameList.forEach(function (entryName) {
+entryNameList.forEach(function(entryName) {
     var entry = webpackConfig.entry;
     entry[entryName] = [
         path.join(__dirname, `./${SOURCE_PATH}/entry/${entryName}.js`)
@@ -76,7 +84,7 @@ switch (NODE_ENV) {
         webpackConfig.output.publicPath = `/${RELEASE_PATH}/`;
 
         var entry = webpackConfig.entry;
-        entryNameList.forEach(function (entryName) {
+        entryNameList.forEach(function(entryName) {
             entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + devPort);
             entry[entryName].unshift('webpack/hot/log-apply-result');
             entry[entryName].unshift('webpack/hot/only-dev-server');
@@ -95,10 +103,11 @@ switch (NODE_ENV) {
 
         var plugins = webpackConfig.plugins;
         plugins.push(new webpack.HotModuleReplacementPlugin());
-
         break;
     case 'production':
         webpackConfig.devtool = 'source-map';
+        webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
+        webpackConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'));
         webpackConfig.plugins.push(new webpack.DefinePlugin({
             'process.env': { // eslint-disable-line quote-props
                 'NODE_ENV': JSON.stringify('production')
