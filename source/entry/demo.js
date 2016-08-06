@@ -4,7 +4,6 @@
  */
 
 import React, { Component } from 'react';
-import { combineReducers } from 'redux';
 import { connect } from 'react-redux';
 
 import render from '../library/render';
@@ -61,9 +60,9 @@ class Demo extends Component {
 
 }
 
-let reducers = combineReducers({
+let reducers = {
     buttonDisabled: buttonDisabledState,
     newsList: newsListState
-});
+};
 
 export default render(Demo, reducers);

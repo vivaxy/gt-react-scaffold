@@ -3,23 +3,21 @@
  * @author vivaxy
  */
 
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {Provider} from 'react-redux';
-import {createStore, compose} from 'redux';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, compose, combineReducers } from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const NOOP = () => {
-};
-
 class App extends Component {
-    constructor () {
+
+    constructor() {
         super();
     }
 
-    render () {
-        let {reducers} = this.props;
+    render() {
+        let {reducers, children} = this.props;
         let store = createStore(reducers, window.devToolsExtension && window.devToolsExtension());
 
         if (module.hot) {
@@ -31,15 +29,20 @@ class App extends Component {
         }
 
         return <Provider store={store}>
-            {this.props.children}
+            {children}
         </Provider>;
     }
 }
 
-let renderApp = (Entry, reducers = NOOP, element = document.getElementById('app')) => {
+let renderApp = (Entry, reducers = {}, element = document.getElementById('app')) => {
     injectTapEventPlugin();
+
+    let combinedReducers = combineReducers({
+        ...reducers
+    });
+
     return render(
-        <App reducers={reducers}>
+        <App reducers={combinedReducers}>
             <MuiThemeProvider>
                 <Entry />
             </MuiThemeProvider>
