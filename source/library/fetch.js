@@ -9,24 +9,24 @@ import querystring from 'querystring';
 
 import env from './env';
 import {FetchError} from '../error';
+import wrappedSetTimeout from './setTimeout';
 
+const MOCK_TIMEOUT = 1000;
 const API_ROOT = '/api';
-const MOCK_API_ROOT = 'http://127.0.0.1:8081/api';
+const MOCK_API_ROOT = '/mock-server';
 const SUCCESS_CODE_LOWER_BOUND = 200;
 const SUCCESS_CODE_HIGHER_BOUND = 300;
 
-let wrappedFetch = async (config) => { // eslint-disable-line arrow-parens
-    let {method = 'GET', data} = config;
-    let requestPath = config.url;
+let wrappedFetch = async (config) => {
+    let {method = 'GET', data, url: requestPath} = config;
     let REQUEST_PATH;
     switch (env) {
         case 'dev':
-            REQUEST_PATH = MOCK_API_ROOT;
+            requestPath = `${MOCK_API_ROOT}${requestPath}.json`;
             break;
         default:
             break;
     }
-    requestPath = `${REQUEST_PATH}${requestPath}`;
     method = method.toUpperCase();
     let response;
     switch (method) {
@@ -49,6 +49,9 @@ let wrappedFetch = async (config) => { // eslint-disable-line arrow-parens
         default:
             break;
     }
+
+    await wrappedSetTimeout(MOCK_TIMEOUT);
+
     switch (true) {
         case response.status >= SUCCESS_CODE_LOWER_BOUND && response.status < SUCCESS_CODE_HIGHER_BOUND:
             return response;

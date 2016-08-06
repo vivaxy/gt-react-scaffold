@@ -3,11 +3,11 @@
  * @author vivaxy
  */
 
-import * as constant from '../constant';
+import * as constant from '../constant/action';
 
-export const setButtonLoading = () => {
+export const setButtonDisabled = () => {
     return {
-        type: constant.BUTTON_LOADING
+        type: constant.BUTTON_DISABLED
     };
 };
 

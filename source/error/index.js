@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import FetchError from './fetch-error';
+import FetchError from './FetchError';
 
 export {
     FetchError

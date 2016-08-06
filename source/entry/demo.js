@@ -3,40 +3,67 @@
  * @author vivaxy
  */
 
-import React, {Component} from 'react';
-import {combineReducers} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { combineReducers } from 'redux';
+import { connect } from 'react-redux';
 
 import render from '../library/render';
 import Logo from '../component/Logo';
-import DemoComponent from '../component/Demo';
-import buttonLoading from '../reducer/button-loading';
-import {setButtonLoading, setButtonDefault} from '../action/button-loading';
+import getNews from '../api/news';
+import DemoButton from '../component/DemoButton';
+import buttonDisabledState from '../reducer/buttonDisabled';
+import newsListState from '../reducer/newsList';
+import {
+    setButtonDisabled as setButtonDisabledAction,
+    setButtonDefault as setButtonDefaultAction
+} from '../action/buttonDisabled';
+import { appendNewsList as appendNewsListAction } from '../action/appendNewsList';
+
+let newsIndex = 0;
 
 @connect(state => state, {
-    setButtonLoading,
-    setButtonDefault
+    setButtonDisabled: setButtonDisabledAction,
+    setButtonDefault: setButtonDefaultAction,
+    appendNewsList: appendNewsListAction
 })
 class Demo extends Component {
 
-    constructor () {
+    constructor() {
         super();
     }
 
-    render () {
-        let {buttonLoading, setButtonLoading, setButtonDefault} = this.props;
+    componentDidMount() {
+        this.getMoreNews();
+    }
+
+    render() {
+        let {buttonDisabled, newsList} = this.props;
         return <div>
             <Logo/>
-            <div>343</div>
-                <DemoComponent buttonLoading={buttonLoading} setButtonLoading={setButtonLoading}
-                               setButtonDefault={setButtonDefault}/>
+            {newsList.map((news) => {
+                return <div key={`news-${newsIndex++}`}>{news.name}</div>;
+            })}
+            <DemoButton buttonDisabled={buttonDisabled} onLoadMore={::this.getMoreNews}/>
         </div>
+    }
+
+    getMoreNews() {
+        let {appendNewsList, setButtonDefault, setButtonDisabled} = this.props;
+        setButtonDisabled();
+        getNews()
+            .then((list) => {
+                appendNewsList(list);
+            })
+            .then(() => {
+                setButtonDefault();
+            });
     }
 
 }
 
 let reducers = combineReducers({
-    buttonLoading
+    buttonDisabled: buttonDisabledState,
+    newsList: newsListState
 });
 
 export default render(Demo, reducers);

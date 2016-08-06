@@ -3,13 +3,13 @@
  * @author vivaxy
  */
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import logoImage from '../image/vivaxy.20150726.jpg';
 
-class Logo extends Component {
+export default class Logo extends Component {
 
-    render () {
+    render() {
 
         let style = {
             width: '100px',
@@ -22,5 +22,3 @@ class Logo extends Component {
     }
 
 }
-
-export default Logo;
