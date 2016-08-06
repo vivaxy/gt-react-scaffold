@@ -45,7 +45,7 @@ var webpackConfig = { // eslint-disable-line no-var
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                loader: 'file-loader?name=[name]-[hash].[ext]'
+                loader: 'file-loader?name=image/[name]-[hash].[ext]'
             }
         ]
     },
