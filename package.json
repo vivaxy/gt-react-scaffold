@@ -4,7 +4,7 @@
   "description": "react",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "NODE_ENV=dev webpack-dev-server --progress",
+    "dev": "NODE_ENV=development webpack-dev-server --progress",
     "build": "rm -rf ./release && mkdir ./release && webpack --progress --display-chunks --display-reasons --display-error-details --display-modules --display-exclude > ./release/build.log"
   },
   "repository": {

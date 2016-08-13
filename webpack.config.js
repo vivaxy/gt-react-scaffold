@@ -7,15 +7,16 @@ var glob = require('glob');
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var WebpackBrowserPlugin = require('webpack-browser-plugin');
-// var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
-var devPort = 8080;
+var DEVELOPMENT_PORT = 8080;
 var SOURCE_PATH = 'source';
 var RELEASE_PATH = 'release';
-var BANNER = 'vivaxy@2016';
+var DEVELOPMENT = 'development';
+var PRODUCTION = 'production';
 
-var NODE_ENV = process.env.NODE_ENV || 'production';
+var BANNER = '@2016 vivaxy';
+
+var NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 
 var webpackConfig = {
     entry: {
@@ -40,22 +41,21 @@ var webpackConfig = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'babel-loader'
+                    'babel'
                 ]
             },
             {
                 test: /\.json$/,
-                loader: 'json-loader'
+                loader: 'json'
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                loader: 'file-loader?name=image/[name]-[hash].[ext]'
+                loader: 'file?name=image/[name]-[hash].[ext]'
             }
         ]
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('common', 'js/common.js')
-        // new FaviconsWebpackPlugin(`./${SOURCE_PATH}/image/vivaxy.20150726.jpg`)
     ]
 };
 
@@ -84,7 +84,7 @@ entryNameList.forEach(function(entryName) {
 });
 
 switch (NODE_ENV) {
-    case 'dev':
+    case DEVELOPMENT:
 
         webpackConfig.module.loaders[0].loaders.unshift('react-hot');
 
@@ -92,7 +92,7 @@ switch (NODE_ENV) {
 
         var entry = webpackConfig.entry;
         entryNameList.forEach(function(entryName) {
-            entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + devPort);
+            entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + DEVELOPMENT_PORT);
             entry[entryName].unshift('webpack/hot/log-apply-result');
             entry[entryName].unshift('webpack/hot/only-dev-server');
         });
@@ -102,7 +102,7 @@ switch (NODE_ENV) {
         webpackConfig.devServer = {
             hot: true,
             historyApiFallback: true,
-            port: devPort,
+            port: DEVELOPMENT_PORT,
             stats: {
                 colors: true
             }
@@ -110,21 +110,16 @@ switch (NODE_ENV) {
 
         var plugins = webpackConfig.plugins;
         plugins.push(new webpack.HotModuleReplacementPlugin());
-        // plugins.push(new WebpackBrowserPlugin({
-        //     port: devPort,
-        //     browser: 'chrome',
-        //     url: `http://127.0.0.1:${devPort}/release/html/demo.html`
-        // }));
         break;
-    case 'production':
+    case PRODUCTION:
         webpackConfig.devtool = 'source-map';
-        webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
         webpackConfig.plugins.push(new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify('production')
+                'NODE_ENV': JSON.stringify(PRODUCTION)
             }
         }));
         webpackConfig.plugins.push(new webpack.BannerPlugin(BANNER));
+        webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
         webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
         break;
     default:
