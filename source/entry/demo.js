@@ -7,16 +7,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import render from '../library/render';
-import Logo from '../component/Logo';
+import setTitle from '../library/setTitle';
+
 import getNews from '../api/news';
+
+import Logo from '../component/Logo';
 import DemoButton from '../component/DemoButton';
+
 import buttonDisabledState from '../reducer/buttonDisabled';
 import newsListState from '../reducer/newsList';
+
 import {
     setButtonDisabled as setButtonDisabledAction,
-    setButtonDefault as setButtonDefaultAction
+    setButtonDefault as setButtonDefaultAction,
 } from '../action/buttonDisabled';
-import { appendNewsList as appendNewsListAction } from '../action/appendNewsList';
+import {
+    appendNewsList as appendNewsListAction,
+} from '../action/appendNewsList';
 
 let newsIndex = 0;
 
@@ -36,6 +43,9 @@ class Demo extends Component {
     }
 
     render() {
+
+        setTitle('demo');
+
         let {buttonDisabled, newsList} = this.props;
         return <div>
             <Logo/>
@@ -65,4 +75,4 @@ let reducers = {
     newsList: newsListState
 };
 
-export default render(Demo, reducers);
+render(Demo, reducers);

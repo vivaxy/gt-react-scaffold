@@ -9,7 +9,7 @@ import querystring from 'querystring';
 
 import env from './env';
 import {FetchError} from '../error';
-import wrappedSetTimeout from './setTimeout';
+import sleep from './sleep';
 
 const MOCK_TIMEOUT = 1000;
 const API_ROOT = '/api';
@@ -50,7 +50,7 @@ let wrappedFetch = async (config) => {
             break;
     }
 
-    await wrappedSetTimeout(MOCK_TIMEOUT);
+    await sleep(MOCK_TIMEOUT);
 
     switch (true) {
         case response.status >= SUCCESS_CODE_LOWER_BOUND && response.status < SUCCESS_CODE_HIGHER_BOUND:

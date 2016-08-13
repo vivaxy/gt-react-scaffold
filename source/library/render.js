@@ -10,6 +10,8 @@ import { createStore, compose, combineReducers } from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import setStyle from '../library/style';
+
 class App extends Component {
 
     constructor() {
@@ -36,6 +38,7 @@ class App extends Component {
 
 let renderApp = (Entry, reducers = {}, element = document.getElementById('app')) => {
     injectTapEventPlugin();
+    setStyle();
 
     let combinedReducers = combineReducers({
         ...reducers

@@ -55,9 +55,9 @@ var webpackConfig = { // eslint-disable-line no-var
     ]
 };
 
-var entryFileNameList = glob.sync(path.join(SOURCE_PATH, 'html') + '/*.html');
+var entryFileNameList = glob.sync(path.join(SOURCE_PATH, 'entry') + '/*.js');
 var entryNameList = entryFileNameList.map(function(entryFileName) {
-    return path.basename(entryFileName, '.html');
+    return path.basename(entryFileName, '.js');
 });
 
 entryNameList.forEach(function(entryName) {
@@ -68,7 +68,7 @@ entryNameList.forEach(function(entryName) {
 
     var plugins = webpackConfig.plugins;
     plugins.push(new HtmlWebpackPlugin({
-        template: `${SOURCE_PATH}/html/${entryName}.html`,
+        template: `${SOURCE_PATH}/html/index.html`,
         filename: `html/${entryName}.html`,
         hash: true,
         inject: 'body',
