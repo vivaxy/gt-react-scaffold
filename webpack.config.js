@@ -7,14 +7,17 @@ var glob = require('glob');
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+// var WebpackBrowserPlugin = require('webpack-browser-plugin');
+// var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 var devPort = 8080;
 var SOURCE_PATH = 'source';
 var RELEASE_PATH = 'release';
+var BANNER = 'vivaxy@2016';
 
-var NODE_ENV = process.env.NODE_ENV || 'production'; // eslint-disable-line no-var, no-process-env
+var NODE_ENV = process.env.NODE_ENV || 'production';
 
-var webpackConfig = { // eslint-disable-line no-var
+var webpackConfig = {
     entry: {
         'common': [
             'babel-polyfill',
@@ -52,6 +55,7 @@ var webpackConfig = { // eslint-disable-line no-var
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('common', 'js/common.js')
+        // new FaviconsWebpackPlugin(`./${SOURCE_PATH}/image/vivaxy.20150726.jpg`)
     ]
 };
 
@@ -106,18 +110,25 @@ switch (NODE_ENV) {
 
         var plugins = webpackConfig.plugins;
         plugins.push(new webpack.HotModuleReplacementPlugin());
+        // plugins.push(new WebpackBrowserPlugin({
+        //     port: devPort,
+        //     browser: 'chrome',
+        //     url: `http://127.0.0.1:${devPort}/release/html/demo.html`
+        // }));
         break;
     case 'production':
         webpackConfig.devtool = 'source-map';
         webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
         webpackConfig.plugins.push(new webpack.DefinePlugin({
-            'process.env': { // eslint-disable-line quote-props
+            'process.env': {
                 'NODE_ENV': JSON.stringify('production')
             }
         }));
+        webpackConfig.plugins.push(new webpack.BannerPlugin(BANNER));
+        webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
         break;
     default:
-        throw new Error('NODE_ENV not found, NODE_ENV=' + NODE_ENV); // eslint-disable-line prefer-template
+        throw new Error('NODE_ENV not found, NODE_ENV=' + NODE_ENV);
 }
 
 module.exports = webpackConfig;
