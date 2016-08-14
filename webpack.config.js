@@ -3,24 +3,28 @@
  * @author vivaxy
  */
 
-var glob = require('glob');
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+'use strict';
 
-var DEVELOPMENT_PORT = 8080;
-var SOURCE_PATH = 'source';
-var RELEASE_PATH = 'release';
-var DEVELOPMENT = 'development';
-var PRODUCTION = 'production';
+const glob = require('glob');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var BANNER = '@2016 vivaxy';
+const DEVELOPMENT_PORT = 8080;
+const SOURCE_PATH = 'source';
+const RELEASE_PATH = 'release';
+const DEVELOPMENT = 'development';
+const PRODUCTION = 'production';
+const COMMON_CHUNK_NAME = 'common';
 
-var NODE_ENV = process.env.NODE_ENV || PRODUCTION;
+const BANNER = '@2016 vivaxy';
 
-var webpackConfig = {
+const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
+
+// default webpack config
+let webpackConfig = {
     entry: {
-        'common': [
+        [COMMON_CHUNK_NAME]: [
             'babel-polyfill',
             'whatwg-fetch',
             'react',
@@ -55,34 +59,38 @@ var webpackConfig = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('common', 'js/common.js')
+        new webpack.optimize.CommonsChunkPlugin({
+            name: COMMON_CHUNK_NAME,
+            filename: 'js/[name].js'
+        })
     ]
 };
 
-var entryFileNameList = glob.sync(path.join(SOURCE_PATH, 'entry') + '/*.js');
-var entryNameList = entryFileNameList.map(function(entryFileName) {
+// get entry
+const entryFileNameList = glob.sync(path.join(SOURCE_PATH, 'entry') + '/*.js');
+const entryNameList = entryFileNameList.map((entryFileName) => {
     return path.basename(entryFileName, '.js');
 });
 
-entryNameList.forEach(function(entryName) {
-    var entry = webpackConfig.entry;
-    entry[entryName] = [
+// set entry
+entryNameList.forEach((entryName) => {
+    webpackConfig.entry[entryName] = [
         path.join(__dirname, `./${SOURCE_PATH}/entry/${entryName}.js`)
     ];
 
-    var plugins = webpackConfig.plugins;
-    plugins.push(new HtmlWebpackPlugin({
+    webpackConfig.plugins.push(new HtmlWebpackPlugin({
         template: `${SOURCE_PATH}/html/index.html`,
         filename: `html/${entryName}.html`,
         hash: true,
         inject: 'body',
         chunks: [
-            'common',
+            COMMON_CHUNK_NAME,
             entryName
         ]
     }));
 });
 
+// set config according to environment
 switch (NODE_ENV) {
     case DEVELOPMENT:
 
@@ -90,11 +98,10 @@ switch (NODE_ENV) {
 
         webpackConfig.output.publicPath = `/${RELEASE_PATH}/`;
 
-        var entry = webpackConfig.entry;
-        entryNameList.forEach(function(entryName) {
-            entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + DEVELOPMENT_PORT);
-            entry[entryName].unshift('webpack/hot/log-apply-result');
-            entry[entryName].unshift('webpack/hot/only-dev-server');
+        entryNameList.forEach((entryName) => {
+            webpackConfig.entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + DEVELOPMENT_PORT);
+            webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
+            webpackConfig.entry[entryName].unshift('webpack/hot/only-dev-server');
         });
 
         webpackConfig.devtool = 'eval';
@@ -108,8 +115,7 @@ switch (NODE_ENV) {
             }
         };
 
-        var plugins = webpackConfig.plugins;
-        plugins.push(new webpack.HotModuleReplacementPlugin());
+        webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         break;
     case PRODUCTION:
         webpackConfig.devtool = 'source-map';
