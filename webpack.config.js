@@ -23,8 +23,6 @@ const BANNER = '@2016 vivaxy';
 
 const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 
-const dashboard = new DashBoard();
-
 // default webpack config
 let webpackConfig = {
     entry: {
@@ -121,6 +119,8 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+        const dashboard = new DashBoard();
         webpackConfig.plugins.push(new DashBoardPlugin(dashboard.setData));
 
         break;
