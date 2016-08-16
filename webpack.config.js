@@ -8,6 +8,8 @@
 const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
+const DashBoard = require('webpack-dashboard');
+const DashBoardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const DEVELOPMENT_PORT = 8080;
@@ -20,6 +22,8 @@ const COMMON_CHUNK_NAME = 'common';
 const BANNER = '@2016 vivaxy';
 
 const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
+
+const dashboard = new DashBoard();
 
 // default webpack config
 let webpackConfig = {
@@ -108,6 +112,7 @@ switch (NODE_ENV) {
 
         webpackConfig.devServer = {
             hot: true,
+            quiet: true,
             historyApiFallback: true,
             port: DEVELOPMENT_PORT,
             stats: {
@@ -116,6 +121,8 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+        webpackConfig.plugins.push(new DashBoardPlugin(dashboard.setData));
+
         break;
     case PRODUCTION:
         webpackConfig.devtool = 'source-map';
