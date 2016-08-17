@@ -14,6 +14,8 @@ import getNews from '../api/news';
 import Logo from '../component/Logo';
 import DemoButton from '../component/DemoButton';
 
+import i18n from '../i18n';
+
 import buttonDisabledState from '../reducer/buttonDisabled';
 import newsListState from '../reducer/newsList';
 
@@ -26,6 +28,8 @@ import {
 } from '../action/appendNewsList';
 
 let newsIndex = 0;
+const LANGUAGE = 'zh-cn';
+const language = i18n[LANGUAGE];
 
 @connect(state => state, {
     setButtonDisabled: setButtonDisabledAction,
@@ -44,7 +48,7 @@ class Demo extends Component {
 
     render() {
 
-        setTitle('demo');
+        setTitle(language.SOMEONE_S_HOME('vivaxy'));
 
         let {buttonDisabled, newsList} = this.props;
         return <div>
