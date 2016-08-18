@@ -8,8 +8,6 @@
 const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
-const DashBoard = require('webpack-dashboard');
-const DashBoardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const DEVELOPMENT_PORT = 8080;
@@ -119,9 +117,6 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-
-        const dashboard = new DashBoard();
-        webpackConfig.plugins.push(new DashBoardPlugin(dashboard.setData));
 
         break;
     case PRODUCTION:
