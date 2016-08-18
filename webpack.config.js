@@ -108,7 +108,6 @@ switch (NODE_ENV) {
 
         webpackConfig.devServer = {
             hot: true,
-            quiet: true,
             historyApiFallback: true,
             port: DEVELOPMENT_PORT,
             stats: {
