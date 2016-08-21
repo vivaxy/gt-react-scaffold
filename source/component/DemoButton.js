@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
 export default class DemoButton extends Component {
@@ -21,3 +21,8 @@ export default class DemoButton extends Component {
         onLoadMore();
     }
 }
+
+DemoButton.propTypes = {
+    buttonDisabled: PropTypes.bool.isRequired,
+    onLoadMore: PropTypes.func.isRequired,
+};
