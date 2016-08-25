@@ -3,16 +3,16 @@
  * @author vivaxy
  */
 
-class FetchError extends Error {
+import * as constant from '../constant/error';
+
+export default class FetchError extends Error {
     constructor (response) {
         super(response.statusText);
         this.response = response;
-        this.name = 'FetchError';
+        this.name = constant.FETCH;
     }
 }
 
 FetchError.create = (response) => {
     return new FetchError(response);
 };
-
-export default FetchError;

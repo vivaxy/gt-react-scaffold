@@ -6,6 +6,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import * as errorConstant from '../constant/error';
+
 import render from '../library/render';
 import setTitle from '../library/setTitle';
 
@@ -75,7 +77,7 @@ class Demo extends Component {
             setButtonDefaultAction();
         } catch (ex) {
             switch (ex.name) {
-                case 'FetchError':
+                case errorConstant.FETCH:
                     toastMessageAction(ex.message);
                     break;
                 default:
