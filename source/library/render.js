@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, compose } from 'redux';
+import { createStore } from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -37,7 +37,7 @@ class App extends Component {
     }
 }
 
-let renderApp = (Entry, element = document.getElementById('app')) => {
+export default (Entry, element = document.getElementById('app')) => {
 
     injectTapEventPlugin();
     setStyle();
@@ -51,5 +51,3 @@ let renderApp = (Entry, element = document.getElementById('app')) => {
         element
     );
 };
-
-export default renderApp;
