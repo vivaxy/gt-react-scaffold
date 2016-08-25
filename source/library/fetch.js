@@ -5,46 +5,46 @@
 
 import 'whatwg-fetch';
 import url from 'url';
-import querystring from 'querystring';
 
-import env from './env';
-import {FetchError} from '../error';
+import * as requestMethodConstant from '../constant/requestMethod';
+import getRequestPath from './requestPath';
+import { FetchError } from '../error';
 import sleep from './sleep';
 
 const MOCK_TIMEOUT = 1000;
-const API_ROOT = '/api';
-const MOCK_API_ROOT = '/mock-server';
 const SUCCESS_CODE_LOWER_BOUND = 200;
 const SUCCESS_CODE_HIGHER_BOUND = 300;
 
-let wrappedFetch = async (config) => {
-    let {method = 'GET', data, url: requestPath} = config;
-    let REQUEST_PATH;
-    switch (env) {
-        case 'dev':
-            requestPath = `${MOCK_API_ROOT}${requestPath}.json`;
-            break;
-        default:
-            break;
-    }
+const basicFetchOptions = {
+    credentials: 'same-origin',
+};
+
+export default async (config) => {
+
+    let {
+        method = requestMethodConstant.GET,
+        data,
+        url: requestPath,
+    } = config;
+
+    requestPath = getRequestPath(requestPath);
     method = method.toUpperCase();
+
     let response;
+
     switch (method) {
-        case 'GET':
+        case requestMethodConstant.GET:
             requestPath = url.format({
                 pathname: requestPath,
-                query: querystring.stringify(data)
+                query: data
             });
-            response = await fetch(requestPath, {
-                credentials: 'same-origin'
-            });
+            response = await fetch(requestPath, Object.assign({}, basicFetchOptions));
             break;
-        case 'POST':
-            response = await fetch(requestPath, {
+        case requestMethodConstant.POST:
+            response = await fetch(requestPath, Object.assign({}, basicFetchOptions, {
                 method,
                 body: JSON.stringify(data),
-                credentials: 'same-origin'
-            });
+            }));
             break;
         default:
             break;
@@ -59,5 +59,3 @@ let wrappedFetch = async (config) => {
             throw new FetchError(response);
     }
 };
-
-export default wrappedFetch;
