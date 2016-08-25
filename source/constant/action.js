@@ -6,3 +6,4 @@
 export const BUTTON_DISABLED = 'button-disabled';
 export const BUTTON_DEFAULT = 'button-default';
 export const APPEND_NEWS = 'append-news';
+export const TOAST_MESSAGE = 'toast-message';

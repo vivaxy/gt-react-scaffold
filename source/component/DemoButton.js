@@ -10,14 +10,18 @@ export default class DemoButton extends Component {
 
     render() {
 
-        let {buttonDisabled} = this.props;
+        let {
+            buttonDisabled,
+        } = this.props;
 
         return <RaisedButton label='load more' disabled={buttonDisabled} primary={true} onClick={::this.onClick}/>
     }
 
     onClick() {
 
-        let {onLoadMore} = this.props;
+        let {
+            onLoadMore,
+        } = this.props;
         onLoadMore();
     }
 }

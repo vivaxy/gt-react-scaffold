@@ -6,20 +6,21 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, compose, combineReducers } from 'redux';
+import { createStore, compose } from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import setStyle from '../library/style';
+import reducers from '../reducer';
 
 class App extends Component {
 
-    constructor() {
-        super();
-    }
+    render () {
 
-    render() {
-        let {reducers, children} = this.props;
+        let {
+            children,
+        } = this.props;
+
         let store = createStore(reducers, window.devToolsExtension && window.devToolsExtension());
 
         if (module.hot) {
@@ -36,16 +37,13 @@ class App extends Component {
     }
 }
 
-let renderApp = (Entry, reducers = {}, element = document.getElementById('app')) => {
+let renderApp = (Entry, element = document.getElementById('app')) => {
+
     injectTapEventPlugin();
     setStyle();
 
-    let combinedReducers = combineReducers({
-        ...reducers
-    });
-
     return render(
-        <App reducers={combinedReducers}>
+        <App>
             <MuiThemeProvider>
                 <Entry />
             </MuiThemeProvider>

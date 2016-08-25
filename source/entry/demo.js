@@ -16,67 +16,75 @@ import DemoButton from '../component/DemoButton';
 
 import i18n from '../i18n';
 
-import buttonDisabledState from '../reducer/buttonDisabled';
-import newsListState from '../reducer/newsList';
-
 import {
     setButtonDisabled as setButtonDisabledAction,
     setButtonDefault as setButtonDefaultAction,
-} from '../action/buttonDisabled';
+} from '../action/button';
 import {
     appendNewsList as appendNewsListAction,
-} from '../action/appendNewsList';
+} from '../action/newsList';
+import {
+    toastMessage as toastMessageAction,
+} from '../action/toastMessage';
 
 let newsIndex = 0;
-const LANGUAGE = 'zh-cn';
-const language = i18n[LANGUAGE];
 
-@connect(state => state, {
-    setButtonDisabled: setButtonDisabledAction,
-    setButtonDefault: setButtonDefaultAction,
-    appendNewsList: appendNewsListAction
+@connect(state => ({
+    buttonState: state.button,
+    newsListState: state.newsList,
+    toastMessageState: state.toastMessage,
+}), {
+    setButtonDisabledAction,
+    setButtonDefaultAction,
+    appendNewsListAction,
+    toastMessageAction,
 })
 class Demo extends Component {
 
-    constructor() {
-        super();
-    }
-
-    componentDidMount() {
+    componentDidMount () {
         this.getMoreNews();
     }
 
-    render() {
+    render () {
 
-        setTitle(language.SOMEONE_S_HOME('vivaxy'));
+        setTitle(i18n.SOMEONE_S_HOME('vivaxy'));
 
-        let {buttonDisabled, newsList} = this.props;
+        let {
+            buttonState,
+            newsListState,
+        } = this.props;
         return <div>
             <Logo/>
-            {newsList.map((news) => {
+            {newsListState.map((news) => {
                 return <div key={`news-${newsIndex++}`}>{news.name}</div>;
             })}
-            <DemoButton buttonDisabled={buttonDisabled} onLoadMore={::this.getMoreNews}/>
+            <DemoButton buttonDisabled={!buttonState} onLoadMore={::this.getMoreNews}/>
         </div>
     }
 
-    getMoreNews() {
-        let {appendNewsList, setButtonDefault, setButtonDisabled} = this.props;
-        setButtonDisabled();
-        getNews()
-            .then((list) => {
-                appendNewsList(list);
-            })
-            .then(() => {
-                setButtonDefault();
-            });
+    async getMoreNews () {
+        try {
+            let {
+                appendNewsListAction,
+                setButtonDefaultAction,
+                setButtonDisabledAction,
+            } = this.props;
+            setButtonDisabledAction();
+            let list = await getNews();
+            appendNewsListAction(list);
+            setButtonDefaultAction();
+        } catch (ex) {
+            switch (ex.name) {
+                case 'FetchError':
+                    toastMessageAction(ex.message);
+                    break;
+                default:
+                    throw ex;
+                    break;
+            }
+        }
     }
 
 }
 
-let reducers = {
-    buttonDisabled: buttonDisabledState,
-    newsList: newsListState
-};
-
-render(Demo, reducers);
+render(Demo);

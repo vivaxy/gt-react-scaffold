@@ -1,5 +1,5 @@
 /**
- * @since 2016-08-06 16:07
+ * @since 2016-08-25 09:31
  * @author vivaxy
  */
 
@@ -7,10 +7,10 @@ import createReducer from '../library/createReducer';
 
 import * as constant from '../constant/action';
 
-const defaultState = [];
+const defaultState = '';
 
 export default createReducer(defaultState, {
-    [constant.APPEND_NEWS]: (state, action) => {
-        return state.concat(action.list);
-    },
+    [constant.TOAST_MESSAGE]: (state, action) => {
+        return action.message;
+    }
 });

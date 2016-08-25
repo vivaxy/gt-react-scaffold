@@ -3,4 +3,14 @@
  * @author vivaxy
  */
 
-export default {};
+import { combineReducers } from 'redux';
+
+import button from './button';
+import newsList from './newsList';
+import toastMessage from './toastMessage';
+
+export default combineReducers({
+    button,
+    newsList,
+    toastMessage,
+});
