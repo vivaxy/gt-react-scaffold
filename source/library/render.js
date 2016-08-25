@@ -13,6 +13,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import setStyle from '../library/style';
 import reducers from '../reducer';
 
+const ID_SELECTOR = 'app';
+
 class App extends Component {
 
     render () {
@@ -37,7 +39,7 @@ class App extends Component {
     }
 }
 
-export default (Entry, element = document.getElementById('app')) => {
+export default (Entry, element = document.getElementById(ID_SELECTOR)) => {
 
     injectTapEventPlugin();
     setStyle();
