@@ -54,7 +54,7 @@ let webpackConfig = {
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                loader: 'file?name=image/[name]-[hash].[ext]'
+                loader: 'url?limit=8192&name=image/[name]-[hash].[ext]'
             }
         ]
     },

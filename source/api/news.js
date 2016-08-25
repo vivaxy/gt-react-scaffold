@@ -8,7 +8,7 @@ import fetch from '../library/fetch';
 export default async () => {
 
     let result = await fetch({
-        url: '/news-by-page',
+        url: '/newsByPage',
         data: ''
     });
 

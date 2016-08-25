@@ -3,12 +3,14 @@
  * @author vivaxy
  */
 
-let env = 'production';
+import * as environmentConstant from '../constant/environment';
+
+let env = environmentConstant.PRODUCTION;
 
 let host = location.host;
 
 if (host === '127.0.0.1:8080') {
-    env = 'dev';
+    env = environmentConstant.DEVELOPMENT;
 }
 
 export default env;
