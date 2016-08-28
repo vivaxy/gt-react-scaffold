@@ -49,6 +49,21 @@ let webpackConfig = {
                 ]
             },
             {
+                test: /\.css$/,
+                loaders: [
+                    'style',
+                    'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
+                ]
+            },
+            {
+                test: /\.less$/,
+                loaders: [
+                    'style',
+                    'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
+                    'less',
+                ]
+            },
+            {
                 test: /\.json$/,
                 loader: 'json'
             },
