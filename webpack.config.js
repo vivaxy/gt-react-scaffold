@@ -134,6 +134,7 @@ switch (NODE_ENV) {
 
         break;
     case PRODUCTION:
+        webpackConfig.output.publicPath = '../';
         webpackConfig.devtool = 'source-map';
         webpackConfig.plugins.push(new webpack.DefinePlugin({
             'process.env': {
