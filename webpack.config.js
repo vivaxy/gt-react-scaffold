@@ -94,7 +94,7 @@ entryNameList.forEach((entryName) => {
     ];
 
     webpackConfig.plugins.push(new HtmlWebpackPlugin({
-        template: `${SOURCE_PATH}/html/index.html`,
+        template: `${SOURCE_PATH}/html/template.html`,
         filename: `html/${entryName}.html`,
         hash: true,
         inject: 'body',
