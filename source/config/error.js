@@ -3,4 +3,5 @@
  * @author vivaxy
  */
 
-export const FETCH = 'FetchError';
+export const FETCH = 'fetch-error';
+export const SERVER = 'server-error';

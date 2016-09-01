@@ -1,8 +1,12 @@
 {
-    "list": [
-        {
-            "id": 1,
-            "name": "this is a piece of news"
-        }
-    ]
+    "code": 0,
+    "message": "some error from server",
+    "data": {
+        "list": [
+            {
+                "id": 1,
+                "name": "this is a piece of news"
+            }
+        ]
+    }
 }

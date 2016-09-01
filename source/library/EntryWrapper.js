@@ -4,15 +4,13 @@
  */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import connect from './connect';
 import action from '../action';
 import Toast from '../component/Toast';
 
-@connect(state => ({
-    toastState: state.toast,
-}), {
+@connect(state => ({}), {
     hideToastAction: action.toast.hideToast,
 })
 export default class EntryWrapper extends Component {

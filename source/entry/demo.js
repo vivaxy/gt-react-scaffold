@@ -3,12 +3,11 @@
  * @author vivaxy
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 
+import connect from '../library/connect';
 import render from '../library/render';
 import setTitle from '../library/setTitle';
-import BaseComponent from '../library/BaseComponent';
 
 import getNews from '../api/news';
 
@@ -16,7 +15,7 @@ import Logo from '../component/Logo';
 import DemoButton from '../component/DemoButton';
 
 import i18n from '../i18n';
-
+import * as errorType from '../config/error';
 import action from '../action';
 
 let newsIndex = 0;
@@ -29,11 +28,7 @@ let newsIndex = 0;
     setButtonDefaultAction: action.button.setButtonDefault,
     appendNewsListAction: action.newsList.appendNewsList,
 })
-class Demo extends BaseComponent {
-
-    constructor (props, content, updater) {
-        super(props, content, updater);
-    }
+class Demo extends Component {
 
     componentDidMount () {
         this.getMoreNews();
@@ -47,6 +42,7 @@ class Demo extends BaseComponent {
             buttonState,
             newsListState,
         } = this.props;
+
         return <div>
             <Logo/>
             {newsListState.map((news) => {
@@ -61,11 +57,25 @@ class Demo extends BaseComponent {
             appendNewsListAction,
             setButtonDefaultAction,
             setButtonDisabledAction,
+            showToastAction,
         } = this.props;
-        setButtonDisabledAction();
-        let list = this.invokeApi(getNews);
-        appendNewsListAction(list);
-        setButtonDefaultAction();
+        try {
+            setButtonDisabledAction();
+            let list = await getNews();
+            appendNewsListAction(list);
+            setButtonDefaultAction();
+        } catch (ex) {
+            switch (ex.name) {
+                case errorType.FETCH:
+                    showToastAction(ex.message);
+                    break;
+                case errorType.SERVER:
+                    showToastAction(ex.message);
+                    break;
+                default:
+                    throw ex;
+            }
+        }
     }
 
 }

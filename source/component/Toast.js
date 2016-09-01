@@ -18,8 +18,8 @@ export default class Toast extends Component {
 
         return <div>
             <Snackbar
-                open={!!toastState}
-                message={toastState}
+                open={toastState.show}
+                message={toastState.message}
                 autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
                 onRequestClose={::this.onClose}
             />
@@ -36,6 +36,9 @@ export default class Toast extends Component {
 }
 
 Toast.propTypes = {
-    toastState: PropTypes.string.isRequired,
+    toastState: PropTypes.shape({
+        show: PropTypes.bool.isRequired,
+        message: PropTypes.string.isRequired,
+    }),
     hideToastAction: PropTypes.func.isRequired,
 };
