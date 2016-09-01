@@ -6,9 +6,9 @@
 import 'whatwg-fetch';
 import url from 'url';
 
-import * as requestMethodConstant from '../constant/requestMethod';
+import * as requestMethodConstant from '../config/requestMethod';
 import getRequestPath from './requestPath';
-import { FetchError } from '../error';
+import { FetchError, ServerError } from '../error';
 import sleep from './sleep';
 
 const MOCK_TIMEOUT = 1000;
@@ -52,10 +52,15 @@ export default async (config) => {
 
     await sleep(MOCK_TIMEOUT);
 
-    switch (true) {
-        case response.status >= SUCCESS_CODE_LOWER_BOUND && response.status < SUCCESS_CODE_HIGHER_BOUND:
-            return response;
-        default:
-            throw new FetchError(response);
+    if (response.status < SUCCESS_CODE_LOWER_BOUND || response.status >= SUCCESS_CODE_HIGHER_BOUND) {
+        throw new FetchError(response);
+    } else {
+        const resp = await response.json();
+        if (resp.code !== 0) {
+            throw new ServerError(resp);
+        } else {
+            return resp.data;
+        }
     }
+
 };

@@ -4,10 +4,8 @@
  */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-import * as errorConstant from '../constant/error';
-
+import connect from '../library/connect';
 import render from '../library/render';
 import setTitle from '../library/setTitle';
 
@@ -17,29 +15,18 @@ import Logo from '../component/Logo';
 import DemoButton from '../component/DemoButton';
 
 import i18n from '../i18n';
-
-import {
-    setButtonDisabled as setButtonDisabledAction,
-    setButtonDefault as setButtonDefaultAction,
-} from '../action/button';
-import {
-    appendNewsList as appendNewsListAction,
-} from '../action/newsList';
-import {
-    toastMessage as toastMessageAction,
-} from '../action/toastMessage';
+import * as errorType from '../config/error';
+import action from '../action';
 
 let newsIndex = 0;
 
 @connect(state => ({
     buttonState: state.button,
     newsListState: state.newsList,
-    toastMessageState: state.toastMessage,
 }), {
-    setButtonDisabledAction,
-    setButtonDefaultAction,
-    appendNewsListAction,
-    toastMessageAction,
+    setButtonDisabledAction: action.button.setButtonDisabled,
+    setButtonDefaultAction: action.button.setButtonDefault,
+    appendNewsListAction: action.newsList.appendNewsList,
 })
 class Demo extends Component {
 
@@ -55,6 +42,7 @@ class Demo extends Component {
             buttonState,
             newsListState,
         } = this.props;
+
         return <div>
             <Logo/>
             {newsListState.map((news) => {
@@ -65,24 +53,27 @@ class Demo extends Component {
     }
 
     async getMoreNews () {
+        let {
+            appendNewsListAction,
+            setButtonDefaultAction,
+            setButtonDisabledAction,
+            showToastAction,
+        } = this.props;
         try {
-            let {
-                appendNewsListAction,
-                setButtonDefaultAction,
-                setButtonDisabledAction,
-            } = this.props;
             setButtonDisabledAction();
             let list = await getNews();
             appendNewsListAction(list);
             setButtonDefaultAction();
         } catch (ex) {
             switch (ex.name) {
-                case errorConstant.FETCH:
-                    toastMessageAction(ex.message);
+                case errorType.FETCH:
+                    showToastAction(ex.message);
+                    break;
+                case errorType.SERVER:
+                    showToastAction(ex.message);
                     break;
                 default:
                     throw ex;
-                    break;
             }
         }
     }

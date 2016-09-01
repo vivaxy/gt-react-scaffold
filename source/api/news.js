@@ -12,8 +12,6 @@ export default async () => {
         data: ''
     });
 
-    result = await result.json();
-
     return result.list;
 
 };

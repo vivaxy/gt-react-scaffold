@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import * as environmentConstant from '../constant/environment';
+import * as environmentConstant from '../config/environment';
 
 import environment from './environment';
 

@@ -4,7 +4,9 @@
  */
 
 import FetchError from './FetchError';
+import ServerError from './ServerError';
 
 export {
-    FetchError
+    FetchError,
+    ServerError,
 };
