@@ -6,7 +6,7 @@
 import 'whatwg-fetch';
 import url from 'url';
 
-import * as requestMethodConstant from '../constant/requestMethod';
+import * as requestMethodConstant from '../config/requestMethod';
 import getRequestPath from './requestPath';
 import { FetchError } from '../error';
 import sleep from './sleep';

@@ -8,9 +8,9 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import setStyle from '../library/style';
+import EntryWrapper from './EntryWrapper';
 import reducers from '../reducer';
 
 const ID_SELECTOR = 'app';
@@ -46,9 +46,9 @@ export default (Entry, element = document.getElementById(ID_SELECTOR)) => {
 
     return render(
         <App>
-            <MuiThemeProvider>
-                <Entry />
-            </MuiThemeProvider>
+            <EntryWrapper>
+                <Entry/>
+            </EntryWrapper>
         </App>,
         element
     );

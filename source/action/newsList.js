@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import * as constant from '../constant/action';
+import * as constant from '../config/action';
 
 export const appendNewsList = (list) => {
     return {

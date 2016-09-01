@@ -3,13 +3,12 @@
  * @author vivaxy
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-
-import * as errorConstant from '../constant/error';
 
 import render from '../library/render';
 import setTitle from '../library/setTitle';
+import BaseComponent from '../library/BaseComponent';
 
 import getNews from '../api/news';
 
@@ -18,30 +17,23 @@ import DemoButton from '../component/DemoButton';
 
 import i18n from '../i18n';
 
-import {
-    setButtonDisabled as setButtonDisabledAction,
-    setButtonDefault as setButtonDefaultAction,
-} from '../action/button';
-import {
-    appendNewsList as appendNewsListAction,
-} from '../action/newsList';
-import {
-    toastMessage as toastMessageAction,
-} from '../action/toastMessage';
+import action from '../action';
 
 let newsIndex = 0;
 
 @connect(state => ({
     buttonState: state.button,
     newsListState: state.newsList,
-    toastMessageState: state.toastMessage,
 }), {
-    setButtonDisabledAction,
-    setButtonDefaultAction,
-    appendNewsListAction,
-    toastMessageAction,
+    setButtonDisabledAction: action.button.setButtonDisabled,
+    setButtonDefaultAction: action.button.setButtonDefault,
+    appendNewsListAction: action.newsList.appendNewsList,
 })
-class Demo extends Component {
+class Demo extends BaseComponent {
+
+    constructor (props, content, updater) {
+        super(props, content, updater);
+    }
 
     componentDidMount () {
         this.getMoreNews();
@@ -65,26 +57,15 @@ class Demo extends Component {
     }
 
     async getMoreNews () {
-        try {
-            let {
-                appendNewsListAction,
-                setButtonDefaultAction,
-                setButtonDisabledAction,
-            } = this.props;
-            setButtonDisabledAction();
-            let list = await getNews();
-            appendNewsListAction(list);
-            setButtonDefaultAction();
-        } catch (ex) {
-            switch (ex.name) {
-                case errorConstant.FETCH:
-                    toastMessageAction(ex.message);
-                    break;
-                default:
-                    throw ex;
-                    break;
-            }
-        }
+        let {
+            appendNewsListAction,
+            setButtonDefaultAction,
+            setButtonDisabledAction,
+        } = this.props;
+        setButtonDisabledAction();
+        let list = this.invokeApi(getNews);
+        appendNewsListAction(list);
+        setButtonDefaultAction();
     }
 
 }

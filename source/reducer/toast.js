@@ -5,12 +5,15 @@
 
 import createReducer from '../library/createReducer';
 
-import * as constant from '../constant/action';
+import * as actionType from '../config/action';
 
 const defaultState = '';
 
 export default createReducer(defaultState, {
-    [constant.TOAST_MESSAGE]: (state, action) => {
+    [actionType.SHOW_TOAST]: (state, action) => {
         return action.message;
-    }
+    },
+    [actionType.HIDE_TOAST]: (state, action) => {
+        return '';
+    },
 });

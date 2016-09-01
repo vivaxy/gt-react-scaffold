@@ -7,10 +7,10 @@ import { combineReducers } from 'redux';
 
 import button from './button';
 import newsList from './newsList';
-import toastMessage from './toastMessage';
+import toast from './toast';
 
 export default combineReducers({
     button,
     newsList,
-    toastMessage,
+    toast,
 });
