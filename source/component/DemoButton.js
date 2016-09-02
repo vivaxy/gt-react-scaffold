@@ -8,6 +8,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 export default class DemoButton extends Component {
 
+    static propTypes = {
+        buttonDisabled: PropTypes.bool.isRequired,
+        onLoadMore: PropTypes.func.isRequired,
+    };
+
     render() {
 
         let {
@@ -25,8 +30,3 @@ export default class DemoButton extends Component {
         onLoadMore();
     }
 }
-
-DemoButton.propTypes = {
-    buttonDisabled: PropTypes.bool.isRequired,
-    onLoadMore: PropTypes.func.isRequired,
-};

@@ -9,6 +9,8 @@ import logoImage from '../image/vivaxy.20150726.jpg';
 
 export default class Logo extends Component {
 
+    static propTypes = {};
+
     render () {
 
         let style = {
@@ -22,5 +24,3 @@ export default class Logo extends Component {
     }
 
 }
-
-Logo.propTypes = {};

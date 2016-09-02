@@ -10,6 +10,14 @@ import * as toastConfig from '../config/toast';
 
 export default class Toast extends Component {
 
+    static propTypes = {
+        toastState: PropTypes.shape({
+            show: PropTypes.bool.isRequired,
+            message: PropTypes.string.isRequired,
+        }),
+        hideToastAction: PropTypes.func.isRequired,
+    };
+
     render () {
 
         let {
@@ -34,11 +42,3 @@ export default class Toast extends Component {
     }
 
 }
-
-Toast.propTypes = {
-    toastState: PropTypes.shape({
-        show: PropTypes.bool.isRequired,
-        message: PropTypes.string.isRequired,
-    }),
-    hideToastAction: PropTypes.func.isRequired,
-};
