@@ -3,18 +3,11 @@
  * @author vivaxy
  */
 
-import React, { Component, cloneElement, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class HorizontalList extends Component {
 
-    static propTypes = {
-        children: PropTypes.arrayOf(PropTypes.shape({
-            props: PropTypes.shape({
-                flex: PropTypes.number,
-                width: PropTypes.number,
-            }).isRequired,
-        }.isRequired).isRequired).isRequired,
-    };
+    static propTypes = {};
 
     render () {
 
@@ -34,37 +27,7 @@ export default class HorizontalList extends Component {
             ...boxStyle,
             ...style,
         }}>
-            {children.map((child, index) => {
-
-                const {
-                    flex,
-                    width,
-                    style,
-                    ...otherProps
-                } = child.props;
-
-                let childStyle = {};
-
-                if (flex !== undefined) {
-                    childStyle = {
-                        WebkitBoxFlex: flex,
-                        WebkitFlex: flex,
-                        flex: flex,
-                        ...style
-                    };
-                } else {
-                    childStyle = {
-                        width,
-                        ...style
-                    };
-                }
-
-                return cloneElement(child, {
-                    style: childStyle,
-                    key: `horizontal-list-${index}`,
-                    ...otherProps,
-                });
-            })}
+            {children}
         </div>
     }
 }

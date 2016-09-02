@@ -3,18 +3,15 @@
  * @author vivaxy
  */
 
-import React, { Component, cloneElement, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+
+import VerticalListItem from './VerticalListItem';
+
+import { ComponentError } from '../../error';
 
 export default class VerticalList extends Component {
 
-    static propTypes = {
-        children: PropTypes.arrayOf(PropTypes.shape({
-            props: PropTypes.shape({
-                flex: PropTypes.number,
-                height: PropTypes.number,
-            }).isRequired,
-        }.isRequired).isRequired).isRequired,
-    };
+    static propTypes = {};
 
     render () {
 
@@ -38,37 +35,7 @@ export default class VerticalList extends Component {
             ...boxStyle,
             ...style,
         }}>
-            {children.map((child, index) => {
-
-                const {
-                    flex,
-                    height,
-                    style,
-                    ...otherProps
-                } = child.props;
-
-                let childStyle = {};
-
-                if (flex !== undefined) {
-                    childStyle = {
-                        WebkitBoxFlex: flex,
-                        WebkitFlex: flex,
-                        flex: flex,
-                        ...style
-                    };
-                } else {
-                    childStyle = {
-                        height,
-                        ...style
-                    };
-                }
-
-                return cloneElement(child, {
-                    style: childStyle,
-                    key: `vertical-list-${index}`,
-                    ...otherProps,
-                });
-            })}
+            {children}
         </div>
     }
 }
