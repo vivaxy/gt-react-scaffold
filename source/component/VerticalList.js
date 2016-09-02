@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component, cloneElement, PropTypes } from 'react';
 
 export default class VerticalList extends Component {
 
@@ -38,7 +38,7 @@ export default class VerticalList extends Component {
             ...boxStyle,
             ...style,
         }}>
-            {children.map((child) => {
+            {children.map((child, index) => {
 
                 const {
                     flex,
@@ -63,9 +63,12 @@ export default class VerticalList extends Component {
                     };
                 }
 
-                return <div style={childStyle} {...otherProps}>{child}</div>
+                return cloneElement(child, {
+                    style: childStyle,
+                    key: `vertical-list-${index}`,
+                    ...otherProps,
+                });
             })}
         </div>
     }
-
 }
