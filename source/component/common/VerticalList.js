@@ -5,10 +5,6 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import VerticalListItem from './VerticalListItem';
-
-import { ComponentError } from '../../error';
-
 export default class VerticalList extends Component {
 
     static propTypes = {};
