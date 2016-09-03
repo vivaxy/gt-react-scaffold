@@ -10,7 +10,7 @@ import { createStore } from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import setStyle from '../library/style';
-import EntryWrapper from './EntryWrapper';
+import EntryWrapper from '../component/EntryWrapper';
 import reducers from '../reducer';
 
 const ID_SELECTOR = 'app';
