@@ -8,8 +8,7 @@ import iconImage from '../image/vivaxy.20150726.jpg';
 export default () => {
 
     let style = {
-        margin: '10px auto',
-        maxWidth: '1200px'
+        margin: '0',
     };
 
     let body = document.body;
