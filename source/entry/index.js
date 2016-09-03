@@ -45,7 +45,7 @@ class Index extends Component {
                             home
                         </HorizontalFlexItem>
                         <HorizontalFlexItem flex={1} style={navigationItemStyle}>
-                            contract
+                            contact
                         </HorizontalFlexItem>
                         <HorizontalFlexItem flex={1} style={navigationItemStyle}>
                             discovery
