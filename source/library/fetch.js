@@ -10,8 +10,10 @@ import * as requestMethodConstant from '../config/requestMethod';
 import getRequestPath from './requestPath';
 import { FetchError, ServerError } from '../error';
 import sleep from './sleep';
+import environment from '../library/environment';
+import * as environmentType from '../config/environment';
 
-const MOCK_TIMEOUT = 1000;
+const MOCK_DELAY = 1000;
 const SUCCESS_CODE_LOWER_BOUND = 200;
 const SUCCESS_CODE_HIGHER_BOUND = 300;
 
@@ -50,7 +52,9 @@ export default async (config) => {
             break;
     }
 
-    await sleep(MOCK_TIMEOUT);
+    if (environment === environmentType.DEVELOPMENT) {
+        await sleep(MOCK_DELAY);
+    }
 
     if (response.status < SUCCESS_CODE_LOWER_BOUND || response.status >= SUCCESS_CODE_HIGHER_BOUND) {
         throw new FetchError(response);
