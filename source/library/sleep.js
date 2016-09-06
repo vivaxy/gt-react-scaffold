@@ -5,6 +5,8 @@
 
 export default (timeout) => {
     return new Promise((resolve) => {
-        setTimeout(resolve, timeout)
+        const timer = setTimeout(() => {
+            return resolve(timer);
+        }, timeout);
     });
 };
