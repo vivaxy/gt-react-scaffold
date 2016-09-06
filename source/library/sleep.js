@@ -3,10 +3,10 @@
  * @author vivaxy
  */
 
-export default (timeout) => {
+export default (timeout, getTimer = () => {
+}) => {
     return new Promise((resolve) => {
-        const timer = setTimeout(() => {
-            return resolve(timer);
-        }, timeout);
+        const timer = setTimeout(resolve, timeout);
+        getTimer(timer);
     });
 };
