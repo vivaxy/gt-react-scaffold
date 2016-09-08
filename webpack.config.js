@@ -87,14 +87,25 @@ const entryNameList = entryFileNameList.map((entryFileName) => {
     return path.basename(entryFileName, '.js');
 });
 
+// get corresponding html template
+const htmlFileNameList = glob.sync(path.join(SOURCE_PATH, 'html') + '/*.html');
+const htmlNameList = htmlFileNameList.map((htmlFileName) => {
+    return path.basename(htmlFileName, '.html');
+});
+
 // set entry
 entryNameList.forEach((entryName) => {
     webpackConfig.entry[entryName] = [
         path.join(__dirname, `./${SOURCE_PATH}/entry/${entryName}.js`)
     ];
 
+    let htmlTemplateName = `template`;
+    if (htmlNameList.indexOf(entryName) !== -1) {
+        htmlTemplateName = entryName;
+    }
+
     webpackConfig.plugins.push(new HtmlWebpackPlugin({
-        template: `${SOURCE_PATH}/html/template.html`,
+        template: `${SOURCE_PATH}/html/${htmlTemplateName}.html`,
         filename: `html/${entryName}.html`,
         hash: true,
         inject: 'body',
