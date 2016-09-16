@@ -3,8 +3,8 @@
  * @author vivaxy
  */
 
-import 'whatwg-fetch';
 import url from 'url';
+import fetch from 'isomorphic-fetch';
 
 import * as requestMethodConstant from '../config/requestMethod';
 import getRequestPath from './requestPath';
