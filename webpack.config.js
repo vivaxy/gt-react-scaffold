@@ -120,7 +120,7 @@ entryNameList.forEach((entryName) => {
 switch (NODE_ENV) {
     case DEVELOPMENT:
 
-        //webpackConfig.module.loaders[0].loaders.unshift('react-hot'); 
+        //webpackConfig.module.loaders[0].loaders.unshift('react-hot');
 
         webpackConfig.output.publicPath = `/${RELEASE_PATH}/`;
 
