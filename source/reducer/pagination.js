@@ -19,13 +19,14 @@ const defaultState = {
 
 export default createReducer(defaultState, {
     [constant.SETUP_PAGINATION]: (state, action) => {
-        return Object.assign({}, state, {
+        return {
+            ...state,
             pageSize: action.pageSize,
             pageIndex: action.pageIndex,
             pageCount: action.pageCount,
             rowCount: action.rowCount,
             needMore: action.pageIndex !== action.pageCount,
-        });
+        };
     }
 });
 

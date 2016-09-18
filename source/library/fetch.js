@@ -40,13 +40,16 @@ export default async (config) => {
                 pathname: requestPath,
                 query: data
             });
-            response = await fetch(requestPath, Object.assign({}, basicFetchOptions));
+            response = await fetch(requestPath, {
+                ...basicFetchOptions
+            });
             break;
         case requestMethodConstant.POST:
-            response = await fetch(requestPath, Object.assign({}, basicFetchOptions, {
+            response = await fetch(requestPath, {
+                ...basicFetchOptions,
                 method,
                 body: JSON.stringify(data),
-            }));
+            });
             break;
         default:
             break;

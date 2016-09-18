@@ -11,6 +11,6 @@ const defaultState = [];
 
 export default createReducer(defaultState, {
     [constant.APPEND_NEWS]: (state, action) => {
-        return state.concat(action.list);
+        return [...state, action.list];
     },
 });
