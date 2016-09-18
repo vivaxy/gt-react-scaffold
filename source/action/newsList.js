@@ -5,9 +5,9 @@
 
 import * as constant from '../config/action';
 
-export const appendNewsList = (list) => {
-    return {
+export default {
+    appendNewsList: list => dispatch => dispatch({
+        list,
         type: constant.APPEND_NEWS,
-        list
-    };
+    }),
 };

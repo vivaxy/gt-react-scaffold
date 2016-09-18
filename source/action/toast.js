@@ -5,15 +5,12 @@
 
 import * as constant from '../config/action';
 
-export const showToast = (message) => {
-    return {
+export default {
+    showToast: message => dispatch => dispatch({
+        message,
         type: constant.SHOW_TOAST,
-        message
-    };
-};
-
-export const hideToast = () => {
-    return {
-        type: constant.HIDE_TOAST
-    };
+    }),
+    hideToast: () => dispatch => dispatch({
+        type: constant.HIDE_TOAST,
+    }),
 };

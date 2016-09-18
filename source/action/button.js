@@ -5,14 +5,11 @@
 
 import * as constant from '../config/action';
 
-export const setButtonDisabled = () => {
-    return {
-        type: constant.BUTTON_DISABLED
-    };
-};
-
-export const setButtonDefault = () => {
-    return {
-        type: constant.BUTTON_DEFAULT
-    };
+export default {
+    setButtonDisabled: () => dispatch => dispatch({
+        type: constant.BUTTON_DISABLED,
+    }),
+    setButtonDefault: () => dispatch => dispatch({
+        type: constant.BUTTON_DEFAULT,
+    }),
 };
