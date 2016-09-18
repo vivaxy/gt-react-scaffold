@@ -8,7 +8,6 @@
         "transform-function-bind",
         "syntax-async-functions",
         "transform-decorators-legacy",
-        "transform-class-properties",
-        "react-hot-loader/babel"
+        "transform-class-properties"
     ]
 }

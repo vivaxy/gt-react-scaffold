@@ -26,7 +26,7 @@ let webpackConfig = {
     entry: {
         [COMMON_CHUNK_NAME]: [
             'babel-polyfill',
-            'whatwg-fetch',
+            'isomorphic-fetch',
             'react',
             'react-dom',
             'redux',
@@ -120,14 +120,16 @@ entryNameList.forEach((entryName) => {
 switch (NODE_ENV) {
     case DEVELOPMENT:
 
-        //webpackConfig.module.loaders[0].loaders.unshift('react-hot');
+        // webpackConfig.module.loaders[0].loaders.unshift('react-hot');
 
         webpackConfig.output.publicPath = `/${RELEASE_PATH}/`;
 
         entryNameList.forEach((entryName) => {
             webpackConfig.entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + DEVELOPMENT_PORT);
             webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
+            // webpackConfig.entry[entryName].unshift('webpack/hot/dev-server');
             webpackConfig.entry[entryName].unshift('webpack/hot/only-dev-server');
+            webpackConfig.entry[entryName].unshift('react-hot-loader/patch');
         });
 
         webpackConfig.devtool = 'eval';
@@ -142,6 +144,8 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+        webpackConfig.module.loaders[0].loaders.push('react-hot-loader/webpack');
 
         break;
     case PRODUCTION:

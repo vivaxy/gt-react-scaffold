@@ -8,4 +8,4 @@ import React, { Component } from 'react';
 import render from '../library/render';
 import Demo from '../container/Demo';
 
-render(Demo);
+export default render(Demo);

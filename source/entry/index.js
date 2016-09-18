@@ -7,4 +7,4 @@ import React, { Component } from 'react';
 import render from '../library/render';
 import Index from '../container/Index';
 
-render(Index);
+export default render(Index);
