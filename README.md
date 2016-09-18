@@ -17,6 +17,3 @@ react redux material-ui
 > npm run build
 
 ## ROADMAP
-
-- wrap invoke api into props, async redux
-- wrap api error into some base component
