@@ -24,14 +24,13 @@ export default class Toast extends Component {
             toastState,
         } = this.props;
 
-        return <div>
-            <Snackbar
-                open={toastState.show}
-                message={toastState.message}
-                autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
-                onRequestClose={::this.onClose}
-            />
-        </div>
+        // todo bindAutoBindMethods.js:50 Uncaught TypeError: Cannot read property '__reactAutoBindMap' of null
+        return <Snackbar
+            open={toastState.show}
+            message={toastState.message}
+            autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
+            onRequestClose={::this.onClose}
+        />
     }
 
     onClose () {
