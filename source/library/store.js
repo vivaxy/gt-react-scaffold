@@ -7,13 +7,13 @@
 
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
-
+import thunk from 'redux-thunk';
 import reducer from '../reducer';
 
 const logger = createLogger();
 
 const store = createStore(combineReducers(reducer), compose(
-    applyMiddleware(logger),
+    applyMiddleware(thunk, logger),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 

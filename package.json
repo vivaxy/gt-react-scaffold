@@ -48,6 +48,7 @@
     "react-tap-event-plugin": "^1.0.0",
     "redux-devtools": "^3.3.1",
     "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
     "tiny-cookie": "^0.5.5",
     "url-loader": "^0.5.7",

@@ -3,9 +3,9 @@
  * @author vivaxy
  */
 
-import * as button from './button';
-import * as newsList from './newsList';
-import * as toast from './toast';
+import button from './button';
+import newsList from './newsList';
+import toast from './toast';
 
 export default {
     button,
