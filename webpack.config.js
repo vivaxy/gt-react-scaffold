@@ -25,7 +25,7 @@ const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 let webpackConfig = {
     entry: {
         [COMMON_CHUNK_NAME]: [
-            'babel-polyfill',
+            // remove babel-polyfill according to https://github.com/pigcan/blog/issues/1
             'isomorphic-fetch',
             'react',
             'react-dom',

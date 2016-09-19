@@ -5,6 +5,7 @@
         "stage-0"
     ],
     "plugins": [
+        "transform-runtime",
         "transform-function-bind",
         "syntax-async-functions",
         "transform-decorators-legacy",
