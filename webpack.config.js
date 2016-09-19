@@ -9,6 +9,7 @@ const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Visualizer = require('webpack-visualizer-plugin');
 
 const DEVELOPMENT_PORT = 8080;
 const SOURCE_PATH = 'source';
@@ -77,7 +78,8 @@ let webpackConfig = {
         new webpack.optimize.CommonsChunkPlugin({
             name: COMMON_CHUNK_NAME,
             filename: 'js/[name].js'
-        })
+        }),
+        new Visualizer(),
     ]
 };
 
