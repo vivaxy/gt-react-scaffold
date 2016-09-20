@@ -46,7 +46,7 @@ let webpackConfig = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'babel'
+                    'babel',
                 ]
             },
             {
@@ -131,7 +131,6 @@ switch (NODE_ENV) {
             webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
             // webpackConfig.entry[entryName].unshift('webpack/hot/dev-server');
             webpackConfig.entry[entryName].unshift('webpack/hot/only-dev-server');
-            webpackConfig.entry[entryName].unshift('react-hot-loader/patch');
         });
 
         webpackConfig.devtool = 'eval';
@@ -146,8 +145,6 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-
-        webpackConfig.module.loaders[0].loaders.push('react-hot-loader/webpack');
 
         break;
     case PRODUCTION:
