@@ -33,7 +33,10 @@ let webpackConfig = {
             'redux',
             'react-redux',
             'material-ui',
-            'react-tap-event-plugin'
+            'react-tap-event-plugin',
+            'tiny-cookie',
+            'react-tap-event-plugin',
+            'react-pianist',
         ]
     },
     output: {
