@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/vivaxy/react-scaffold#readme",
   "devDependencies": {
+    "babel-core": "^6.16.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-syntax-async-functions": "^6.8.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
