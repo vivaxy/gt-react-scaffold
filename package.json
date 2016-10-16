@@ -1,6 +1,6 @@
 {
   "name": "react-scaffold",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "react",
   "main": "webpack.config.js",
   "scripts": {

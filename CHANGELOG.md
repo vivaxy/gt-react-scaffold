@@ -1,3 +1,4 @@
+# 1.0.0
 - update react hot loader
 - switch to yarn package manager
 
