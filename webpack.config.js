@@ -11,6 +11,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
+const DEVELOPMENT_IP = '0.0.0.0';
 const DEVELOPMENT_PORT = 8080;
 const SOURCE_PATH = 'source';
 const RELEASE_PATH = 'release';
@@ -21,6 +22,41 @@ const COMMON_CHUNK_NAME = 'common';
 const BANNER = '@2016 vivaxy';
 
 const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
+
+const jsLoader = {
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loaders: [
+        'babel',
+    ],
+};
+
+const cssLoader = {
+    test: /\.css$/,
+    loaders: [
+        'style',
+        'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
+    ],
+};
+
+const lessLoader = {
+    test: /\.less$/,
+    loaders: [
+        'style',
+        'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
+        'less',
+    ],
+};
+
+const jsonLoader = {
+    test: /\.json$/,
+    loader: 'json',
+};
+
+const fileLoader = {
+    test: /\.(png|jpg|gif)$/,
+    loader: 'url?limit=8192&name=image/[name]-[hash].[ext]',
+};
 
 // default webpack config
 let webpackConfig = {
@@ -45,36 +81,11 @@ let webpackConfig = {
     },
     module: {
         loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: [
-                    'babel',
-                ]
-            },
-            {
-                test: /\.css$/,
-                loaders: [
-                    'style',
-                    'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
-                ]
-            },
-            {
-                test: /\.less$/,
-                loaders: [
-                    'style',
-                    'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
-                    'less',
-                ]
-            },
-            {
-                test: /\.json$/,
-                loader: 'json'
-            },
-            {
-                test: /\.(png|jpg|gif)$/,
-                loader: 'url?limit=8192&name=image/[name]-[hash].[ext]'
-            }
+            jsLoader,
+            cssLoader,
+            lessLoader,
+            jsonLoader,
+            fileLoader,
         ]
     },
     plugins: [
@@ -125,15 +136,21 @@ entryNameList.forEach((entryName) => {
 switch (NODE_ENV) {
     case DEVELOPMENT:
 
-        // webpackConfig.module.loaders[0].loaders.unshift('react-hot');
+        // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
+        jsLoader.loaders.push('react-hot-loader/webpack');
 
         webpackConfig.output.publicPath = `/${RELEASE_PATH}/`;
 
         entryNameList.forEach((entryName) => {
-            webpackConfig.entry[entryName].unshift('webpack-dev-server/client?http://127.0.0.1:' + DEVELOPMENT_PORT);
+            webpackConfig.entry[entryName].unshift('webpack-dev-server/client?http://' + DEVELOPMENT_IP + ':' + DEVELOPMENT_PORT);
             webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
+
+            // hot reload
             // webpackConfig.entry[entryName].unshift('webpack/hot/dev-server');
             webpackConfig.entry[entryName].unshift('webpack/hot/only-dev-server');
+
+            // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
+            webpackConfig.entry[entryName].unshift('react-hot-loader/patch');
         });
 
         webpackConfig.devtool = 'eval';
@@ -141,6 +158,7 @@ switch (NODE_ENV) {
         webpackConfig.devServer = {
             hot: true,
             historyApiFallback: true,
+            host: DEVELOPMENT_IP,
             port: DEVELOPMENT_PORT,
             stats: {
                 colors: true

@@ -10,12 +10,9 @@ import connect from '../library/connect';
 import action from '../action';
 import Toast from '../component/Toast';
 
-@connect(state => ({}), {
-    hideToastAction: action.toast.hideToast,
-})
-export default class EntryWrapper extends Component {
+class EntryWrapper extends Component {
 
-    render () {
+    render() {
 
         let {
             children,
@@ -37,3 +34,7 @@ export default class EntryWrapper extends Component {
     }
 
 }
+
+export default connect(state => ({}), {
+    hideToastAction: action.toast.hideToast,
+})(EntryWrapper);
