@@ -7,9 +7,9 @@ import * as environmentConstant from '../config/environment';
 
 let env = environmentConstant.PRODUCTION;
 
-let host = location.host;
+const pathname = location.pathname;
 
-if (host === '127.0.0.1:8080') {
+if (pathname.startsWith('/release')) {
     env = environmentConstant.DEVELOPMENT;
 }
 

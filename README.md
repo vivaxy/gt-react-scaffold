@@ -9,11 +9,12 @@ react redux material-ui
 ## initialize project
 
 - install nodejs
-- > npm i
+- install yarn `npm i -g yarn`
+- > yarn
 
 ## local develop
 
-- > npm run dev
+- > npm start
 - open in browser http://127.0.0.1:8080/release/html/demo.html
 
 ## build

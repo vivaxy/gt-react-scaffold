@@ -4,7 +4,7 @@
   "description": "react",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --progress",
+    "start": "NODE_ENV=development webpack-dev-server --progress",
     "build": "npm run build:clean && npm run build:webpack",
     "build:clean": "rm -rf ./release && mkdir ./release",
     "build:webpack": "webpack --progress --display-chunks --display-reasons --display-error-details --display-modules --display-exclude > ./release/build.log"
@@ -36,6 +36,7 @@
     "css-loader": "^0.24.0",
     "file-loader": "^0.9.0",
     "glob": "^7.0.5",
+    "graceful-fs": "^4.1.9",
     "html-webpack-plugin": "^2.22.0",
     "isomorphic-fetch": "^2.2.1",
     "less": "^2.7.1",
