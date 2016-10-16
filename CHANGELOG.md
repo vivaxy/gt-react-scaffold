@@ -1,1 +1,5 @@
-- 0.0.0 first version
+- update react hot loader
+- switch to yarn package manager
+
+# 0.0.0
+- first version

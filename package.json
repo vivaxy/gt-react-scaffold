@@ -4,6 +4,7 @@
   "description": "react",
   "main": "webpack.config.js",
   "scripts": {
+    "setup": "sh ./script/setup.sh",
     "start": "NODE_ENV=development webpack-dev-server --progress",
     "build": "npm run build:clean && npm run build:webpack",
     "build:clean": "rm -rf ./release && mkdir ./release",

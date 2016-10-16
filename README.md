@@ -9,8 +9,9 @@ react redux material-ui
 ## initialize project
 
 - install nodejs
+- clone project from git repository
 - install yarn `npm i -g yarn`
-- > yarn
+- > npm run setup
 
 ## local develop
 
@@ -20,5 +21,3 @@ react redux material-ui
 ## build
 
 > npm run build
-
-## ROADMAP
