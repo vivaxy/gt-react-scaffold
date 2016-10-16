@@ -1,3 +1,8 @@
+/**
+ * @since 2016-09-03 09:16
+ * @author vivaxy
+ */
+
 import React, { Component } from 'react';
 
 import connect from '../library/connect';
