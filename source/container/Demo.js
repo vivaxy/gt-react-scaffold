@@ -14,15 +14,7 @@ import action from '../action';
 
 let newsIndex = 0;
 
-@connect(state => ({
-    buttonState: state.button,
-    newsListState: state.newsList,
-}), {
-    setButtonDisabledAction: action.button.setButtonDisabled,
-    setButtonDefaultAction: action.button.setButtonDefault,
-    appendNewsListAction: action.newsList.appendNewsList,
-})
-export default class Demo extends Component {
+class Demo extends Component {
 
     componentDidMount () {
         this.getMoreNews();
@@ -73,3 +65,12 @@ export default class Demo extends Component {
     }
 
 }
+
+export default connect(state => ({
+    buttonState: state.button,
+    newsListState: state.newsList,
+}), {
+    setButtonDisabledAction: action.button.setButtonDisabled,
+    setButtonDefaultAction: action.button.setButtonDefault,
+    appendNewsListAction: action.newsList.appendNewsList,
+})(Demo);

@@ -7,8 +7,7 @@ import PianistDemo from '../component/pianist-demo';
 
 import i18n from '../i18n';
 
-@connect(state => ({}), {})
-export default class Index extends Component {
+class Index extends Component {
 
     render () {
 
@@ -18,3 +17,5 @@ export default class Index extends Component {
     }
 
 }
+
+export default connect(state => ({}), {})(Index);

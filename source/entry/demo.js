@@ -5,7 +5,14 @@
 
 import React, { Component } from 'react';
 
-import render from '../library/render';
+import render, {renderWithEntry} from '../library/render';
 import Demo from '../container/Demo';
 
-export default render(Demo);
+render(Demo);
+
+if (module.hot) {
+    module.hot.accept(`../container/Demo`, () => {
+        const NewEntry = require(`../container/Demo`).default;
+        renderWithEntry(NewEntry);
+    });
+}
