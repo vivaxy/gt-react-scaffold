@@ -4,7 +4,8 @@
 
 - react
 - redux
-- material-ui
+- webpack packaging
+- material ui
 - hot reload
 - html template
 - mock server
@@ -52,3 +53,8 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 ## CONTRIBUTE
 
 Feel free to submit any issue.
+
+## TODO
+
+- single page support
+- eslint for code styles
