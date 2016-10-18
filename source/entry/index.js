@@ -3,7 +3,6 @@
  * @author vivaxy
  */
 
-import React, { Component } from 'react';
 import render, { renderWithEntry } from '../library/render';
 import Index from '../container/Index';
 
