@@ -18,6 +18,7 @@ const RELEASE_PATH = 'release';
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
 const COMMON_CHUNK_NAME = 'common';
+const NODE_MODULES = 'node_modules';
 
 const BANNER = '@2016 vivaxy';
 
@@ -37,6 +38,20 @@ const cssLoader = {
         'style',
         'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
     ],
+    include: [
+        path.resolve(__dirname, SOURCE_PATH),
+    ],
+};
+
+const cssModuleLoader = {
+    test: /\.css$/,
+    loaders: [
+        'style',
+        'css',
+    ],
+    include: [
+        path.resolve(__dirname, NODE_MODULES),
+    ],
 };
 
 const lessLoader = {
@@ -45,6 +60,19 @@ const lessLoader = {
         'style',
         'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
         'less',
+    ],include: [
+        path.resolve(__dirname, SOURCE_PATH),
+    ],
+};
+
+const lessModuleLoader = {
+    test: /\.less$/,
+    loaders: [
+        'style',
+        'css',
+        'less',
+    ],include: [
+        path.resolve(__dirname, NODE_MODULES),
     ],
 };
 
@@ -76,7 +104,7 @@ let webpackConfig = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, `${RELEASE_PATH}`),
+        path: path.resolve(__dirname, RELEASE_PATH),
         filename: 'js/[name].js'
     },
     module: {
@@ -86,6 +114,8 @@ let webpackConfig = {
             lessLoader,
             jsonLoader,
             fileLoader,
+            cssModuleLoader,
+            lessModuleLoader,
         ]
     },
     plugins: [
