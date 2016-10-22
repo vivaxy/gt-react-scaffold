@@ -94,7 +94,7 @@ const createPackageJSON = async() => {
         peerDependencies,
     };
 
-    return await write(filename, JSON.stringify(outputPackage));
+    return await write(filename, JSON.stringify(outputPackage, null, 2));
 };
 
 const createREADME = async() => {
@@ -102,36 +102,36 @@ const createREADME = async() => {
     const data = await read(filename);
     const data_removed_INITIALIZE = data.replace(/## INITIALIZE.+?#/, '\n#');
     const data_removed_CONTRIBUTE = data_removed_INITIALIZE.replace(/## CONTRIBUTE.+?#/, '\n#');
-    const data_removed_TODO = data_removed_CONTRIBUTE.replace(/## TODO.+?#/, '\n#');
+    const data_removed_TODO = data_removed_CONTRIBUTE.replace(/## TODO.+?\\n/, '\n');
     return await write(filename, data_removed_TODO);
 };
 
 const createCHANGELOG = async() => {
     const filename = `./CHANGELOG.md`;
-    return await write(filename, `# 0.0.0`);
+    return await write(filename, `# 0.0.0\n`);
 };
 
 /**
  - remove git info `rm -rf .git`
  - update config in files
-    - package.json
-        - name
-        - version
-        - repository
-            - url
-        - bugs
-            - url
-        - homepage
-        - scripts
-            - setup
-    - webpack.config.js
-        - DEVELOPMENT_PORT
-    - README.md
-        - INITIALIZE
-        - CONTRIBUTE
-        - TODO
-        - CHANGELOG.md
-    - .gitignore
+ - package.json
+ - name
+ - version
+ - repository
+ - url
+ - bugs
+ - url
+ - homepage
+ - scripts
+ - setup
+ - webpack.config.js
+ - DEVELOPMENT_PORT
+ - README.md
+ - INITIALIZE
+ - CONTRIBUTE
+ - TODO
+ - CHANGELOG.md
+ - .gitignore
  - remove scripts
  */
 const setup = async() => {
