@@ -76,7 +76,7 @@ const createPackageJSON = async() => {
         reactScaffoldVersion: version,
         description: `project from ${description}`,
         main,
-        scripts: _script,
+        scripts: scripts,
         repository: {
             ...repository,
             url: ``,
