@@ -37,7 +37,8 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 ## INITIALIZE
 
 - install nodejs
-- clone project from git repository
+- clone project from git repository `git clone https://github.com/vivaxy/react-scaffold.git .`
+- remove git info `rm -rf .git`
 - install yarn `npm i -g yarn`
 - `npm run setup`
 
