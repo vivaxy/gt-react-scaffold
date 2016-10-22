@@ -16,7 +16,7 @@
 
 ## STRUCTURE
 
-![flowchart](/docs/flowchart.png)
+![flowchart](./docs/flowchart.png)
 
 As we find out html are mostly same in react projects, we extract the same html into a template file which lays in `html` folder.
 
@@ -59,3 +59,5 @@ Feel free to submit any issue.
 
 - single page support
 - eslint for code styles
+
+##

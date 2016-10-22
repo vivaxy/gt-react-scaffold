@@ -100,10 +100,16 @@ const createPackageJSON = async() => {
 const createREADME = async() => {
     const filename = `./README.md`;
     const data = await read(filename);
-    const data_removed_INITIALIZE = data.replace(/## INITIALIZE.+?#/, '\n#');
-    const data_removed_CONTRIBUTE = data_removed_INITIALIZE.replace(/## CONTRIBUTE.+?#/, '\n#');
-    const data_removed_TODO = data_removed_CONTRIBUTE.replace(/## TODO.+?\\n/, '\n');
-    return await write(filename, data_removed_TODO);
+    const partsToRemove = [
+        `INITIALIZE`,
+        `CONTRIBUTE`,
+        `TODO`,
+    ];
+    let data_removed = data;
+    partsToRemove.forEach((part) => {
+        data_removed = data_removed.replace(new RegExp(`## ${part}.+?##`), `\n##`);
+    });
+    return await write(filename, data_removed);
 };
 
 const createCHANGELOG = async() => {
