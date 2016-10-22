@@ -114,24 +114,24 @@ const createCHANGELOG = async() => {
 /**
  - remove git info `rm -rf .git`
  - update config in files
- - package.json
- - name
- - version
- - repository
- - url
- - bugs
- - url
- - homepage
- - scripts
- - setup
- - webpack.config.js
- - DEVELOPMENT_PORT
- - README.md
- - INITIALIZE
- - CONTRIBUTE
- - TODO
- - CHANGELOG.md
- - .gitignore
+    - package.json
+        - name
+        - version
+        - repository
+            - url
+        - bugs
+            - url
+        - homepage
+        - scripts
+            - setup
+    - webpack.config.js
+        - DEVELOPMENT_PORT
+    - README.md
+        - INITIALIZE
+        - CONTRIBUTE
+        - TODO
+        - CHANGELOG.md
+    - .gitignore
  - remove scripts
  */
 const setup = async() => {
