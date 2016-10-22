@@ -107,7 +107,7 @@ const createREADME = async() => {
     ];
     let data_removed = data;
     partsToRemove.forEach((part) => {
-        data_removed = data_removed.replace(new RegExp(`## ${part}.+?##`), `\n##`);
+        data_removed = data_removed.replace(new RegExp(`## ${part}[\\s\\S]+?##`), `##`);
     });
     return await write(filename, data_removed);
 };
