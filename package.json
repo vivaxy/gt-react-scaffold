@@ -1,10 +1,10 @@
 {
   "name": "react-scaffold",
   "version": "1.0.0",
-  "description": "react",
+  "description": "react-scaffold",
   "main": "webpack.config.js",
   "scripts": {
-    "setup": "sh ./script/setup.sh",
+    "setup": "babel-node ./scripts/setup.js",
     "start": "NODE_ENV=development webpack-dev-server --progress",
     "build": "npm run build:clean && npm run build:webpack",
     "build:clean": "rm -rf ./release && mkdir ./release",
@@ -15,7 +15,8 @@
     "url": "git+https://github.com/vivaxy/react-scaffold.git"
   },
   "keywords": [
-    "react"
+    "react",
+    "react-scaffold"
   ],
   "author": "vivaxy",
   "license": "MIT",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/vivaxy/react-scaffold#readme",
   "devDependencies": {
+    "babel-cli": "^6.16.0",
     "babel-core": "^6.16.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-syntax-async-functions": "^6.8.0",
@@ -36,6 +38,7 @@
     "babel-runtime": "^6.11.6",
     "css-loader": "^0.24.0",
     "file-loader": "^0.9.0",
+    "fs-extra": "^0.30.0",
     "glob": "^7.0.5",
     "graceful-fs": "^4.1.9",
     "html-webpack-plugin": "^2.22.0",
