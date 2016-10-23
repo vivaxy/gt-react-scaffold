@@ -24,7 +24,7 @@ export default class PianistDemo extends Component {
             position: 'absolute',
         }}>
             <VerticalFlexItem flex={1}>
-                test
+                test1
             </VerticalFlexItem>
             <VerticalFlexItem height={50}>
                 <BorderBox style={{

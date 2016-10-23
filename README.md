@@ -58,6 +58,15 @@ Feel free to submit any issue.
 ## TODO
 
 - single page support
+    - fix hot reload for react route
+    - add react route redux
+    - update readme
 - eslint for code styles
 
-##
+## REFERENCE
+
+- https://github.com/webpack/docs/wiki/webpack-dev-server
+- https://github.com/gaearon/react-hot-loader/tree/master/docs
+- https://github.com/reactjs/react-router-redux
+- https://github.com/ampedandwired/html-webpack-plugin
+- https://github.com/ReactTraining/react-router

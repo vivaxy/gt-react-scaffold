@@ -9,8 +9,7 @@ import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { AppContainer } from 'react-hot-loader';
 
-import setStyle from '../library/style';
-import EntryWrapper from '../component/EntryWrapper';
+import setStyle from './style';
 import store from './store';
 
 const ID_SELECTOR = 'react-scaffold';
@@ -21,9 +20,7 @@ export const renderWithEntry = (Entry) => {
     return render(
         <AppContainer>
             <Provider store={store}>
-                <EntryWrapper>
                     <Entry/>
-                </EntryWrapper>
             </Provider>
         </AppContainer>,
         document.getElementById(ID_SELECTOR)

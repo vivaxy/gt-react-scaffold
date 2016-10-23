@@ -1,3 +1,8 @@
+/**
+ * @since 2016-10-23 14:48
+ * @author vivaxy
+ */
+
 import React, { Component } from 'react';
 
 import connect from '../library/connect';
@@ -5,16 +10,16 @@ import setTitle from '../library/setTitle';
 
 import getNews from '../api/news';
 
-import Logo from '../component/Logo';
-import DemoButton from '../component/DemoButton';
+import Logo from '../components/Logo';
+import DemoButton from '../components/DemoButton';
 
 import i18n from '../i18n';
-import * as errorType from '../config/error';
-import action from '../action';
+import * as errorType from '../config/errors';
+import actions from '../actions';
 
 let newsIndex = 0;
 
-class Demo extends Component {
+class Index extends Component {
 
     componentDidMount () {
         this.getMoreNews();
@@ -70,7 +75,7 @@ export default connect(state => ({
     buttonState: state.button,
     newsListState: state.newsList,
 }), {
-    setButtonDisabledAction: action.button.setButtonDisabled,
-    setButtonDefaultAction: action.button.setButtonDefault,
-    appendNewsListAction: action.newsList.appendNewsList,
-})(Demo);
+    setButtonDisabledAction: actions.button.setButtonDisabled,
+    setButtonDefaultAction: actions.button.setButtonDefault,
+    appendNewsListAction: actions.newsList.appendNewsList,
+})(Index);

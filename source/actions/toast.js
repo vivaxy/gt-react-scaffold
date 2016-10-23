@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import * as constant from '../config/action';
+import * as constant from '../config/actions';
 
 export default {
     showToast: message => dispatch => dispatch({

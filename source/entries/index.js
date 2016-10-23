@@ -4,13 +4,13 @@
  */
 
 import render, { renderWithEntry } from '../library/render';
-import Index from '../container/Index';
+import Entry from '../containers/Entry';
 
-render(Index);
+render(Entry);
 
 if (module.hot) {
-    module.hot.accept(`../container/Demo`, () => {
-        const NewEntry = require(`../container/Index`).default;
+    module.hot.accept(`../containers/Entry`, () => {
+        const NewEntry = require(`../containers/Entry`).default;
         renderWithEntry(NewEntry);
     });
 }

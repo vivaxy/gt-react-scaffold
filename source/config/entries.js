@@ -3,4 +3,4 @@
  * @author vivaxy
  */
 
-export const DEMO = '/html/demo/html';
+export const DEMO = '/demo';

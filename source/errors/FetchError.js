@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import * as constant from '../config/error';
+import * as constant from '../config/errors';
 
 export default class FetchError extends Error {
     constructor (response) {
