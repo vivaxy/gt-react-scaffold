@@ -7,10 +7,10 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import connect from '../library/connect';
-import action from '../action';
-import Toast from '../component/Toast';
+import action from '../actions';
+import Toast from '../components/Toast';
 
-class EntryWrapper extends Component {
+class Base extends Component {
 
     render() {
 
@@ -37,4 +37,4 @@ class EntryWrapper extends Component {
 
 export default connect(state => ({}), {
     hideToastAction: action.toast.hideToast,
-})(EntryWrapper);
+})(Base);

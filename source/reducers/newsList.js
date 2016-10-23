@@ -5,7 +5,7 @@
 
 import createReducer from '../library/createReducer';
 
-import * as constant from '../config/action';
+import * as constant from '../config/actions';
 
 const defaultState = [];
 

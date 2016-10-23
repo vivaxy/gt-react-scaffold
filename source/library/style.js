@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import iconImage from '../image/vivaxy.20150726.jpg';
+import iconImage from '../images/vivaxy.20150726.jpg';
 
 export default () => {
 

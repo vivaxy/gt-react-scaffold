@@ -5,7 +5,7 @@
 
 import createReducer from '../library/createReducer';
 
-import * as actionType from '../config/action';
+import * as actionType from '../config/actions';
 
 const defaultState = {
     show: false,

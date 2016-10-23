@@ -1,26 +1,33 @@
+/**
+ * @since 2016-10-23 14:48
+ * @author vivaxy
+ */
+
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import connect from '../library/connect';
 import setTitle from '../library/setTitle';
 
 import getNews from '../api/news';
 
-import Logo from '../component/Logo';
-import DemoButton from '../component/DemoButton';
+import Logo from '../components/Logo';
+import DemoButton from '../components/DemoButton';
 
 import i18n from '../i18n';
-import * as errorType from '../config/error';
-import action from '../action';
+import * as errorType from '../config/errors';
+import * as entries from '../config/entries';
+import actions from '../actions';
 
 let newsIndex = 0;
 
-class Demo extends Component {
+class Index extends Component {
 
-    componentDidMount () {
+    componentDidMount() {
         this.getMoreNews();
     }
 
-    render () {
+    render() {
 
         setTitle(i18n.SOMEONE_S_HOME('vivaxy'));
 
@@ -35,10 +42,12 @@ class Demo extends Component {
                 return <div key={`news-${newsIndex++}`}>{news.name}</div>;
             })}
             <DemoButton buttonDisabled={!buttonState} onLoadMore={::this.getMoreNews}/>
+            <hr/>
+            <RaisedButton onClick={::this.goToDemo}>go to demo</RaisedButton>
         </div>
     }
 
-    async getMoreNews () {
+    async getMoreNews() {
         let {
             appendNewsListAction,
             setButtonDefaultAction,
@@ -64,13 +73,21 @@ class Demo extends Component {
         }
     }
 
+    goToDemo() {
+        const {
+            routingPush,
+        } = this.props;
+        routingPush(entries.DEMO);
+    }
+
 }
 
 export default connect(state => ({
     buttonState: state.button,
     newsListState: state.newsList,
 }), {
-    setButtonDisabledAction: action.button.setButtonDisabled,
-    setButtonDefaultAction: action.button.setButtonDefault,
-    appendNewsListAction: action.newsList.appendNewsList,
-})(Demo);
+    setButtonDisabledAction: actions.button.setButtonDisabled,
+    setButtonDefaultAction: actions.button.setButtonDefault,
+    appendNewsListAction: actions.newsList.appendNewsList,
+    routingPush: actions.routing.push,
+})(Index);

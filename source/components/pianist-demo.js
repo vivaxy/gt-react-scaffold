@@ -9,9 +9,13 @@ import { VerticalFlexBox, VerticalFlexItem } from 'react-pianist/VerticalFlex';
 import { HorizontalFlexBox, HorizontalFlexItem } from 'react-pianist/HorizontalFlex';
 import { BorderBox, BorderLine } from 'react-pianist/BorderBox';
 
-export default class PianistDemo extends Component {
+import actions from '../actions';
+import connect from '../library/connect';
+import * as entires from '../config/entries';
 
-    render () {
+class PianistDemo extends Component {
+
+    render() {
 
         const navigationItemStyle = {
             textAlign: 'center',
@@ -32,7 +36,7 @@ export default class PianistDemo extends Component {
                 }}>
                     <BorderLine position={'top'} color={'#efefef'}/>
                     <HorizontalFlexBox>
-                        <HorizontalFlexItem flex={1} style={navigationItemStyle}>
+                        <HorizontalFlexItem flex={1} style={navigationItemStyle} onClick={::this.goToHome}>
                             home
                         </HorizontalFlexItem>
                         <HorizontalFlexItem flex={1} style={navigationItemStyle}>
@@ -49,4 +53,15 @@ export default class PianistDemo extends Component {
             </VerticalFlexItem>
         </VerticalFlexBox>
     }
+
+    goToHome() {
+        const {
+            routingPush,
+        } = this.props;
+        routingPush(entires.INDEX);
+    }
 }
+
+export default connect(state => ({}), {
+    routingPush: actions.routing.push,
+})(PianistDemo);
