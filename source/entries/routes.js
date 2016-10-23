@@ -4,26 +4,32 @@
  */
 
 import Base from '../containers/Base';
-import Demo from '../containers/Demo';
-import Index from '../containers/Index';
 import NoMatch from '../containers/NoMatch';
+import Index from '../containers/Index';
+import Demo from '../containers/Demo';
 
 import * as routes from '../config/routes';
 
-export default {
+const demoRoute = {
+    path: `${routes.DEMO}/:index`,
+    component: Demo,
+};
+
+const noMatchRoute = {
+    path: routes.WILDCARD,
+    component: NoMatch,
+};
+
+const route = {
     path: routes.BASE,
     component: Base,
     indexRoute: {
         component: Index,
     },
     childRoutes: [
-        {
-            path: routes.DEMO,
-            component: Demo,
-        },
-        {
-            path: routes.WILDCARD,
-            component: NoMatch,
-        },
-    ]
+        demoRoute,
+        noMatchRoute,
+    ],
 };
+
+export default route;

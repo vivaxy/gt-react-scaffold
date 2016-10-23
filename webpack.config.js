@@ -91,11 +91,14 @@ let webpackConfig = {
     entry: {
         [MAIN_ENTRY_NAME]: [
             `./${SOURCE_PATH}/entries/index.js`,
-        ]
+        ],
     },
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
         filename: 'js/[name].js',
+        // pages rests in different folder levels
+        hotUpdateMainFilename: '/[hash].hot-update.json',
+        hotUpdateChunkFilename: '/[id].[hash].hot-update.js',
     },
     module: {
         loaders: [
@@ -120,7 +123,8 @@ let webpackConfig = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: MAIN_ENTRY_NAME,
-            filename: 'js/[name].js'
+            // pages rests in different folder levels
+            filename: '/js/[name].js'
         }),
         new Visualizer(),
     ]

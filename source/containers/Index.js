@@ -43,7 +43,13 @@ class Index extends Component {
             })}
             <DemoButton buttonDisabled={!buttonState} onLoadMore={::this.getMoreNews}/>
             <hr/>
-            <RaisedButton onClick={::this.goToDemo}>go to demo</RaisedButton>
+            <RaisedButton onClick={::this.goToDemo(1)}>go to demo at tab 1</RaisedButton>
+            <hr/>
+            <RaisedButton onClick={::this.goToDemo(2)}>go to demo at tab 2</RaisedButton>
+            <hr/>
+            <RaisedButton onClick={::this.goToDemo(3)}>go to demo at tab 3</RaisedButton>
+            <hr/>
+            <RaisedButton onClick={::this.goToDemo(4)}>go to demo at tab 4</RaisedButton>
         </div>
     }
 
@@ -73,11 +79,13 @@ class Index extends Component {
         }
     }
 
-    goToDemo() {
+    goToDemo(index) {
         const {
             routingPush,
         } = this.props;
-        routingPush(entries.DEMO);
+        return () => {
+            routingPush(`${entries.DEMO}/${index}`);
+        }
     }
 
 }

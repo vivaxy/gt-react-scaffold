@@ -8,19 +8,15 @@ import React, { Component } from 'react';
 import { VerticalFlexBox, VerticalFlexItem } from 'react-pianist/VerticalFlex';
 import { HorizontalFlexBox, HorizontalFlexItem } from 'react-pianist/HorizontalFlex';
 import { BorderBox, BorderLine } from 'react-pianist/BorderBox';
+import { Button } from 'react-pianist/Button';
 
 import actions from '../actions';
 import connect from '../library/connect';
-import * as entires from '../config/entries';
+import * as entries from '../config/entries';
 
 class PianistDemo extends Component {
 
     render() {
-
-        const navigationItemStyle = {
-            textAlign: 'center',
-            lineHeight: '50px',
-        };
 
         return <VerticalFlexBox style={{
             width: '100%',
@@ -28,7 +24,7 @@ class PianistDemo extends Component {
             position: 'absolute',
         }}>
             <VerticalFlexItem flex={1}>
-                test
+                <Button onClick={::this.getToIndex}>go to index</Button>
             </VerticalFlexItem>
             <VerticalFlexItem height={50}>
                 <BorderBox style={{
@@ -36,16 +32,28 @@ class PianistDemo extends Component {
                 }}>
                     <BorderLine position={'top'} color={'#efefef'}/>
                     <HorizontalFlexBox>
-                        <HorizontalFlexItem flex={1} style={navigationItemStyle} onClick={::this.goToHome}>
+                        <HorizontalFlexItem
+                            flex={1}
+                            style={::this.getNavigationItemStyle(1)}
+                            onClick={::this.navigate(1)}>
                             home
                         </HorizontalFlexItem>
-                        <HorizontalFlexItem flex={1} style={navigationItemStyle}>
+                        <HorizontalFlexItem
+                            flex={1}
+                            style={::this.getNavigationItemStyle(2)}
+                            onClick={::this.navigate(2)}>
                             contact
                         </HorizontalFlexItem>
-                        <HorizontalFlexItem flex={1} style={navigationItemStyle}>
+                        <HorizontalFlexItem
+                            flex={1}
+                            style={::this.getNavigationItemStyle(3)}
+                            onClick={::this.navigate(3)}>
                             discovery
                         </HorizontalFlexItem>
-                        <HorizontalFlexItem flex={1} style={navigationItemStyle}>
+                        <HorizontalFlexItem
+                            flex={1}
+                            style={::this.getNavigationItemStyle(4)}
+                            onClick={::this.navigate(4)}>
                             me
                         </HorizontalFlexItem>
                     </HorizontalFlexBox>
@@ -54,11 +62,31 @@ class PianistDemo extends Component {
         </VerticalFlexBox>
     }
 
-    goToHome() {
+    getToIndex() {
         const {
             routingPush,
         } = this.props;
-        routingPush(entires.INDEX);
+        routingPush(entries.INDEX);
+    }
+
+    getNavigationItemStyle = (currentIndex) => {
+        const {
+            index,
+        } = this.props;
+        return {
+            textAlign: 'center',
+            lineHeight: '50px',
+            color: index === currentIndex ? '#f63' : '#333',
+        };
+    };
+
+    navigate(index) {
+        const {
+            routingPush,
+        } = this.props;
+        return () => {
+            routingPush(`${entries.DEMO}/${index}`);
+        }
     }
 }
 

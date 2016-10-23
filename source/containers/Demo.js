@@ -11,9 +11,13 @@ class Index extends Component {
 
     render () {
 
+        const {
+            params,
+        } = this.props;
+
         setTitle(i18n.SOMEONE_S_HOME('react-pianist'));
 
-        return <PianistDemo/>
+        return <PianistDemo index={Number(params.index)}/>
     }
 
 }
