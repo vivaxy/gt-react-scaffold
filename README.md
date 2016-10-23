@@ -3,11 +3,13 @@
 ## FEATURE
 
 - react
+- react router
+- react hot reloading
 - redux
+- redux logger
+- redux thunk
 - webpack packaging
 - material ui
-- hot reload
-- html template
 - mock server
 - unified error center
 - internationalization
@@ -22,13 +24,13 @@ As we find out html are mostly same in react projects, we extract the same html 
 
 `html-webpack-plugin` is used to generate released html files, which load corresponding js files.
 
-`entry` stores js main methods, we split main container to `container` because entry could not be hot-module-replaced.
+`entries` stores js main methods, we split main container to `containers` because entry could not be hot-module-replaced.
 
-`entry`s import `container`s, which is one to one correspondent. `render` method in entry provides all commonly used setups, such as redux store, provider, injectTapEventPlugin for material-ui, and custom styles.
+`entries`s import `containers`s, which is one to one correspondent. `render` method in entry provides all commonly used setups, such as redux store, provider, injectTapEventPlugin for material-ui, and custom styles.
 
-`container` is the headquarters which imports all dummy components, passing through props to them. Also, `container` interacts with redux `reducer` and `action`.
+`containers` is the headquarters which imports all dummy components, passing through props to them. Also, `containers` interacts with redux `reducers` and `actions`.
 
-We do not use async redux for ajax requests because ajax status is not that important for us to record. So, we invoke `api` in `container`, get response, and determine what `action` to call.
+We do not use async redux for ajax requests because ajax status is not that important for us to record. So, we invoke `api` in `containers`, get response, and determine what `actions` to call.
 
 We store every string in `i18n` for better internationalization.
 
@@ -45,7 +47,7 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 ## DEVELOP
 
 - `npm start`
-- open in browser `http://127.0.0.1:8080/release/html/demo.html`
+- open in browser `http://0.0.0.0:8080/release/html/demo.html`
 
 ## BUILD
 
@@ -57,7 +59,12 @@ Feel free to submit any issue.
 
 ## TODO
 
-- single page support
 - eslint for code styles
 
-##
+## REFERENCE
+
+- https://github.com/webpack/docs/wiki/webpack-dev-server
+- https://github.com/gaearon/react-hot-loader/tree/master/docs
+- https://github.com/reactjs/react-router-redux
+- https://github.com/ampedandwired/html-webpack-plugin
+- https://github.com/ReactTraining/react-router

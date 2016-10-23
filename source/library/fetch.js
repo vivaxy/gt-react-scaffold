@@ -8,10 +8,10 @@ import fetch from 'isomorphic-fetch';
 
 import * as requestMethodConstant from '../config/requestMethod';
 import getRequestPath from './requestPath';
-import { FetchError, ServerError } from '../error';
+import { FetchError, ServerError } from '../errors';
 import sleep from './sleep';
-import environment from '../library/environment';
-import * as environmentType from '../config/environment';
+import environment from './environment';
+import * as environmentType from '../config/environments';
 
 const MOCK_DELAY = 1000;
 const SUCCESS_CODE_LOWER_BOUND = 200;

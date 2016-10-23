@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import * as environmentConstant from '../config/environment';
+import * as environmentConstant from '../config/environments';
 
 let env = environmentConstant.PRODUCTION;
 

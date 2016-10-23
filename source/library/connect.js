@@ -5,7 +5,7 @@
 
 import { connect } from 'react-redux';
 
-import action from '../action';
+import actions from '../actions';
 
 export default (stateMapFunction, actionMap) => {
     return connect((state) => {
@@ -15,6 +15,6 @@ export default (stateMapFunction, actionMap) => {
         };
     }, {
         ...actionMap,
-        showToastAction: action.toast.showToast,
+        showToastAction: actions.toast.showToast,
     });
 };

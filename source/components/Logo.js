@@ -5,7 +5,7 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import logoImage from '../image/vivaxy.20150726.jpg';
+import logoImage from '../images/vivaxy.20150726.jpg';
 
 export default class Logo extends Component {
 
