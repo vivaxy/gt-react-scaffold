@@ -42,6 +42,7 @@ class Index extends Component {
                 return <div key={`news-${newsIndex++}`}>{news.name}</div>;
             })}
             <DemoButton buttonDisabled={!buttonState} onLoadMore={::this.getMoreNews}/>
+            <hr/>
             <RaisedButton onClick={::this.goToDemo}>go to demo</RaisedButton>
         </div>
     }

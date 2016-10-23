@@ -3,14 +3,14 @@
  * @author vivaxy
  */
 
-import render, { renderWithEntry } from '../library/render';
-import Entry from '../containers/Entry';
+import render, { renderWithRoutes } from '../library/render';
+import routes from './routes';
 
-render(Entry);
+render(routes);
 
 if (module.hot) {
-    module.hot.accept(`../containers/Entry`, () => {
-        const NewEntry = require(`../containers/Entry`).default;
-        renderWithEntry(NewEntry);
+    module.hot.accept(`./routes`, () => {
+        const newRoutes = require(`./routes`).default;
+        renderWithRoutes(newRoutes);
     });
 }

@@ -3,11 +3,13 @@
 ## FEATURE
 
 - react
+- react router
+- react hot reloading
 - redux
+- redux logger
+- redux thunk
 - webpack packaging
 - material ui
-- hot reload
-- html template
 - mock server
 - unified error center
 - internationalization
@@ -57,8 +59,6 @@ Feel free to submit any issue.
 
 ## TODO
 
-- single page support
-    - fix hot reload for react route
 - eslint for code styles
 
 ## REFERENCE
