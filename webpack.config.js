@@ -83,7 +83,7 @@ const jsonLoader = {
 
 const fileLoader = {
     test: /\.(png|jpg|gif)$/,
-    loader: 'url?limit=8192&name=image/[name]-[hash].[ext]',
+    loader: 'url?limit=8192&name=images/[name]-[hash].[ext]',
 };
 
 // default webpack config
