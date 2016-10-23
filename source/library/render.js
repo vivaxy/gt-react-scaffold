@@ -20,7 +20,7 @@ export const renderWithEntry = (Entry) => {
     return render(
         <AppContainer>
             <Provider store={store}>
-                    <Entry/>
+                <Entry/>
             </Provider>
         </AppContainer>,
         document.getElementById(ID_SELECTOR)

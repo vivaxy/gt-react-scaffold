@@ -6,9 +6,11 @@
 import button from './button';
 import newsList from './newsList';
 import toast from './toast';
+import routing from './routing';
 
 export default {
     button,
     newsList,
     toast,
+    routing,
 };

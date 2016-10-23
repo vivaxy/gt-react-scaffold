@@ -4,34 +4,16 @@
  */
 
 import React, { Component } from 'react';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+import { Router, browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
-import connect from '../library/connect';
 import setTitle from '../library/setTitle';
-import * as entries from '../config/entries';
-
-import Base from '../containers/Base';
-import Demo from '../containers/Demo';
-import Index from '../containers/Index';
-import NoMatch from '../containers/NoMatch';
+import store from '../library/store';
+import routes from '../entries/routes';
 
 import i18n from '../i18n';
 
-const routes = {
-    path: '/',
-    component: Base,
-    indexRoute: {component: Index},
-    childRoutes: [
-        {
-            path: 'demo',
-            component: Demo,
-        },
-        {
-            path: '*',
-            component: NoMatch,
-        },
-    ]
-};
+const history = syncHistoryWithStore(browserHistory, store);
 
 export default class Entry extends Component {
 
@@ -40,7 +22,7 @@ export default class Entry extends Component {
     }
 
     render() {
-        return <Router history={browserHistory} routes={routes}/>
+        return <Router history={history} routes={routes}/>
     }
 
 }

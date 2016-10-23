@@ -4,6 +4,7 @@
  */
 
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import connect from '../library/connect';
 import setTitle from '../library/setTitle';
@@ -15,17 +16,18 @@ import DemoButton from '../components/DemoButton';
 
 import i18n from '../i18n';
 import * as errorType from '../config/errors';
+import * as entries from '../config/entries';
 import actions from '../actions';
 
 let newsIndex = 0;
 
 class Index extends Component {
 
-    componentDidMount () {
+    componentDidMount() {
         this.getMoreNews();
     }
 
-    render () {
+    render() {
 
         setTitle(i18n.SOMEONE_S_HOME('vivaxy'));
 
@@ -40,10 +42,11 @@ class Index extends Component {
                 return <div key={`news-${newsIndex++}`}>{news.name}</div>;
             })}
             <DemoButton buttonDisabled={!buttonState} onLoadMore={::this.getMoreNews}/>
+            <RaisedButton onClick={::this.goToDemo}>go to demo</RaisedButton>
         </div>
     }
 
-    async getMoreNews () {
+    async getMoreNews() {
         let {
             appendNewsListAction,
             setButtonDefaultAction,
@@ -69,6 +72,13 @@ class Index extends Component {
         }
     }
 
+    goToDemo() {
+        const {
+            routingPush,
+        } = this.props;
+        routingPush(entries.DEMO);
+    }
+
 }
 
 export default connect(state => ({
@@ -78,4 +88,5 @@ export default connect(state => ({
     setButtonDisabledAction: actions.button.setButtonDisabled,
     setButtonDefaultAction: actions.button.setButtonDefault,
     appendNewsListAction: actions.newsList.appendNewsList,
+    routingPush: actions.routing.push,
 })(Index);

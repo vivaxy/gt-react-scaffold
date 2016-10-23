@@ -3,14 +3,14 @@
  * @author vivaxy
  */
 
-import * as constant from '../config/actions';
+import * as actions from '../config/actions';
 
 export default {
     showToast: message => dispatch => dispatch({
         message,
-        type: constant.SHOW_TOAST,
+        type: actions.SHOW_TOAST,
     }),
     hideToast: () => dispatch => dispatch({
-        type: constant.HIDE_TOAST,
+        type: actions.HIDE_TOAST,
     }),
 };

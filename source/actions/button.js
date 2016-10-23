@@ -3,13 +3,13 @@
  * @author vivaxy
  */
 
-import * as constant from '../config/actions';
+import * as actions from '../config/actions';
 
 export default {
     setButtonDisabled: () => dispatch => dispatch({
-        type: constant.BUTTON_DISABLED,
+        type: actions.BUTTON_DISABLED,
     }),
     setButtonDefault: () => dispatch => dispatch({
-        type: constant.BUTTON_DEFAULT,
+        type: actions.BUTTON_DEFAULT,
     }),
 };

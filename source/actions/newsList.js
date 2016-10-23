@@ -3,11 +3,11 @@
  * @author vivaxy
  */
 
-import * as constant from '../config/actions';
+import * as actions from '../config/actions';
 
 export default {
     appendNewsList: list => dispatch => dispatch({
         list,
-        type: constant.APPEND_NEWS,
+        type: actions.APPEND_NEWS,
     }),
 };

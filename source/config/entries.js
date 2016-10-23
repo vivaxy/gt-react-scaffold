@@ -3,4 +3,5 @@
  * @author vivaxy
  */
 
+export const INDEX = '/';
 export const DEMO = '/demo';
