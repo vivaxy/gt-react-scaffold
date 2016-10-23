@@ -3,5 +3,7 @@
  * @author vivaxy
  */
 
-export const INDEX = '/';
-export const DEMO = '/demo';
+import * as routes from './routes';
+
+export const INDEX = `${routes.BASE}`;
+export const DEMO = `${routes.BASE}${routes.DEMO}`;

@@ -8,19 +8,21 @@ import Demo from '../containers/Demo';
 import Index from '../containers/Index';
 import NoMatch from '../containers/NoMatch';
 
+import * as routes from '../config/routes';
+
 export default {
-    path: '/',
+    path: routes.BASE,
     component: Base,
     indexRoute: {
         component: Index,
     },
     childRoutes: [
         {
-            path: 'demo',
+            path: routes.DEMO,
             component: Demo,
         },
         {
-            path: '*',
+            path: routes.WILDCARD,
             component: NoMatch,
         },
     ]
