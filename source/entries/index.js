@@ -3,14 +3,13 @@
  * @author vivaxy
  */
 
-import render, { renderWithRoutes } from '../library/render';
-import routes from './routes';
+import page from '../pages/index';
 
-render(routes);
+page();
 
 if (module.hot) {
-    module.hot.accept(`./routes`, () => {
-        const newRoutes = require(`./routes`).default;
-        renderWithRoutes(newRoutes);
+    module.hot.accept('../pages/index', () => {
+        const newPage = require('../pages/index').default;
+        newPage();
     });
 }

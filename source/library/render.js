@@ -18,10 +18,12 @@ const ID_SELECTOR = 'react-scaffold';
 const history = syncHistoryWithStore(browserHistory, store);
 
 injectTapEventPlugin();
+setStyle();
 
 // hack around https://github.com/gaearon/react-hot-boilerplate/pull/61#issuecomment-211504531
-Router.prototype.componentWillReceiveProps = function(nextProps) {
+Router.prototype.componentWillReceiveProps = function (nextProps) {
     let components = [];
+
     function grabComponents(element) {
         // This only works for JSX routes, adjust accordingly for plain JS config
         if (element.props && element.props.component) {
@@ -31,11 +33,13 @@ Router.prototype.componentWillReceiveProps = function(nextProps) {
             Children.forEach(element.props.children, grabComponents);
         }
     }
+
     grabComponents(nextProps.routes || nextProps.children);
     components.forEach(createElement); // force patching
 };
 
-export const renderWithRoutes = (routes) => {
+export default (routes) => {
+
     return render(
         <AppContainer>
             <Provider store={store}>
@@ -44,12 +48,5 @@ export const renderWithRoutes = (routes) => {
         </AppContainer>,
         document.getElementById(ID_SELECTOR)
     );
-};
-
-export default (routes) => {
-
-    setStyle();
-
-    renderWithRoutes(routes);
 
 };

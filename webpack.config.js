@@ -6,6 +6,7 @@
 'use strict';
 
 const path = require('path');
+const glob = require('glob');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
@@ -16,9 +17,11 @@ const SOURCE_PATH = 'source';
 const RELEASE_PATH = 'release';
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
-const MAIN_ENTRY_NAME = 'index';
 const NODE_MODULES = 'node_modules';
 const MOCK_SERVER_BASE = 'mock-server';
+const ENTRIES_FOLDER = 'entries';
+const HTML_FOLDER = 'html';
+const COMMON_CHUNK_NAME = 'common';
 
 const BANNER = '@2016 vivaxy';
 
@@ -26,7 +29,9 @@ const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 
 const jsLoader = {
     test: /\.js$/,
-    exclude: /node_modules/,
+    include: [
+        path.resolve(__dirname, SOURCE_PATH),
+    ],
     loaders: [
         'babel',
     ],
@@ -89,13 +94,23 @@ const fileLoader = {
 // default webpack config
 let webpackConfig = {
     entry: {
-        [MAIN_ENTRY_NAME]: [
-            `./${SOURCE_PATH}/entries/index.js`,
+        [COMMON_CHUNK_NAME]: [
+            // remove babel-polyfill according to https://github.com/pigcan/blog/issues/1
+            'isomorphic-fetch',
+            'react',
+            'react-dom',
+            'redux',
+            'react-redux',
+            'material-ui',
+            'react-tap-event-plugin',
+            'tiny-cookie',
+            'react-tap-event-plugin',
+            'react-pianist',
         ],
     },
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
-        filename: 'js/[name].js',
+        filename: '/js/[name].js',
         // pages rests in different folder levels
         hotUpdateMainFilename: '/[hash].hot-update.json',
         hotUpdateChunkFilename: '/[id].[hash].hot-update.js',
@@ -112,23 +127,50 @@ let webpackConfig = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: `${SOURCE_PATH}/html/index.html`,
-            filename: `index.html`,
-            hash: true,
-            inject: 'body',
-            chunks: [
-                MAIN_ENTRY_NAME,
-            ]
-        }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: MAIN_ENTRY_NAME,
+            name: COMMON_CHUNK_NAME,
             // pages rests in different folder levels
             filename: '/js/[name].js'
         }),
         new Visualizer(),
     ]
 };
+
+// get entry
+const entryFileNameList = glob.sync(path.join(SOURCE_PATH, ENTRIES_FOLDER) + '/*.js');
+const entryNameList = entryFileNameList.map((entryFileName) => {
+    return path.basename(entryFileName, '.js');
+});
+
+// get corresponding html template
+const htmlFileNameList = glob.sync(path.join(SOURCE_PATH, HTML_FOLDER) + '/*.html');
+const htmlNameList = htmlFileNameList.map((htmlFileName) => {
+    return path.basename(htmlFileName, '.html');
+});
+
+// set entry
+entryNameList.forEach((entryName) => {
+    webpackConfig.entry[entryName] = [
+        path.join(__dirname, `./${SOURCE_PATH}/${ENTRIES_FOLDER}/${entryName}.js`),
+    ];
+
+    let htmlTemplateName = `index`;
+    if (htmlNameList.indexOf(entryName) !== -1) {
+        htmlTemplateName = entryName;
+    }
+
+    webpackConfig.plugins.push(new HtmlWebpackPlugin({
+        template: `${SOURCE_PATH}/${HTML_FOLDER}/${htmlTemplateName}.html`,
+        filename: entryName === htmlTemplateName ? `${htmlTemplateName}.html` : `${HTML_FOLDER}/${entryName}.html`,
+        hash: true,
+        inject: 'body',
+        chunks: [
+            COMMON_CHUNK_NAME,
+            entryName,
+        ]
+    }));
+
+});
 
 // set config according to environment
 switch (NODE_ENV) {
@@ -137,15 +179,18 @@ switch (NODE_ENV) {
         // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
         jsLoader.loaders.push('react-hot-loader/webpack');
 
-        webpackConfig.entry[MAIN_ENTRY_NAME].unshift('webpack-dev-server/client?http://' + DEVELOPMENT_IP + ':' + DEVELOPMENT_PORT);
-        webpackConfig.entry[MAIN_ENTRY_NAME].unshift('webpack/hot/log-apply-result');
+        entryNameList.forEach((entryName) => {
 
-        // hot reload
-        // webpackConfig.entry[MAIN_ENTRY_NAME].unshift('webpack/hot/dev-server');
-        webpackConfig.entry[MAIN_ENTRY_NAME].unshift('webpack/hot/only-dev-server');
+            webpackConfig.entry[entryName].unshift('webpack-dev-server/client?http://' + DEVELOPMENT_IP + ':' + DEVELOPMENT_PORT);
+            webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
 
-        // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
-        webpackConfig.entry[MAIN_ENTRY_NAME].unshift('react-hot-loader/patch');
+            // hot reload
+            // webpackConfig.entry[entryName].unshift('webpack/hot/dev-server');
+            webpackConfig.entry[entryName].unshift('webpack/hot/only-dev-server');
+
+            // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
+            webpackConfig.entry[entryName].unshift('react-hot-loader/patch');
+        });
 
         webpackConfig.devtool = 'eval';
 
