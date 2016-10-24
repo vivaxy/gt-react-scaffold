@@ -71,7 +71,7 @@ const createPackageJSON = async() => {
     Reflect.deleteProperty(devDependencies, `fs-extra`);
 
     const outputPackage = {
-        name: path.resolve(__dirname, '../scripts').split(path.sep).pop(),
+        name: path.resolve(__dirname, '..').split(path.sep).pop(),
         version: `0.0.0`,
         reactScaffoldVersion: version,
         description: `project from ${description}`,
