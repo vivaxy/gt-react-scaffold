@@ -187,7 +187,7 @@ switch (NODE_ENV) {
 
         entryNameList.forEach((entryName) => {
 
-            webpackConfig.entry[entryName].unshift('webpack-dev-server/client?http://' + DEVELOPMENT_IP + ':' + DEVELOPMENT_PORT);
+            webpackConfig.entry[entryName].unshift(`webpack-dev-server/client?http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}`);
             webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
 
             // hot reload
