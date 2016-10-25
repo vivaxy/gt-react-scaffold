@@ -39,23 +39,23 @@ const jsLoader = {
 
 const cssLoader = {
     test: /\.css$/,
+    include: [
+        path.resolve(__dirname, SOURCE_PATH),
+    ],
     loaders: [
         'style',
         'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
-    ],
-    include: [
-        path.resolve(__dirname, SOURCE_PATH),
     ],
 };
 
 const cssModuleLoader = {
     test: /\.css$/,
+    include: [
+        path.resolve(__dirname, NODE_MODULES),
+    ],
     loaders: [
         'style',
         'css',
-    ],
-    include: [
-        path.resolve(__dirname, NODE_MODULES),
     ],
 };
 
@@ -65,7 +65,8 @@ const lessLoader = {
         'style',
         'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
         'less',
-    ], include: [
+    ],
+    include: [
         path.resolve(__dirname, SOURCE_PATH),
     ],
 };
@@ -76,19 +77,24 @@ const lessModuleLoader = {
         'style',
         'css',
         'less',
-    ], include: [
+    ],
+    include: [
         path.resolve(__dirname, NODE_MODULES),
     ],
 };
 
 const jsonLoader = {
     test: /\.json$/,
-    loader: 'json',
+    loaders: [
+        'json',
+    ],
 };
 
 const fileLoader = {
     test: /\.(png|jpg|gif)$/,
-    loader: 'url?limit=8192&name=images/[name]-[hash].[ext]',
+    loaders: [
+        'url?limit=8192&name=images/[name]-[hash].[ext]',
+    ],
 };
 
 // default webpack config
