@@ -15,7 +15,7 @@ class Index extends Component {
             params,
         } = this.props;
 
-        setTitle(i18n.SOMEONE_S_HOME('react-pianist'));
+        setTitle(i18n.$SOMEONE_S_HOME('react-pianist'));
 
         return <PianistDemo index={Number(params.index)}/>
     }

@@ -29,7 +29,7 @@ class Index extends Component {
 
     render() {
 
-        setTitle(i18n.SOMEONE_S_HOME('vivaxy'));
+        setTitle(i18n.$SOMEONE_S_HOME('vivaxy'));
 
         let {
             buttonState,
