@@ -5,4 +5,4 @@
 
 import * as environmentConstant from '../config/environments';
 
-export default process.env.NODE_ENV || environmentConstant.PRODUCT;
+export default process.env.NODE_ENV || environmentConstant.PRODUCTION;

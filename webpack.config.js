@@ -16,7 +16,7 @@ const DEVELOPMENT_PORT = 8080;
 const SOURCE_PATH = 'source';
 const RELEASE_PATH = 'release';
 const DEVELOPMENT = 'development';
-const PRODUCT = 'product';
+const PRODUCTION = 'production';
 const NODE_MODULES = 'node_modules';
 const MOCK_SERVER_BASE = 'mock-server';
 const ENTRIES_FOLDER = 'entries';
@@ -25,7 +25,7 @@ const COMMON_CHUNK_NAME = 'common';
 
 const BANNER = '@2016 vivaxy';
 
-const NODE_ENV = process.env.NODE_ENV || PRODUCT;
+const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 
 const jsLoader = {
     test: /\.js$/,
@@ -61,25 +61,25 @@ const cssModuleLoader = {
 
 const lessLoader = {
     test: /\.less$/,
+    include: [
+        path.resolve(__dirname, SOURCE_PATH),
+    ],
     loaders: [
         'style',
         'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
         'less',
     ],
-    include: [
-        path.resolve(__dirname, SOURCE_PATH),
-    ],
 };
 
 const lessModuleLoader = {
     test: /\.less$/,
+    include: [
+        path.resolve(__dirname, NODE_MODULES),
+    ],
     loaders: [
         'style',
         'css',
         'less',
-    ],
-    include: [
-        path.resolve(__dirname, NODE_MODULES),
     ],
 };
 
@@ -93,7 +93,7 @@ const jsonLoader = {
 const fileLoader = {
     test: /\.(png|jpg|gif)$/,
     loaders: [
-        'url?limit=8192&name=/images/[name]-[hash].[ext]',
+        'url?limit=8192&name=images/[name]-[hash].[ext]',
     ],
 };
 
@@ -116,10 +116,10 @@ let webpackConfig = {
     },
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
-        filename: '/js/[name].js',
+        filename: 'js/[name].js',
         // pages rests in different folder levels
-        hotUpdateMainFilename: '/[hash].hot-update.json',
-        hotUpdateChunkFilename: '/[id].[hash].hot-update.js',
+        hotUpdateMainFilename: '[hash].hot-update.json',
+        hotUpdateChunkFilename: '[id].[hash].hot-update.js',
     },
     module: {
         loaders: [
@@ -130,18 +130,18 @@ let webpackConfig = {
             fileLoader,
             cssModuleLoader,
             lessModuleLoader,
-        ]
+        ],
     },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify(NODE_ENV)
-            }
+                'NODE_ENV': JSON.stringify(NODE_ENV),
+            },
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: COMMON_CHUNK_NAME,
             // pages rests in different folder levels
-            filename: '/js/[name].js'
+            filename: 'js/[name].js',
         }),
         new Visualizer(),
     ]
@@ -178,7 +178,7 @@ entryNameList.forEach((entryName) => {
         chunks: [
             COMMON_CHUNK_NAME,
             entryName,
-        ]
+        ],
     }));
 
 });
@@ -204,6 +204,7 @@ switch (NODE_ENV) {
         });
 
         webpackConfig.devtool = 'eval';
+        webpackConfig.output.publicPath = '/';
 
         webpackConfig.devServer = {
             contentBase: [
@@ -215,7 +216,7 @@ switch (NODE_ENV) {
             host: DEVELOPMENT_IP,
             port: DEVELOPMENT_PORT,
             stats: {
-                colors: true
+                colors: true,
             },
         };
 
@@ -223,6 +224,7 @@ switch (NODE_ENV) {
         break;
     default:
         webpackConfig.devtool = 'source-map';
+        webpackConfig.output.publicPath = '../';
         webpackConfig.plugins.push(new webpack.BannerPlugin(BANNER));
         webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
         webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
