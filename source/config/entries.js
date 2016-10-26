@@ -3,7 +3,5 @@
  * @author vivaxy
  */
 
-import * as routes from './routes';
-
-export const INDEX = `${routes.BASE}`;
-export const DEMO = `${routes.BASE}${routes.DEMO}`;
+export const INDEX = 'index';
+export const ABOUT = 'about';

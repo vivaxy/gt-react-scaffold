@@ -12,7 +12,6 @@ import { Button } from 'react-pianist/Button';
 
 import actions from '../actions';
 import connect from '../library/connect';
-import * as entries from '../config/entries';
 
 class PianistDemo extends Component {
 
@@ -66,7 +65,7 @@ class PianistDemo extends Component {
         const {
             routingPush,
         } = this.props;
-        routingPush(entries.INDEX);
+        routingPush('/');
     }
 
     getNavigationItemStyle = (currentIndex) => {
@@ -85,7 +84,7 @@ class PianistDemo extends Component {
             routingPush,
         } = this.props;
         return () => {
-            routingPush(`${entries.DEMO}/${index}`);
+            routingPush(`/demo/${index}`);
         }
     }
 }

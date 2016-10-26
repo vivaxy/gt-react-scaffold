@@ -16,7 +16,6 @@ import DemoButton from '../components/DemoButton';
 
 import i18n from '../i18n';
 import * as errorType from '../config/errors';
-import * as entries from '../config/entries';
 import actions from '../actions';
 
 let newsIndex = 0;
@@ -84,7 +83,7 @@ class Index extends Component {
             routingPush,
         } = this.props;
         return () => {
-            routingPush(`${entries.DEMO}/${index}`);
+            routingPush(`/demo/${index}`);
         }
     }
 

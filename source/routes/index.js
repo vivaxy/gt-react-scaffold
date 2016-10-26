@@ -8,20 +8,18 @@ import NoMatch from '../containers/NoMatch';
 import Index from '../containers/Index';
 import Demo from '../containers/Demo';
 
-import * as routes from '../config/routes';
-
 const demoRoute = {
-    path: `${routes.DEMO}/:index`,
+    path: 'demo/:index',
     component: Demo,
 };
 
 const noMatchRoute = {
-    path: routes.WILDCARD,
+    path: '*',
     component: NoMatch,
 };
 
 const route = {
-    path: routes.BASE,
+    path: '/',
     component: Base,
     indexRoute: {
         component: Index,
