@@ -4,4 +4,6 @@
  */
 
 export const DEVELOPMENT = 'development';
-export const PRODUCTION = 'production';
+export const LOCAL = 'local';
+export const BETA = 'beta';
+export const PRODUCT = 'product';

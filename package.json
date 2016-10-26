@@ -6,6 +6,8 @@
   "scripts": {
     "setup": "babel-node ./scripts/setup.js",
     "start": "NODE_ENV=development webpack-dev-server --progress",
+    "beta": "NODE_ENV=beta npm run build",
+    "product": "NODE_ENV=product npm run build",
     "build": "npm run build:clean && npm run build:webpack",
     "build:clean": "rm -rf ./release && mkdir ./release",
     "build:webpack": "webpack --progress --display-chunks --display-reasons --display-error-details --display-modules --display-exclude > ./release/build.log"

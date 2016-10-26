@@ -16,7 +16,7 @@ const DEVELOPMENT_PORT = 8080;
 const SOURCE_PATH = 'source';
 const RELEASE_PATH = 'release';
 const DEVELOPMENT = 'development';
-const PRODUCTION = 'production';
+const PRODUCT = 'product';
 const NODE_MODULES = 'node_modules';
 const MOCK_SERVER_BASE = 'mock-server';
 const ENTRIES_FOLDER = 'entries';
@@ -25,7 +25,7 @@ const COMMON_CHUNK_NAME = 'common';
 
 const BANNER = '@2016 vivaxy';
 
-const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
+const NODE_ENV = process.env.NODE_ENV || PRODUCT;
 
 const jsLoader = {
     test: /\.js$/,
@@ -133,6 +133,11 @@ let webpackConfig = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(NODE_ENV)
+            }
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: COMMON_CHUNK_NAME,
             // pages rests in different folder levels
@@ -215,21 +220,13 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-
         break;
-    case PRODUCTION:
+    default:
         webpackConfig.devtool = 'source-map';
-        webpackConfig.plugins.push(new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(PRODUCTION)
-            }
-        }));
         webpackConfig.plugins.push(new webpack.BannerPlugin(BANNER));
         webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
         webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
         break;
-    default:
-        throw new Error('NODE_ENV not found, NODE_ENV=' + NODE_ENV);
 }
 
 module.exports = webpackConfig;

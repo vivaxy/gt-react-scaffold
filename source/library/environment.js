@@ -5,12 +5,4 @@
 
 import * as environmentConstant from '../config/environments';
 
-let env = environmentConstant.PRODUCTION;
-
-const pathname = location.pathname;
-
-if (pathname.startsWith('/release')) {
-    env = environmentConstant.DEVELOPMENT;
-}
-
-export default env;
+export default process.env.NODE_ENV || environmentConstant.PRODUCT;

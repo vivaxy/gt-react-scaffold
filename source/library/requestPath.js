@@ -15,7 +15,7 @@ export default (url) => {
         case environmentConstant.DEVELOPMENT:
             requestPath = `${MOCK_API_ROOT}${url}.json`;
             break;
-        case environmentConstant.PRODUCTION:
+        case environmentConstant.PRODUCT:
             requestPath = `${MOCK_API_ROOT}${url}.json`;
             break;
         default:
