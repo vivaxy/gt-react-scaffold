@@ -5,6 +5,8 @@
 - react
 - react router
 - react hot reloading
+- page transition
+- multiple entries
 - redux
 - redux logger
 - redux thunk
