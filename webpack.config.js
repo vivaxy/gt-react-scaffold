@@ -93,7 +93,7 @@ const jsonLoader = {
 const fileLoader = {
     test: /\.(png|jpg|gif)$/,
     loaders: [
-        'url?limit=8192&name=images/[name]-[hash].[ext]',
+        'url?limit=8192&name=/images/[name]-[hash].[ext]',
     ],
 };
 
@@ -167,7 +167,7 @@ entryNameList.forEach((entryName) => {
 
     webpackConfig.plugins.push(new HtmlWebpackPlugin({
         template: `${SOURCE_PATH}/${HTML_FOLDER}/${htmlTemplateName}.html`,
-        filename: entryName === htmlTemplateName ? `${htmlTemplateName}.html` : `${HTML_FOLDER}/${entryName}.html`,
+        filename: `${HTML_FOLDER}/${entryName}.html`,
         hash: true,
         inject: 'body',
         chunks: [

@@ -6,7 +6,7 @@
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
-import { Router, browserHistory } from 'react-router'
+import { Router, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React, { Component, Children, createElement } from 'react';
@@ -15,7 +15,7 @@ import setStyle from './style';
 import store from './store';
 
 const ID_SELECTOR = 'react-scaffold';
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 injectTapEventPlugin();
 setStyle();

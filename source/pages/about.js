@@ -4,7 +4,7 @@
  */
 
 import render  from '../library/render';
-import routes from '../routes/index';
+import routes from '../routes/about';
 
 export default () => {
     return render(routes);
