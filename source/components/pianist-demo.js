@@ -24,6 +24,9 @@ class PianistDemo extends Component {
         }}>
             <VerticalFlexItem flex={1}>
                 <Button onClick={::this.getToIndex}>go to index</Button>
+                <div>
+                    {Math.random()}
+                </div>
             </VerticalFlexItem>
             <VerticalFlexItem height={50}>
                 <BorderBox style={{

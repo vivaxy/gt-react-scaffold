@@ -17,7 +17,9 @@ class Index extends Component {
 
         setTitle(i18n.$SOMEONE_S_HOME('react-pianist'));
 
-        return <PianistDemo index={Number(params.index)}/>
+        return <div className="page-wrapper">
+            <PianistDemo index={Number(params.index)}/>
+        </div>
     }
 
 }

@@ -35,7 +35,7 @@ class Index extends Component {
             newsListState,
         } = this.props;
 
-        return <div>
+        return <div className="page-wrapper">
             <Logo/>
             {newsListState.map((news) => {
                 return <div key={`news-${newsIndex++}`}>{news.name}</div>;

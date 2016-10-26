@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import React, { Component } from 'react';
+import React, { Component, cloneElement } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import connect from '../library/connect';
@@ -18,13 +19,21 @@ class Base extends Component {
             children,
             toastState,
             hideToastAction,
+            location,
         } = this.props;
 
         return <MuiThemeProvider>
             <div>
-                <div>
-                    {children}
-                </div>
+                <ReactCSSTransitionGroup
+                    component='div'
+                    transitionName='page-transition'
+                    transitionEnterTimeout={300}
+                    transitionLeaveTimeout={300}
+                >
+                    {cloneElement(children, {
+                        key: location.pathname,
+                    })}
+                </ReactCSSTransitionGroup>
                 <Toast
                     toastState={toastState}
                     hideToastAction={hideToastAction}

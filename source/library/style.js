@@ -4,6 +4,7 @@
  */
 
 import iconImage from '../images/vivaxy.20150726.jpg';
+import '!style!css!less!./style.less';
 
 export default () => {
 
