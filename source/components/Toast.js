@@ -8,7 +8,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 import * as toastConfig from '../config/toast';
 
-export default class Toast extends Component {
+export default class extends Component {
 
     static propTypes = {
         toastState: PropTypes.shape({

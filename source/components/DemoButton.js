@@ -6,7 +6,7 @@
 import React, { Component, PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class DemoButton extends Component {
+export default class extends Component {
 
     static propTypes = {
         buttonDisabled: PropTypes.bool.isRequired,

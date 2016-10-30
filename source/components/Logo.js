@@ -7,7 +7,7 @@ import React, { Component, PropTypes } from 'react';
 
 import logoImage from '../images/vivaxy.20150726.jpg';
 
-export default class Logo extends Component {
+export default class extends Component {
 
     static propTypes = {};
 
