@@ -32,6 +32,8 @@ As we find out html are mostly same in react projects, we extract the same html 
 
 `containers` is the headquarters which imports all dummy components, passing through props to them. Also, `containers` interacts with redux `reducers` and `actions`.
 
+It is recommended that you wrap containers into another. `redux` will re-render a container when and only when mapped reducers have been updated.
+
 We do not use async redux for ajax requests because ajax status is not that important for us to record. So, we invoke `api` in `containers`, get response, and determine what `actions` to call.
 
 We store every string in `i18n` for better internationalization.
