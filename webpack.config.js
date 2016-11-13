@@ -102,16 +102,13 @@ let webpackConfig = {
     entry: {
         [COMMON_CHUNK_NAME]: [
             // remove babel-polyfill according to https://github.com/pigcan/blog/issues/1
-            'isomorphic-fetch',
             'react',
             'react-dom',
             'redux',
             'react-redux',
-            'material-ui',
             'react-tap-event-plugin',
             'tiny-cookie',
-            'react-tap-event-plugin',
-            'react-pianist',
+            'isomorphic-fetch',
         ],
     },
     output: {
