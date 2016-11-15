@@ -23,12 +23,11 @@ const remove = async(file) => {
 const read = async(file) => {
     return await new Promise((resolve) => {
         fs.readFile(file, 'utf8', (err, data) => {
-                if (err) {
-                    throw err;
-                }
-                resolve(data);
+            if (err) {
+                throw err;
             }
-        );
+            resolve(data);
+        });
     });
 };
 
