@@ -50,7 +50,7 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 - add scaffold into gt `gt config add vivaxy/react-scaffold https://github.com/vivaxy/react-scaffold.git`
 - create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`
 - run `gt init`
-- select `react-scaffold-client`
+- select `vivaxy/react-scaffold`
 
 ## DEVELOP
 
