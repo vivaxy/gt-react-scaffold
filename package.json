@@ -4,7 +4,6 @@
   "description": "react-scaffold",
   "main": "webpack.config.js",
   "scripts": {
-    "setup": "babel-node ./scripts/setup.js",
     "start": "NODE_ENV=development webpack-dev-server --progress",
     "beta": "NODE_ENV=beta npm run build",
     "production": "NODE_ENV=production npm run build",
@@ -27,7 +26,6 @@
   },
   "homepage": "https://github.com/vivaxy/react-scaffold#readme",
   "devDependencies": {
-    "babel-cli": "^6.16.0",
     "babel-core": "^6.16.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-syntax-async-functions": "^6.8.0",
@@ -40,7 +38,6 @@
     "babel-runtime": "^6.11.6",
     "css-loader": "^0.24.0",
     "file-loader": "^0.9.0",
-    "fs-extra": "^0.30.0",
     "glob": "^7.1.1",
     "graceful-fs": "^4.1.9",
     "html-webpack-plugin": "^2.22.0",
