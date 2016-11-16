@@ -47,7 +47,7 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 
     `sudo npm install -g granturismo`
 
-- create your project directory `mkdir my-project-name && cd my-project-name`
+- create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`
 - run `gt init`
 - select `react-scaffold-client`
 
