@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import connect from '../library/connect';
-import setTitle from '../library/setTitle';
+import connect from '../lib/connect';
+import setTitle from '../lib/setTitle';
 
 import PianistDemo from '../components/pianist-demo';
 

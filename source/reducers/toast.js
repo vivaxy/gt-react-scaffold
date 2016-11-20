@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import createReducer from '../library/createReducer';
+import createReducer from '../lib/createReducer';
 
 import * as actionType from '../config/actions';
 

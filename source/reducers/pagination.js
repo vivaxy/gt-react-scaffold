@@ -5,7 +5,7 @@
 
 import { PropTypes } from 'react';
 
-import createReducer from '../library/createReducer';
+import createReducer from '../lib/createReducer';
 
 import * as constant from '../config/actions';
 

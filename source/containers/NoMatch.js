@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 
-import connect from '../library/connect';
+import connect from '../lib/connect';
 
 class NoMatch extends Component {
 

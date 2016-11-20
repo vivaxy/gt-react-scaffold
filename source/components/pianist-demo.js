@@ -11,7 +11,7 @@ import { BorderBox, BorderLine } from 'react-pianist/BorderBox';
 import { Button } from 'react-pianist/Button';
 
 import actions from '../actions';
-import connect from '../library/connect';
+import connect from '../lib/connect';
 
 class PianistDemo extends Component {
 

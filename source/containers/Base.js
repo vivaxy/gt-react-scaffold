@@ -7,7 +7,7 @@ import React, { Component, cloneElement } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import connect from '../library/connect';
+import connect from '../lib/connect';
 import action from '../actions';
 import Toast from '../components/Toast';
 

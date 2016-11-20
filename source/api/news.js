@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import fetch from '../library/fetch';
+import fetch from '../lib/fetch';
 
 export default async () => {
 

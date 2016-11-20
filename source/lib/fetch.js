@@ -21,8 +21,14 @@ const basicFetchOptions = {
     credentials: 'same-origin',
 };
 
-export default async (config) => {
+const stringifyConfig = (config) => {
+    return JSON.stringify(config);
+};
 
+const cached = {};
+
+const sendRequest = async(config) => {
+    let response = null;
     let {
         method = requestMethodConstant.GET,
         data,
@@ -31,8 +37,6 @@ export default async (config) => {
 
     requestPath = getRequestPath(requestPath);
     method = method.toUpperCase();
-
-    let response;
 
     switch (method) {
         case requestMethodConstant.GET:
@@ -53,6 +57,19 @@ export default async (config) => {
             break;
         default:
             break;
+    }
+};
+
+export default async(config) => {
+
+    const stringifiedConfig = stringifyConfig(config);
+    let response;
+
+    if (cached[stringifiedConfig]) {
+        response = cached[stringifiedConfig];
+    } else {
+        response = sendRequest(config);
+        cached[stringifiedConfig] = response;
     }
 
     if (environment === environmentType.DEVELOPMENT) {

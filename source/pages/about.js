@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import render  from '../library/render';
+import render  from '../lib/render';
 import routes from '../routes/about';
 
 export default () => {

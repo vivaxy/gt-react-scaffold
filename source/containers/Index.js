@@ -6,8 +6,8 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import connect from '../library/connect';
-import setTitle from '../library/setTitle';
+import connect from '../lib/connect';
+import setTitle from '../lib/setTitle';
 
 import getNews from '../api/news';
 
