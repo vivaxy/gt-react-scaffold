@@ -11,19 +11,19 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
-const DEVELOPMENT_IP = '0.0.0.0';
+const DEVELOPMENT_IP = `0.0.0.0`;
 const DEVELOPMENT_PORT = 8080;
-const SOURCE_PATH = 'source';
-const RELEASE_PATH = 'release';
-const DEVELOPMENT = 'development';
-const PRODUCTION = 'production';
-const NODE_MODULES = 'node_modules';
-const MOCK_SERVER_BASE = 'mock-server';
-const ENTRIES_FOLDER = 'entries';
-const HTML_FOLDER = 'html';
-const COMMON_CHUNK_NAME = 'common';
+const SOURCE_PATH = `source`;
+const RELEASE_PATH = `release`;
+const DEVELOPMENT = `development`;
+const PRODUCTION = `production`;
+const NODE_MODULES = `node_modules`;
+const MOCK_SERVER_BASE = `mock-server`;
+const ENTRIES_FOLDER = `entries`;
+const HTML_FOLDER = `html`;
+const COMMON_CHUNK_NAME = `common`;
 
-const BANNER = '@2016 vivaxy';
+const BANNER = `@2016 vivaxy`;
 
 const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 
@@ -33,7 +33,7 @@ const jsLoader = {
         path.resolve(__dirname, SOURCE_PATH),
     ],
     loaders: [
-        'babel',
+        `babel`,
     ],
 };
 
@@ -43,8 +43,8 @@ const cssLoader = {
         path.resolve(__dirname, SOURCE_PATH),
     ],
     loaders: [
-        'style',
-        'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
+        `style`,
+        `css`,
     ],
 };
 
@@ -54,8 +54,8 @@ const cssModuleLoader = {
         path.resolve(__dirname, NODE_MODULES),
     ],
     loaders: [
-        'style',
-        'css',
+        `style`,
+        `css`,
     ],
 };
 
@@ -65,9 +65,9 @@ const lessLoader = {
         path.resolve(__dirname, SOURCE_PATH),
     ],
     loaders: [
-        'style',
-        'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!',
-        'less',
+        `style`,
+        `css`,
+        `less`,
     ],
 };
 
@@ -77,23 +77,23 @@ const lessModuleLoader = {
         path.resolve(__dirname, NODE_MODULES),
     ],
     loaders: [
-        'style',
-        'css',
-        'less',
+        `style`,
+        `css`,
+        `less`,
     ],
 };
 
 const jsonLoader = {
     test: /\.json$/,
     loaders: [
-        'json',
+        `json`,
     ],
 };
 
 const fileLoader = {
     test: /\.(png|jpg|gif)$/,
     loaders: [
-        'url?limit=8192&name=images/[name]-[hash].[ext]',
+        `url?limit=8192&name=images/[name]-[hash].[ext]`,
     ],
 };
 
@@ -102,21 +102,21 @@ let webpackConfig = {
     entry: {
         [COMMON_CHUNK_NAME]: [
             // remove babel-polyfill according to https://github.com/pigcan/blog/issues/1
-            'react',
-            'react-dom',
-            'redux',
-            'react-redux',
-            'react-tap-event-plugin',
-            'tiny-cookie',
-            'isomorphic-fetch',
+            `react`,
+            `react-dom`,
+            `redux`,
+            `react-redux`,
+            `react-tap-event-plugin`,
+            `tiny-cookie`,
+            `isomorphic-fetch`,
         ],
     },
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
-        filename: 'js/[name].js',
+        filename: `js/[name].js`,
         // pages rests in different folder levels
-        hotUpdateMainFilename: '[hash].hot-update.json',
-        hotUpdateChunkFilename: '[id].[hash].hot-update.js',
+        hotUpdateMainFilename: `[hash].hot-update.json`,
+        hotUpdateChunkFilename: `[id].[hash].hot-update.js`,
     },
     module: {
         loaders: [
@@ -138,22 +138,22 @@ let webpackConfig = {
         new webpack.optimize.CommonsChunkPlugin({
             name: COMMON_CHUNK_NAME,
             // pages rests in different folder levels
-            filename: 'js/[name].js',
+            filename: `js/[name].js`,
         }),
         new Visualizer(),
     ]
 };
 
 // get entry
-const entryFileNameList = glob.sync(path.join(SOURCE_PATH, ENTRIES_FOLDER) + '/*.js');
+const entryFileNameList = glob.sync(path.join(SOURCE_PATH, ENTRIES_FOLDER) + `/*.js`);
 const entryNameList = entryFileNameList.map((entryFileName) => {
-    return path.basename(entryFileName, '.js');
+    return path.basename(entryFileName, `.js`);
 });
 
 // get corresponding html template
-const htmlFileNameList = glob.sync(path.join(SOURCE_PATH, HTML_FOLDER) + '/*.html');
+const htmlFileNameList = glob.sync(path.join(SOURCE_PATH, HTML_FOLDER) + `/*.html`);
 const htmlNameList = htmlFileNameList.map((htmlFileName) => {
-    return path.basename(htmlFileName, '.html');
+    return path.basename(htmlFileName, `.html`);
 });
 
 // set entry
@@ -171,7 +171,7 @@ entryNameList.forEach((entryName) => {
         template: `${SOURCE_PATH}/${HTML_FOLDER}/${htmlTemplateName}.html`,
         filename: `${HTML_FOLDER}/${entryName}.html`,
         hash: true,
-        inject: 'body',
+        inject: `body`,
         chunks: [
             COMMON_CHUNK_NAME,
             entryName,
@@ -185,23 +185,23 @@ switch (NODE_ENV) {
     case DEVELOPMENT:
 
         // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
-        jsLoader.loaders.push('react-hot-loader/webpack');
+        jsLoader.loaders.push(`react-hot-loader/webpack`);
 
         entryNameList.forEach((entryName) => {
 
             webpackConfig.entry[entryName].unshift(`webpack-dev-server/client?http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}`);
-            webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
+            webpackConfig.entry[entryName].unshift(`webpack/hot/log-apply-result`);
 
             // hot reload
             // webpackConfig.entry[entryName].unshift('webpack/hot/dev-server');
-            webpackConfig.entry[entryName].unshift('webpack/hot/only-dev-server');
+            webpackConfig.entry[entryName].unshift(`webpack/hot/only-dev-server`);
 
             // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
-            webpackConfig.entry[entryName].unshift('react-hot-loader/patch');
+            webpackConfig.entry[entryName].unshift(`react-hot-loader/patch`);
         });
 
-        webpackConfig.devtool = 'eval';
-        webpackConfig.output.publicPath = '/';
+        webpackConfig.devtool = `eval`;
+        webpackConfig.output.publicPath = `/`;
 
         webpackConfig.devServer = {
             contentBase: [
@@ -220,8 +220,8 @@ switch (NODE_ENV) {
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         break;
     default:
-        webpackConfig.devtool = 'source-map';
-        webpackConfig.output.publicPath = '../';
+        webpackConfig.devtool = `source-map`;
+        webpackConfig.output.publicPath = `../`;
         webpackConfig.plugins.push(new webpack.BannerPlugin(BANNER));
         webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
         webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
