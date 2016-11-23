@@ -58,6 +58,7 @@ const sendRequest = async(config) => {
         default:
             break;
     }
+    return response;
 };
 
 export default async(config) => {
@@ -68,8 +69,8 @@ export default async(config) => {
     if (cached[stringifiedConfig]) {
         response = cached[stringifiedConfig];
     } else {
-        response = sendRequest(config);
-        cached[stringifiedConfig] = response;
+        response = await sendRequest(config);
+        cached[stringifiedConfig] = response.clone();
     }
 
     if (environment === environmentType.DEVELOPMENT) {
