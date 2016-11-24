@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import connect from '../lib/connect';
-import setTitle from '../lib/setTitle';
+import setTitle from '../../lib/setTitle';
 
-import PianistDemo from '../components/pianist-demo';
+import PianistDemo from '../../components/pianist-demo';
 
-import i18n from '../i18n';
+import i18n from '../../i18n';
 
 class Index extends Component {
 

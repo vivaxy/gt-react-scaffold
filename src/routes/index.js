@@ -3,10 +3,10 @@
  * @author vivaxy
  */
 
-import Base from '../containers/Base';
-import NoMatch from '../containers/NoMatch';
-import Index from '../containers/Index';
-import Demo from '../containers/Demo';
+import Base from '../containers/common/Base';
+import NoMatch from '../containers/common/NoMatch';
+import Index from '../containers/common/Index';
+import Demo from '../containers/common/Demo';
 
 const demoRoute = {
     path: 'demo/:index',

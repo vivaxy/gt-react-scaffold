@@ -4,8 +4,7 @@
  */
 
 import React, { Component } from 'react';
-
-import connect from '../lib/connect';
+import { connect } from 'react-redux';
 
 class NoMatch extends Component {
 

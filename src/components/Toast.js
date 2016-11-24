@@ -24,7 +24,6 @@ export default class extends Component {
             toastState,
         } = this.props;
 
-        // todo bindAutoBindMethods.js:50 Uncaught TypeError: Cannot read property '__reactAutoBindMap' of null
         return <Snackbar
             open={toastState.show}
             message={toastState.message}

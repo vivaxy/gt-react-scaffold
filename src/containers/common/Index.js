@@ -4,19 +4,20 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import RaisedButton from 'material-ui/RaisedButton';
 
-import connect from '../lib/connect';
-import setTitle from '../lib/setTitle';
+import setTitle from '../../lib/setTitle';
 
-import getNews from '../api/news';
+import getNews from '../../api/news';
 
-import Logo from '../components/Logo';
-import DemoButton from '../components/DemoButton';
+import Logo from '../../components/Logo';
+import DemoButton from '../../components/DemoButton';
 
-import i18n from '../i18n';
-import * as errorType from '../config/errors';
-import actions from '../actions';
+import i18n from '../../i18n';
+import * as errorType from '../../config/errors';
+import actions from '../../actions';
 
 let newsIndex = 0;
 
@@ -97,4 +98,5 @@ export default connect(state => ({
     setButtonDefaultAction: actions.button.setButtonDefault,
     appendNewsListAction: actions.newsList.appendNewsList,
     routingPush: actions.routing.push,
+    showToastAction: actions.toast.showToast,
 })(Index);
