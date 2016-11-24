@@ -60,7 +60,7 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 
 ## BUILD
 
-- `npm run build`
+- `npm run build`np
 
 ## CONTRIBUTE
 

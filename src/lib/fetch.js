@@ -18,7 +18,7 @@ const SUCCESS_CODE_LOWER_BOUND = 200;
 const SUCCESS_CODE_HIGHER_BOUND = 300;
 
 const basicFetchOptions = {
-    credentials: 'same-origin',
+    credentials: 'include',
 };
 
 const stringifyConfig = (config) => {
