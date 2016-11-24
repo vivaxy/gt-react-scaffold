@@ -13,7 +13,7 @@ const Visualizer = require('webpack-visualizer-plugin');
 
 const DEVELOPMENT_IP = `0.0.0.0`;
 const DEVELOPMENT_PORT = 8080;
-const SOURCE_PATH = `source`;
+const SOURCE_PATH = `src`;
 const RELEASE_PATH = `release`;
 const DEVELOPMENT = `development`;
 const PRODUCTION = `production`;
