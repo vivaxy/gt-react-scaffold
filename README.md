@@ -8,6 +8,7 @@
 - page transition
 - multiple entries
 - redux
+- react redux
 - redux logger
 - redux thunk
 - webpack packaging
