@@ -6,12 +6,15 @@
 'use strict';
 
 const path = require('path');
+const childProcess = require('child_process');
+
+const ip = require('ip');
 const glob = require('glob');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
-const DEVELOPMENT_IP = `0.0.0.0`;
+const DEVELOPMENT_IP = ip.address();
 const DEVELOPMENT_PORT = 8080;
 const SOURCE_PATH = `src`;
 const RELEASE_PATH = `release`;
@@ -227,5 +230,16 @@ switch (NODE_ENV) {
         webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
         break;
 }
+
+const openBrowser = () => {
+    const execCommand = process.platform === 'darwin' ? 'open' :
+        process.platform === 'win32' ? 'start' : 'xdg-open';
+
+    const openUrl = `http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}/${HTML_FOLDER}/index.html`;
+
+    childProcess.execSync(`${execCommand} ${openUrl}`);
+};
+
+openBrowser();
 
 module.exports = webpackConfig;
