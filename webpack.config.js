@@ -183,6 +183,15 @@ entryNameList.forEach((entryName) => {
 
 });
 
+const openBrowser = () => {
+    const execCommand = process.platform === 'darwin' ? 'open' :
+        process.platform === 'win32' ? 'start' : 'xdg-open';
+
+    const openUrl = `http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}/${HTML_FOLDER}/index.html`;
+
+    childProcess.execSync(`${execCommand} ${openUrl}`);
+};
+
 // set config according to environment
 switch (NODE_ENV) {
     case DEVELOPMENT:
@@ -221,6 +230,7 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+        openBrowser();
         break;
     default:
         webpackConfig.devtool = `source-map`;
@@ -230,16 +240,5 @@ switch (NODE_ENV) {
         webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
         break;
 }
-
-const openBrowser = () => {
-    const execCommand = process.platform === 'darwin' ? 'open' :
-        process.platform === 'win32' ? 'start' : 'xdg-open';
-
-    const openUrl = `http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}/${HTML_FOLDER}/index.html`;
-
-    childProcess.execSync(`${execCommand} ${openUrl}`);
-};
-
-openBrowser();
 
 module.exports = webpackConfig;
