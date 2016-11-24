@@ -67,7 +67,7 @@ export default async(config) => {
     let response;
 
     if (cached[stringifiedConfig]) {
-        response = cached[stringifiedConfig];
+        response = cached[stringifiedConfig].clone();
     } else {
         response = await sendRequest(config);
         cached[stringifiedConfig] = response.clone();
