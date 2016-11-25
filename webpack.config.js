@@ -144,7 +144,7 @@ let webpackConfig = {
             filename: `js/[name].js`,
         }),
         new Visualizer(),
-    ]
+    ],
 };
 
 // get entry
