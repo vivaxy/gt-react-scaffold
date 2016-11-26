@@ -230,6 +230,7 @@ switch (NODE_ENV) {
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+        webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
         openBrowser();
         break;
     default:
@@ -238,6 +239,7 @@ switch (NODE_ENV) {
         webpackConfig.plugins.push(new webpack.BannerPlugin(BANNER));
         webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
         webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
+        webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin(true));
         break;
 }
 
