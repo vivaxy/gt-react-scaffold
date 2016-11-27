@@ -66,6 +66,12 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 
 Feel free to submit any issue.
 
+Steps to make contributions
+
+- update codes
+- submit your changes
+- run `npm run release` to update `CHANGELOG.md` and bump version
+
 ## TODO
 
 - eslint for code styles
