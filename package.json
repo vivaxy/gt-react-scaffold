@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "changelog": "standard-version",
-    "start": "NODE_ENV=development webpack-dev-server --progress",
+    "start": "NODE_ENV=development webpack-dev-server --progress --open",
     "beta": "NODE_ENV=beta npm run build",
     "production": "NODE_ENV=production npm run build",
     "build": "npm run build:clean && npm run build:webpack",
@@ -18,7 +18,8 @@
   },
   "keywords": [
     "react",
-    "react-scaffold"
+    "react-scaffold",
+    "scaffold"
   ],
   "author": "vivaxy",
   "license": "MIT",
@@ -64,7 +65,7 @@
     "style-loader": "^0.13.1",
     "tiny-cookie": "^0.5.5",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
+    "webpack": "^1.13.3",
     "webpack-dev-server": "^1.14.1",
     "webpack-visualizer-plugin": "^0.1.5"
   },

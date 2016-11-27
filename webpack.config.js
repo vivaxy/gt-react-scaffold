@@ -6,7 +6,6 @@
 'use strict';
 
 const path = require('path');
-const childProcess = require('child_process');
 
 const ip = require('ip');
 const glob = require('glob');
@@ -15,7 +14,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
 const DEVELOPMENT_IP = ip.address();
-const DEVELOPMENT_PORT = 8080;
+const DEVELOPMENT_PORT = Math.floor(Math.random() * 65536);
 const SOURCE_PATH = `src`;
 const RELEASE_PATH = `release`;
 const DEVELOPMENT = `development`;
@@ -183,15 +182,6 @@ entryNameList.forEach((entryName) => {
 
 });
 
-const openBrowser = () => {
-    const execCommand = process.platform === 'darwin' ? 'open' :
-        process.platform === 'win32' ? 'start' : 'xdg-open';
-
-    const openUrl = `http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}/${HTML_FOLDER}/index.html`;
-
-    childProcess.execSync(`${execCommand} ${openUrl}`);
-};
-
 // set config according to environment
 switch (NODE_ENV) {
     case DEVELOPMENT:
@@ -231,7 +221,6 @@ switch (NODE_ENV) {
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
-        openBrowser();
         break;
     default:
         webpackConfig.devtool = `source-map`;
