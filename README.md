@@ -71,6 +71,7 @@ Steps to make contributions
 - update codes
 - submit your changes
 - run `npm run release` to update `CHANGELOG.md` and bump version
+- run `git push --tag origin master` to push changes into origin
 
 ## TODO
 
