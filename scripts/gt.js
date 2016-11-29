@@ -16,7 +16,7 @@ const copyFiles = async() => {
     const files = [
         `docs`,
         `mock-server`,
-        `source`,
+        `src`,
         `.babelrc`,
         `.editorconfig`,
         `.gitignore`,
