@@ -3,11 +3,15 @@
  * @author vivaxy
  */
 
-const copyFiles = (options) => {
+import Listr from 'listr';
+
+let data;
+
+const copyFiles = async() => {
 
     const {
         presets,
-    } = options;
+    } = data;
 
     const files = [
         `docs`,
@@ -20,24 +24,22 @@ const copyFiles = (options) => {
         `webpack.config.js`,
     ];
 
-    console.log(`copying files...`);
-    presets.copyFiles(files);
+    await presets.copyFiles(files);
 };
 
-const updatePackageJSON = (options) => {
+const updatePackageJSON = async() => {
 
     const {
         project,
         scaffold,
         presets,
-    } = options;
+    } = data;
 
     const projectGit = project.git || {};
 
     const filename = `package.json`;
 
-    console.log(`updating package.json...`);
-    presets.updateJson(filename, (data) => {
+    await presets.updateJson(filename, (data) => {
 
         const {
             name,
@@ -83,17 +85,17 @@ const updatePackageJSON = (options) => {
 
 };
 
-const updateREADME = (options) => {
+const updateREADME = async() => {
+
     const {
         project,
         scaffold,
         presets,
-    } = options;
+    } = data;
 
     const filename = `README.md`;
 
-    console.log(`updating README.md...`);
-    presets.updateFile(filename, (data) => {
+    await presets.updateFile(filename, (data) => {
         const partsToRemove = [
             `INITIALIZE`,
             `CONTRIBUTE`,
@@ -107,8 +109,23 @@ const updateREADME = (options) => {
     });
 };
 
-export const init = (options) => {
-    copyFiles(options);
-    updatePackageJSON(options);
-    updateREADME(options);
+export const init = async(options) => {
+
+    data = options;
+
+    return new Listr([
+        {
+            title: `copy files`,
+            task: copyFiles,
+        },
+        {
+            title: `update package.json`,
+            task: updatePackageJSON,
+        },
+        {
+            title: `update README.md`,
+            task: updateREADME,
+        },
+    ]);
+
 };
