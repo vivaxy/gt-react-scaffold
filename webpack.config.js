@@ -217,6 +217,7 @@ switch (NODE_ENV) {
             stats: {
                 colors: true,
             },
+            open: true,
         };
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
