@@ -8,7 +8,7 @@ import fetch from 'isomorphic-fetch';
 
 import * as requestMethodConstant from '../config/requestMethod';
 import getRequestPath from './requestPath';
-import { FetchError, ServerError } from '../errors';
+import { FetchError, ServerError, TimeoutError } from '../errors';
 import sleep from './sleep';
 import environment from './environment';
 import * as environmentType from '../config/environments';
@@ -28,6 +28,7 @@ const stringifyConfig = (config) => {
 const cached = {};
 
 const sendRequest = async(config) => {
+
     let response = null;
     let {
         method = requestMethodConstant.GET,
@@ -58,23 +59,35 @@ const sendRequest = async(config) => {
         default:
             break;
     }
+
+    if (environment === environmentType.DEVELOPMENT) {
+        await sleep(MOCK_DELAY);
+    }
+
     return response;
+};
+
+const timeoutPromise = async(timeout) => {
+    await sleep(timeout);
+    throw new TimeoutError(timeout);
 };
 
 export default async(config) => {
 
-    const stringifiedConfig = stringifyConfig(config);
+    const {
+        timeout = 60000,
+        ...fetchConfig,
+    } = config;
+
+    const stringifiedConfig = stringifyConfig(fetchConfig);
     let response;
 
     if (cached[stringifiedConfig]) {
         response = cached[stringifiedConfig].clone();
     } else {
-        response = await sendRequest(config);
+        const race = Promise.race([timeoutPromise(timeout), sendRequest(fetchConfig)]);
+        response = await race;
         cached[stringifiedConfig] = response.clone();
-    }
-
-    if (environment === environmentType.DEVELOPMENT) {
-        await sleep(MOCK_DELAY);
     }
 
     if (response.status < SUCCESS_CODE_LOWER_BOUND || response.status >= SUCCESS_CODE_HIGHER_BOUND) {

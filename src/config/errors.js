@@ -3,5 +3,6 @@
  * @author vivaxy
  */
 
-export const FETCH = 'fetch-error';
-export const SERVER = 'server-error';
+export const FETCH = 'FETCH';
+export const SERVER = 'SERVER';
+export const TIMEOUT = 'TIMEOUT';
