@@ -69,13 +69,9 @@ Feel free to submit any issue.
 Steps to make contributions
 
 - update codes
-- submit your changes
+- submit your changes by [`gacp`](https://github.com/vivaxy/gacp)
 - run `npm run release` to update `CHANGELOG.md` and bump version
-- run `git push --tag origin master` to push changes into origin
-
-## TODO
-
-- eslint for code styles
+- run [`gacp`](https://github.com/vivaxy/gacp) to push changes into origin
 
 ## REFERENCE
 
