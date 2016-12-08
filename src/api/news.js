@@ -9,7 +9,7 @@ export default async () => {
 
     let result = await fetch({
         url: '/newsByPage',
-        data: ''
+        data: Math.random()
     });
 
     return result.list;

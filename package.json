@@ -41,7 +41,6 @@
     "css-loader": "^0.24.0",
     "file-loader": "^0.9.0",
     "glob": "^7.1.1",
-    "graceful-fs": "^4.1.9",
     "html-webpack-plugin": "^2.22.0",
     "ip": "^1.1.4",
     "isomorphic-fetch": "^2.2.1",
