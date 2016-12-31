@@ -21,12 +21,6 @@ const basicFetchOptions = {
     credentials: 'include',
 };
 
-const stringifyConfig = (config) => {
-    return JSON.stringify(config);
-};
-
-const cached = {};
-
 const sendRequest = async(config) => {
 
     let response = null;
@@ -79,16 +73,9 @@ export default async(config) => {
         ...fetchConfig,
     } = config;
 
-    const stringifiedConfig = stringifyConfig(fetchConfig);
     let response;
 
-    if (cached[stringifiedConfig]) {
-        response = cached[stringifiedConfig].clone();
-    } else {
-        const race = Promise.race([timeoutPromise(timeout), sendRequest(fetchConfig)]);
-        response = await race;
-        cached[stringifiedConfig] = response.clone();
-    }
+    response = await Promise.race([timeoutPromise(timeout), sendRequest(fetchConfig)]);
 
     if (response.status < SUCCESS_CODE_LOWER_BOUND || response.status >= SUCCESS_CODE_HIGHER_BOUND) {
         throw new FetchError(response);
