@@ -16,23 +16,30 @@ class Base extends Component {
 
     render() {
 
-        let {
+        const {
             children,
             toastState,
             hideToastAction,
             location,
         } = this.props;
 
+        const {
+            action,
+            pathname,
+        } = location;
+
+        const transitionName = `page-transition-${action.toLowerCase()}`;
+
         return <MuiThemeProvider>
             <div>
                 <ReactCSSTransitionGroup
                     component='div'
-                    transitionName='page-transition'
+                    transitionName={transitionName}
                     transitionEnterTimeout={300}
                     transitionLeaveTimeout={300}
                 >
                     {cloneElement(children, {
-                        key: location.pathname,
+                        key: pathname,
                     })}
                 </ReactCSSTransitionGroup>
                 <Toast

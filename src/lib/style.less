@@ -1,23 +1,23 @@
-.page-transition-enter {
+.page-transition-push-enter, .page-transition-pop-leave.page-transition-pop-leave-active {
     -webkit-transform: translate3d(100%, 0, 100px);
     transform: translate3d(100%, 0, 100px);
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
-.page-transition-enter.page-transition-enter-active {
+.page-transition-push-enter.page-transition-push-enter-active, .page-transition-pop-leave {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
 
-.page-transition-leave {
+.page-transition-push-leave, .page-transition-pop-enter.page-transition-pop-enter-active {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
-.page-transition-leave.page-transition-leave-active {
+.page-transition-push-leave.page-transition-push-leave-active, .page-transition-pop-enter {
     -webkit-transform: translate3d(-100%, 0, -100px);
     transform: translate3d(-100%, 0, -100px);
 }
