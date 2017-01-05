@@ -5,6 +5,12 @@
 
 import Listr from 'listr';
 
+const sleep = (timeout) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, timeout);
+    });
+};
+
 let data;
 
 const copyFiles = async() => {
@@ -24,6 +30,7 @@ const copyFiles = async() => {
         `webpack.config.js`,
     ];
 
+    await sleep(1000);
     await presets.copyFiles(files);
 };
 
@@ -39,6 +46,7 @@ const updatePackageJSON = async() => {
 
     const filename = `package.json`;
 
+    await sleep(1000);
     await presets.updateJson(filename, (data) => {
 
         const {
@@ -95,6 +103,7 @@ const updateREADME = async() => {
 
     const filename = `README.md`;
 
+    await sleep(1000);
     await presets.updateFile(filename, (data) => {
         const partsToRemove = [
             `INITIALIZE`,
