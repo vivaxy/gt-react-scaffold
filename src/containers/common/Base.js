@@ -12,6 +12,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import actions from '../../actions';
 import Toast from './Toast';
 
+import './Base.less';
+
 class Base extends Component {
 
     render() {
