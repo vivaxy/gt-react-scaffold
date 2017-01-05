@@ -1,16 +1,16 @@
 .page-transition-push-enter, .page-transition-pop-leave.page-transition-pop-leave-active {
     -webkit-transform: translate3d(100%, 0, 100px);
     transform: translate3d(100%, 0, 100px);
-    -webkit-transition: all 0.3s ease;
+    -webkit-transition: all 300ms ease;
     transition: all 300ms ease;
     z-index: 1;
-    box-shadow: rgba(0, 0, 0, 0.3) 0 0 0;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 0;
 }
 
 .page-transition-push-enter.page-transition-push-enter-active, .page-transition-pop-leave {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    box-shadow: rgba(0, 0, 0, 0.3) 0 0 20px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 20px;
 }
 
 .page-transition-push-leave, .page-transition-pop-enter.page-transition-pop-enter-active {
