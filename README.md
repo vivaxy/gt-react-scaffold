@@ -1,4 +1,31 @@
+## INITIALIZE
+
+- install nodejs
+- install [gt](https://github.com/vivaxy/granturismo)
+
+    `sudo npm install -g granturismo`
+
+- add scaffold into gt `gt config add vivaxy/react-scaffold https://github.com/vivaxy/react-scaffold.git`
+- create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`
+- run `gt init`
+- select `vivaxy/react-scaffold`
+
+## CONTRIBUTE
+
+Feel free to submit any issue.
+
+Steps to make contributions
+
+- update codes
+- submit your changes by [`gacp`](https://github.com/vivaxy/gacp)
+- run `npm run release` to update `CHANGELOG.md` and bump version
+- run [`gacp`](https://github.com/vivaxy/gacp) to push changes into origin
+
+----------
+
 # react-scaffold
+
+Initialized by [vivaxy/react-scaffold](https://github.com/vivaxy/react-scaffold)
 
 ## FEATURE
 
@@ -41,18 +68,6 @@ We store every string in `i18n` for better internationalization.
 
 Built project files will be in the `release` folder. With `build.log`, you can see every build details. With `stats.html`, you can optimize your dependencies to make project smaller.
 
-## INITIALIZE
-
-- install nodejs
-- install [gt](https://github.com/vivaxy/granturismo)
-
-    `sudo npm install -g granturismo`
-
-- add scaffold into gt `gt config add vivaxy/react-scaffold https://github.com/vivaxy/react-scaffold.git`
-- create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`
-- run `gt init`
-- select `vivaxy/react-scaffold`
-
 ## DEVELOP
 
 - `npm start`
@@ -61,17 +76,6 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 ## BUILD
 
 - `npm run build`
-
-## CONTRIBUTE
-
-Feel free to submit any issue.
-
-Steps to make contributions
-
-- update codes
-- submit your changes by [`gacp`](https://github.com/vivaxy/gacp)
-- run `npm run release` to update `CHANGELOG.md` and bump version
-- run [`gacp`](https://github.com/vivaxy/gacp) to push changes into origin
 
 ## REFERENCE
 

@@ -69,6 +69,7 @@ const updatePackageJSON = async() => {
         return {
             name: project.name,
             version: `0.0.0`,
+            gtScaffoldVersion: version,
             description,
             main,
             scripts,
@@ -104,16 +105,8 @@ const updateREADME = async() => {
 
     await sleep(1000);
     await presets.updateFile(filename, (data) => {
-        const partsToRemove = [
-            `INITIALIZE`,
-            `CONTRIBUTE`,
-            `TODO`,
-        ];
-        let data_removed = data;
-        partsToRemove.forEach((part) => {
-            data_removed = data_removed.replace(new RegExp(`## ${part}[\\s\\S]+?##`), `##`);
-        });
-        return data_removed;
+        const projectData = data.split(`----------\n\n`)[1];
+        return projectData.replace(/react-scaffold/g, project.name);
     });
 };
 
