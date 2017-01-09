@@ -25,8 +25,6 @@ Steps to make contributions
 
 # react-scaffold
 
-Initialized by [vivaxy/react-scaffold](https://github.com/vivaxy/react-scaffold)
-
 ## FEATURE
 
 - react
