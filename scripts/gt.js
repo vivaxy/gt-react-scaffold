@@ -69,7 +69,6 @@ const updatePackageJSON = async() => {
         return {
             name: project.name,
             version: `0.0.0`,
-            reactScaffoldVersion: version,
             description,
             main,
             scripts,
