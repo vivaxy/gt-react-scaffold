@@ -4,7 +4,7 @@
   "description": "react-scaffold",
   "main": "webpack.config.js",
   "scripts": {
-    "release": "standard-version",
+    "release": "standard-version && git push --tag",
     "start": "NODE_ENV=development webpack-dev-server --progress",
     "beta": "NODE_ENV=beta npm run build",
     "production": "NODE_ENV=production npm run build",
