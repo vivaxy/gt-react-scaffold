@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "release": "standard-version && git push --tag",
-    "start": "NODE_ENV=development webpack-dev-server --progress",
+    "start": "NODE_ENV=development node ./scripts/dev.js",
     "beta": "NODE_ENV=beta npm run build",
     "production": "NODE_ENV=production npm run build",
     "build": "npm run build:clean && npm run build:webpack",
@@ -49,6 +49,7 @@
     "less-loader": "^2.2.3",
     "listr": "^0.8.0",
     "material-ui": "^0.16.6",
+    "open": "0.0.5",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.0",

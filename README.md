@@ -69,7 +69,6 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 ## DEVELOP
 
 - `npm start`
-- open in browser `http://0.0.0.0:${port}/html/index.html`
 
 ## BUILD
 

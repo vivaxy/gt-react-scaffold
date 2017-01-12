@@ -205,21 +205,6 @@ switch (NODE_ENV) {
         webpackConfig.devtool = `eval`;
         webpackConfig.output.publicPath = `/`;
 
-        webpackConfig.devServer = {
-            contentBase: [
-                RELEASE_PATH,
-                MOCK_SERVER_BASE,
-            ],
-            hot: true,
-            historyApiFallback: true,
-            host: DEVELOPMENT_IP,
-            port: DEVELOPMENT_PORT,
-            stats: {
-                colors: true,
-            },
-            open: true,
-        };
-
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
         break;
@@ -232,5 +217,10 @@ switch (NODE_ENV) {
         webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin(true));
         break;
 }
+
+webpackConfig.DEVELOPMENT_IP = DEVELOPMENT_IP;
+webpackConfig.DEVELOPMENT_PORT = DEVELOPMENT_PORT;
+webpackConfig.RELEASE_PATH = RELEASE_PATH;
+webpackConfig.MOCK_SERVER_BASE = MOCK_SERVER_BASE;
 
 module.exports = webpackConfig;
