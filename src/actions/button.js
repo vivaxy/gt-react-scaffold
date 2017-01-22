@@ -3,13 +3,14 @@
  * @author vivaxy
  */
 
+import createAction from '../lib/createAction';
 import * as actions from '../config/actions';
 
 export default {
-    setButtonDisabled: () => dispatch => dispatch({
+    setButtonDisabled: () => createAction({
         type: actions.BUTTON_DISABLED,
     }),
-    setButtonDefault: () => dispatch => dispatch({
+    setButtonDefault: () => createAction({
         type: actions.BUTTON_DEFAULT,
     }),
 };

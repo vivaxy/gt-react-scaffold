@@ -3,10 +3,11 @@
  * @author vivaxy
  */
 
+import createAction from '../lib/createAction';
 import * as actions from '../config/actions';
 
 export default {
-    appendNewsList: list => dispatch => dispatch({
+    appendNewsList: (list) => createAction({
         list,
         type: actions.APPEND_NEWS,
     }),

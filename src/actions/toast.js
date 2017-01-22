@@ -3,14 +3,16 @@
  * @author vivaxy
  */
 
+import createAction from '../lib/createAction';
+
 import * as actions from '../config/actions';
 
 export default {
-    showToast: message => dispatch => dispatch({
+    showToast: message => createAction({
         message,
         type: actions.SHOW_TOAST,
     }),
-    hideToast: () => dispatch => dispatch({
+    hideToast: () => createAction({
         type: actions.HIDE_TOAST,
     }),
 };

@@ -5,10 +5,12 @@
 
 import { push, replace, go, goBack, goForward } from 'react-router-redux'
 
+import createAction from '../lib/createAction';
+
 export default {
-    push: (location) => (dispatch) => dispatch(push(location)),
-    replace: (location) => (dispatch) => dispatch(replace(location)),
-    go: (number) => (dispatch) => dispatch(go(number)),
-    goBack: () => (dispatch) => dispatch(goBack()),
-    goForward: () => (dispatch) => dispatch(goForward()),
+    push: (location) => createAction(push(location)),
+    replace: (location) => createAction(replace(location)),
+    go: (number) => createAction(go(number)),
+    goBack: () => createAction(goBack()),
+    goForward: () => createAction(goForward()),
 };
