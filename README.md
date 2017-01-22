@@ -3,7 +3,7 @@
 - install nodejs
 - install [gt](https://github.com/vivaxy/granturismo)
 
-    `sudo npm install -g granturismo`
+    `yarn global add granturismo`
 
 - add scaffold into gt `gt config add vivaxy/react-scaffold https://github.com/vivaxy/react-scaffold.git`
 - create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`
@@ -18,7 +18,7 @@ Steps to make contributions
 
 - update codes
 - submit your changes by [`gacp`](https://github.com/vivaxy/gacp)
-- run `npm run release` to update `CHANGELOG.md` and bump version
+- run `yarn run release` to update `CHANGELOG.md` and bump version
 - run [`gacp`](https://github.com/vivaxy/gacp) to push changes into origin
 
 ----------
@@ -68,11 +68,11 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 
 ## DEVELOP
 
-- `npm start`
+- `yarn start`
 
 ## BUILD
 
-- `npm run build`
+- `yarn run build`
 
 ## REFERENCE
 
