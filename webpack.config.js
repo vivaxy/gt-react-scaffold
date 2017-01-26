@@ -12,6 +12,7 @@ const glob = require('glob');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
+const autoprefixer = require('autoprefixer');
 
 const DEVELOPMENT_IP = ip.address();
 const DEVELOPMENT_PORT = Math.floor(Math.random() * 65536);
@@ -35,7 +36,7 @@ const jsLoader = {
         path.resolve(__dirname, SOURCE_PATH),
     ],
     loaders: [
-        `babel`,
+        `babel-loader`,
     ],
 };
 
@@ -45,8 +46,9 @@ const cssLoader = {
         path.resolve(__dirname, SOURCE_PATH),
     ],
     loaders: [
-        `style`,
-        `css`,
+        `style-loader`,
+        `css-loader`,
+        `postcss-loader`,
     ],
 };
 
@@ -56,8 +58,9 @@ const cssModuleLoader = {
         path.resolve(__dirname, NODE_MODULES),
     ],
     loaders: [
-        `style`,
-        `css`,
+        `style-loader`,
+        `css-loader`,
+        `postcss-loader`,
     ],
 };
 
@@ -67,9 +70,10 @@ const lessLoader = {
         path.resolve(__dirname, SOURCE_PATH),
     ],
     loaders: [
-        `style`,
-        `css`,
-        `less`,
+        `style-loader`,
+        `css-loader`,
+        `postcss-loader`,
+        `less-loader`,
     ],
 };
 
@@ -79,23 +83,24 @@ const lessModuleLoader = {
         path.resolve(__dirname, NODE_MODULES),
     ],
     loaders: [
-        `style`,
-        `css`,
-        `less`,
+        `style-loader`,
+        `css-loader`,
+        `postcss-loader`,
+        `less-loader`,
     ],
 };
 
 const jsonLoader = {
     test: /\.json$/,
     loaders: [
-        `json`,
+        `json-loader`,
     ],
 };
 
 const fileLoader = {
     test: /\.(png|jpg|gif)$/,
     loaders: [
-        `url?limit=8192&name=images/[name]-[hash].[ext]`,
+        `url-loader?limit=8192&name=images/[name]-[hash].[ext]`,
     ],
 };
 
@@ -144,6 +149,11 @@ let webpackConfig = {
         }),
         new Visualizer(),
     ],
+    postcss: () => {
+        return [
+            autoprefixer,
+        ];
+    },
 };
 
 // get entry

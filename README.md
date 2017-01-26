@@ -43,6 +43,9 @@ Steps to make contributions
 - internationalization
 - environments
 - webpack visualizer
+- postcss
+- autoprefixer
+- less
 
 ## STRUCTURE
 

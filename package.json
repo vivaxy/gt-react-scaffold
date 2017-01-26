@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/vivaxy/gt-react-scaffold#readme",
   "devDependencies": {
+    "autoprefixer": "^6.7.0",
     "babel-core": "^6.16.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-syntax-async-functions": "^6.8.0",
@@ -51,6 +52,7 @@
     "listr": "^0.8.0",
     "material-ui": "^0.16.6",
     "open": "0.0.5",
+    "postcss-loader": "^1.2.2",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.0",
@@ -71,5 +73,9 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-visualizer-plugin": "^0.1.5"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "ie 9-10"
+  ]
 }
