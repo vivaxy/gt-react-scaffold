@@ -1,6 +1,6 @@
 {
   "name": "gt-react-scaffold",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "react gt scaffold",
   "main": "webpack.config.js",
   "scripts": {

@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.2.0...v1.3.0) (2017-01-26)
+
+
+### Bug Fixes
+
+* **gt.js:** :bug:Fix gt info in README.md ([00d772b](https://github.com/vivaxy/gt-react-scaffold/commit/00d772b))
+
+
+### Features
+
+* **postcss:** :sparkles:Add postcss ([df5d83a](https://github.com/vivaxy/gt-react-scaffold/commit/df5d83a))
+* **rename:** :sparkles:Rename `react-scaffold` to `gt-react-scaffold` ([5107d7b](https://github.com/vivaxy/gt-react-scaffold/commit/5107d7b))
+* **webpack:** :sparkles:Use `scripts/dev.js` to start webpack dev server, for more controllable. No ([f6b7103](https://github.com/vivaxy/gt-react-scaffold/commit/f6b7103))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.1.0...v1.2.0) (2017-01-09)
 
