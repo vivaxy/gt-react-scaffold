@@ -106,9 +106,9 @@ const updateREADME = async() => {
     await sleep(1000);
     await presets.updateFile(filename, (data) => {
         const projectData = data.split(`----------\n\n`)[1];
-        return projectData.replace(/react-scaffold/g, `${project.name}
+        return projectData.replace(/gt-react-scaffold/g, `${project.name}
 
-Initialized by [vivaxy/react-scaffold](https://github.com/vivaxy/react-scaffold)`);
+Initialized by [vivaxy/gt-react-scaffold](https://github.com/vivaxy/gt-react-scaffold)`);
     });
 };
 

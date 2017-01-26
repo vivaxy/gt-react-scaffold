@@ -5,10 +5,10 @@
 
     `yarn global add granturismo`
 
-- add scaffold into gt `gt config add vivaxy/react-scaffold https://github.com/vivaxy/react-scaffold.git`
+- add scaffold into gt `gt config add vivaxy/gt-react-scaffold https://github.com/vivaxy/gt-react-scaffold.git`
 - create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`
 - run `gt init`
-- select `vivaxy/react-scaffold`
+- select `vivaxy/gt-react-scaffold`
 
 ## CONTRIBUTE
 
@@ -23,7 +23,7 @@ Steps to make contributions
 
 ----------
 
-# react-scaffold
+# gt-react-scaffold
 
 ## FEATURE
 

@@ -14,7 +14,7 @@ import React, { Component, Children, createElement } from 'react';
 import setStyle from './style';
 import store from './store';
 
-const ID_SELECTOR = 'react-scaffold';
+const ID_SELECTOR = 'gt-react-scaffold';
 const history = syncHistoryWithStore(hashHistory, store);
 
 injectTapEventPlugin();

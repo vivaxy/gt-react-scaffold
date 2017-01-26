@@ -1,7 +1,7 @@
 {
-  "name": "react-scaffold",
+  "name": "gt-react-scaffold",
   "version": "1.2.0",
-  "description": "react-scaffold",
+  "description": "react gt scaffold",
   "main": "webpack.config.js",
   "scripts": {
     "release": "standard-version && git push --tag",
@@ -14,19 +14,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vivaxy/react-scaffold.git"
+    "url": "git+https://github.com/vivaxy/gt-react-scaffold.git"
   },
   "keywords": [
     "react",
-    "react-scaffold",
-    "scaffold"
+    "gt-react-scaffold",
+    "scaffold",
+    "gt"
   ],
   "author": "vivaxy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vivaxy/react-scaffold/issues"
+    "url": "https://github.com/vivaxy/gt-react-scaffold/issues"
   },
-  "homepage": "https://github.com/vivaxy/react-scaffold#readme",
+  "homepage": "https://github.com/vivaxy/gt-react-scaffold#readme",
   "devDependencies": {
     "babel-core": "^6.16.0",
     "babel-loader": "^6.2.4",
