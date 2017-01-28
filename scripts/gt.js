@@ -113,6 +113,38 @@ Initialized by [vivaxy/gt-react-scaffold](https://github.com/vivaxy/gt-react-sca
     });
 };
 
+const updateTemplate = async() => {
+    const {
+        project,
+        scaffold,
+        presets,
+    } = data;
+
+    const filename = `src/html/index.html`;
+
+    await sleep(1000);
+    await presets.updateFile(filename, (data) => {
+        const projectData = data.split(`----------\n\n`)[1];
+        return projectData.replace(/gt-react-scaffold/g, `${project.name}`);
+    });
+};
+
+const updateRender = async() => {
+    const {
+        project,
+        scaffold,
+        presets,
+    } = data;
+
+    const filename = `src/lib/render.js`;
+
+    await sleep(1000);
+    await presets.updateFile(filename, (data) => {
+        const projectData = data.split(`----------\n\n`)[1];
+        return projectData.replace(/gt-react-scaffold/g, `${project.name}`);
+    });
+};
+
 export const init = async(options) => {
 
     data = options;
@@ -121,6 +153,14 @@ export const init = async(options) => {
         {
             title: `copy files`,
             task: copyFiles,
+        },
+        {
+            title: `update template`,
+            task: updateTemplate,
+        },
+        {
+            title: `update render`,
+            task: updateRender,
         },
         {
             title: `update package.json`,
