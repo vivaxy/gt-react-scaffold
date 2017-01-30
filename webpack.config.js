@@ -6,13 +6,14 @@
 'use strict';
 
 const path = require('path');
-
 const ip = require('ip');
 const glob = require('glob');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Visualizer = require('webpack-visualizer-plugin');
+const numeral = require('numeral');
+const logUpdate = require('log-update');
 const autoprefixer = require('autoprefixer');
+const Visualizer = require('webpack-visualizer-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const DEVELOPMENT_IP = ip.address();
 const DEVELOPMENT_PORT = Math.floor(Math.random() * 65536);
@@ -217,6 +218,10 @@ switch (NODE_ENV) {
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
+        webpackConfig.plugins.push(new webpack.NoErrorsPlugin());
+        webpackConfig.plugins.push(new webpack.ProgressPlugin((percentage, msg) => {
+            logUpdate(' progress:', numeral(percentage).format('00.00%'), msg);
+        }));
         break;
     default:
         webpackConfig.devtool = `source-map`;
