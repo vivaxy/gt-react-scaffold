@@ -107,18 +107,7 @@ const fileLoader = {
 
 // default webpack config
 let webpackConfig = {
-    entry: {
-        [COMMON_CHUNK_NAME]: [
-            // remove babel-polyfill according to https://github.com/pigcan/blog/issues/1
-            `react`,
-            `react-dom`,
-            `redux`,
-            `react-redux`,
-            `react-tap-event-plugin`,
-            `tiny-cookie`,
-            `isomorphic-fetch`,
-        ],
-    },
+    entry: {},
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
         filename: `js/[name].js`,
@@ -138,15 +127,14 @@ let webpackConfig = {
         ],
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(NODE_ENV),
-            },
-        }),
+        new webpack.EnvironmentPlugin([
+            `NODE_ENV`,
+        ]),
         new webpack.optimize.CommonsChunkPlugin({
             name: COMMON_CHUNK_NAME,
             // pages rests in different folder levels
             filename: `js/[name].js`,
+            minChunks: 2, // Infinity
         }),
         new Visualizer(),
     ],
