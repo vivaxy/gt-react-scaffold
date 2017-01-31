@@ -36,6 +36,13 @@ const setProxy = () => {
     });
 };
 
+const openBrowser = () => {
+    const address = server.listeningApp.address();
+    const url = `http://${address.address}:${address.port}`;
+    console.log(`   server started: ${url}`);
+    open(`${url}/html/index.html`);
+};
+
 setProxy();
 
 const server = new WebpackDevServer(compiler, devServerOptions);
@@ -43,10 +50,7 @@ const server = new WebpackDevServer(compiler, devServerOptions);
 compiler.plugin('done', function() {
     if (!opened) {
         opened = true;
-        const address = server.listeningApp.address();
-        const url = `http://${address.address}:${address.port}`;
-        console.log(`server started: ${url}`);
-        open(`${url}/html/index.html`);
+        openBrowser();
     }
 });
 
@@ -55,3 +59,7 @@ server.listen(config.DEVELOPMENT_PORT, config.DEVELOPMENT_IP, function(err) {
         console.log(err);
     }
 });
+
+const stdIn = process.stdin;
+stdIn.setEncoding('utf8');
+stdIn.on('data', openBrowser);

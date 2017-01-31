@@ -125,9 +125,6 @@ let webpackConfig = {
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
         filename: `js/[name].js`,
-        // pages rests in different folder levels
-        hotUpdateMainFilename: `[hash].hot-update.json`,
-        hotUpdateChunkFilename: `[id].[hash].hot-update.js`,
     },
     module: {
         rules: [
@@ -150,6 +147,7 @@ let webpackConfig = {
             minChunks: 2, // Infinity
         }),
         new Visualizer(),
+        new webpack.NamedModulesPlugin(),
     ],
 };
 
@@ -214,7 +212,7 @@ switch (NODE_ENV) {
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
         webpackConfig.plugins.push(new webpack.ProgressPlugin((percentage, msg) => {
-            logUpdate(' progress:', numeral(percentage).format('00.00%'), msg);
+            logUpdate('     progress:', numeral(percentage).format('00.00%'), msg);
         }));
         break;
     default:
