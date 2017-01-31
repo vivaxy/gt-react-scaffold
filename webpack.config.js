@@ -131,7 +131,7 @@ let webpackConfig = {
             `NODE_ENV`,
         ]),
         new webpack.optimize.CommonsChunkPlugin({
-            name: COMMON_CHUNK_NAME,
+            names: [COMMON_CHUNK_NAME],
             // pages rests in different folder levels
             filename: `js/[name].js`,
             minChunks: 2, // Infinity
@@ -173,6 +173,7 @@ entryNameList.forEach((entryName) => {
         filename: `${HTML_FOLDER}/${entryName}.html`,
         hash: true,
         inject: `body`,
+        chunksSortMode: 'none',
         chunks: [
             COMMON_CHUNK_NAME,
             entryName,
