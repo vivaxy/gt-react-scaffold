@@ -22,6 +22,7 @@ const copyFiles = async() => {
     const files = [
         `docs`,
         `mock-server`,
+        `scripts/config.js`,
         `scripts/dev.js`,
         `src`,
         `.babelrc`,

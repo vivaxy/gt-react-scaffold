@@ -4,7 +4,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Button } from 'react-pianist/Button';
 
 export default class extends Component {
 
@@ -19,7 +19,7 @@ export default class extends Component {
             buttonDisabled,
         } = this.props;
 
-        return <RaisedButton label='load more' disabled={buttonDisabled} primary={true} onClick={::this.onClick}/>
+        return <Button disabled={buttonDisabled} primary={true} onClick={::this.onClick}>{'load more'}</Button>
     }
 
     onClick() {

@@ -6,7 +6,6 @@
 'use strict';
 
 const path = require('path');
-const ip = require('ip');
 const glob = require('glob');
 const webpack = require('webpack');
 const numeral = require('numeral');
@@ -15,14 +14,15 @@ const autoprefixer = require('autoprefixer');
 const Visualizer = require('webpack-visualizer-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const DEVELOPMENT_IP = ip.address();
-const DEVELOPMENT_PORT = Math.floor(Math.random() * 65536);
+const config = require('./scripts/config');
+
+const DEVELOPMENT_IP = config.DEVELOPMENT_IP;
+const DEVELOPMENT_PORT = config.DEVELOPMENT_PORT;
+const RELEASE_PATH = config.RELEASE_PATH;
 const SOURCE_PATH = `src`;
-const RELEASE_PATH = `release`;
 const DEVELOPMENT = `development`;
 const PRODUCTION = `production`;
 const NODE_MODULES = `node_modules`;
-const MOCK_SERVER_BASE = `mock-server`;
 const ENTRIES_FOLDER = `entries`;
 const HTML_FOLDER = `html`;
 const COMMON_CHUNK_NAME = `common`;
@@ -31,83 +31,97 @@ const BANNER = `@2016 vivaxy`;
 
 const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 
-const jsLoader = {
+const postcssLoader = {
+    loader: 'postcss-loader',
+    options: {
+        plugins: function () {
+            return [
+                autoprefixer
+            ];
+        }
+    }
+};
+
+const jsRule = {
     test: /\.js$/,
     include: [
         path.resolve(__dirname, SOURCE_PATH),
     ],
-    loaders: [
-        `babel-loader`,
-    ],
+    use: [
+        'babel-loader',
+    ]
 };
 
-const cssLoader = {
+const cssRule = {
     test: /\.css$/,
     include: [
         path.resolve(__dirname, SOURCE_PATH),
     ],
-    loaders: [
-        `style-loader`,
-        `css-loader`,
-        `postcss-loader`,
+    use: [
+        'style-loader',
+        'css-loader',
+        postcssLoader,
     ],
 };
 
-const cssModuleLoader = {
+const cssModuleRule = {
     test: /\.css$/,
     include: [
         path.resolve(__dirname, NODE_MODULES),
     ],
-    loaders: [
-        `style-loader`,
-        `css-loader`,
-        `postcss-loader`,
+    use: [
+        'style-loader',
+        'css-loader',
+        postcssLoader,
     ],
 };
 
-const lessLoader = {
+const lessRule = {
     test: /\.less$/,
     include: [
         path.resolve(__dirname, SOURCE_PATH),
     ],
-    loaders: [
-        `style-loader`,
-        `css-loader`,
-        `postcss-loader`,
-        `less-loader`,
+    use: [
+        'style-loader',
+        'css-loader',
+        postcssLoader,
+        'less-loader',
     ],
 };
 
-const lessModuleLoader = {
+const lessModuleRule = {
     test: /\.less$/,
     include: [
         path.resolve(__dirname, NODE_MODULES),
     ],
-    loaders: [
-        `style-loader`,
-        `css-loader`,
-        `postcss-loader`,
-        `less-loader`,
+    use: [
+        'style-loader',
+        'css-loader',
+        postcssLoader,
+        'less-loader',
     ],
 };
 
-const jsonLoader = {
-    test: /\.json$/,
-    loaders: [
-        `json-loader`,
-    ],
-};
-
-const fileLoader = {
+const fileRule = {
     test: /\.(png|jpg|gif)$/,
-    loaders: [
-        `url-loader?limit=8192&name=images/[name]-[hash].[ext]`,
+    use: [
+        {
+            loader: 'url-loader',
+            options: {
+                limit: 8192,
+                name: `images/[name]-[hash].[ext]`,
+            },
+        },
     ],
 };
 
 // default webpack config
 let webpackConfig = {
-    entry: {},
+    entry: {
+        [COMMON_CHUNK_NAME]: [
+            'babel-polyfill',
+        ],
+    },
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
         filename: `js/[name].js`,
@@ -116,14 +130,13 @@ let webpackConfig = {
         hotUpdateChunkFilename: `[id].[hash].hot-update.js`,
     },
     module: {
-        loaders: [
-            jsLoader,
-            cssLoader,
-            lessLoader,
-            jsonLoader,
-            fileLoader,
-            cssModuleLoader,
-            lessModuleLoader,
+        rules: [
+            jsRule,
+            cssRule,
+            lessRule,
+            fileRule,
+            cssModuleRule,
+            lessModuleRule,
         ],
     },
     plugins: [
@@ -138,11 +151,6 @@ let webpackConfig = {
         }),
         new Visualizer(),
     ],
-    postcss: () => {
-        return [
-            autoprefixer,
-        ];
-    },
 };
 
 // get entry
@@ -173,13 +181,11 @@ entryNameList.forEach((entryName) => {
         filename: `${HTML_FOLDER}/${entryName}.html`,
         hash: true,
         inject: `body`,
-        chunksSortMode: 'none',
         chunks: [
             COMMON_CHUNK_NAME,
             entryName,
         ],
     }));
-
 });
 
 // set config according to environment
@@ -187,7 +193,7 @@ switch (NODE_ENV) {
     case DEVELOPMENT:
 
         // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
-        jsLoader.loaders.push(`react-hot-loader/webpack`);
+        jsRule.use.push(`react-hot-loader/webpack`);
 
         entryNameList.forEach((entryName) => {
 
@@ -203,11 +209,10 @@ switch (NODE_ENV) {
         });
 
         webpackConfig.devtool = `eval`;
-        webpackConfig.output.publicPath = `/`;
+        webpackConfig.output.publicPath = `../`;
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-        webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
-        webpackConfig.plugins.push(new webpack.NoErrorsPlugin());
+        webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
         webpackConfig.plugins.push(new webpack.ProgressPlugin((percentage, msg) => {
             logUpdate(' progress:', numeral(percentage).format('00.00%'), msg);
         }));
@@ -215,16 +220,13 @@ switch (NODE_ENV) {
     default:
         webpackConfig.devtool = `source-map`;
         webpackConfig.output.publicPath = `../`;
-        webpackConfig.plugins.push(new webpack.BannerPlugin(BANNER));
-        webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
-        webpackConfig.plugins.push(new webpack.optimize.DedupePlugin());
-        webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin(true));
+        webpackConfig.plugins.push(new webpack.BannerPlugin({
+            banner: BANNER,
+        }));
+        webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true
+        }));
         break;
 }
-
-webpackConfig.DEVELOPMENT_IP = DEVELOPMENT_IP;
-webpackConfig.DEVELOPMENT_PORT = DEVELOPMENT_PORT;
-webpackConfig.RELEASE_PATH = RELEASE_PATH;
-webpackConfig.MOCK_SERVER_BASE = MOCK_SERVER_BASE;
 
 module.exports = webpackConfig;

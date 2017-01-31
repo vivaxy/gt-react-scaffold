@@ -37,7 +37,7 @@ Steps to make contributions
 - redux logger
 - redux thunk
 - webpack packaging
-- material ui
+- react pianist
 - mock server
 - unified error center
 - internationalization

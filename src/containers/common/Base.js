@@ -7,7 +7,6 @@ import React, { Component, cloneElement } from 'react';
 import { connect } from 'react-redux';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import actions from '../../actions';
 import Toast from './Toast';
@@ -32,7 +31,7 @@ class Base extends Component {
 
         const transitionName = `page-transition-${action.toLowerCase()}`;
 
-        return <MuiThemeProvider>
+        return (
             <div>
                 <ReactCSSTransitionGroup
                     component='div'
@@ -49,7 +48,7 @@ class Base extends Component {
                     hideToastAction={hideToastAction}
                 />
             </div>
-        </MuiThemeProvider>
+        )
     }
 
 }

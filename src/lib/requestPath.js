@@ -7,7 +7,7 @@ import * as environmentConstant from '../config/environments';
 
 import environment from './environment';
 
-const MOCK_API_ROOT = `/api`;
+const MOCK_API_ROOT = `/mock-server/api`;
 
 export default (url) => {
     let requestPath = '';

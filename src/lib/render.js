@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 import { Router, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import React, { Component, Children, createElement } from 'react';
 
 import setStyle from './style';
@@ -17,7 +16,6 @@ import store from './store';
 const ID_SELECTOR = 'gt-react-scaffold';
 const history = syncHistoryWithStore(hashHistory, store);
 
-injectTapEventPlugin();
 setStyle();
 
 // hack around https://github.com/gaearon/react-hot-boilerplate/pull/61#issuecomment-211504531

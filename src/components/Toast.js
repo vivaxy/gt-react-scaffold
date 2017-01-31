@@ -4,7 +4,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import Snackbar from 'material-ui/Snackbar';
+import { AutoHideToast } from 'react-pianist/Toast';
 
 import * as toastConfig from '../config/toast';
 
@@ -18,21 +18,20 @@ export default class extends Component {
         hideToastAction: PropTypes.func.isRequired,
     };
 
-    render () {
+    render() {
 
         let {
             toastState,
         } = this.props;
 
-        return <Snackbar
-            open={toastState.show}
-            message={toastState.message}
+        return <AutoHideToast
+            show={toastState.show}
             autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
-            onRequestClose={::this.onClose}
-        />
+            onAutoHide={::this.onClose}
+        >{toastState.message}</AutoHideToast>
     }
 
-    onClose () {
+    onClose() {
         let {
             hideToastAction,
         } = this.props;

@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import RaisedButton from 'material-ui/RaisedButton';
+import { Button } from 'react-pianist/Button';
 
 import setTitle from '../../lib/setTitle';
 
@@ -20,6 +20,10 @@ import * as errorType from '../../config/errors';
 import actions from '../../actions';
 
 let newsIndex = 0;
+
+const raisedButtonStyle = {
+    padding: '0 8px',
+};
 
 class Index extends Component {
 
@@ -43,13 +47,13 @@ class Index extends Component {
             })}
             <DemoButton buttonDisabled={!buttonState} onLoadMore={::this.getMoreNews}/>
             <hr/>
-            <RaisedButton onClick={::this.goToDemo(1)}>go to demo at tab 1</RaisedButton>
+            <Button style={raisedButtonStyle} onClick={::this.goToDemo(1)}>go to demo at tab 1</Button>
             <hr/>
-            <RaisedButton onClick={::this.goToDemo(2)}>go to demo at tab 2</RaisedButton>
+            <Button style={raisedButtonStyle} onClick={::this.goToDemo(2)}>go to demo at tab 2</Button>
             <hr/>
-            <RaisedButton onClick={::this.goToDemo(3)}>go to demo at tab 3</RaisedButton>
+            <Button style={raisedButtonStyle} onClick={::this.goToDemo(3)}>go to demo at tab 3</Button>
             <hr/>
-            <RaisedButton onClick={::this.goToDemo(4)}>go to demo at tab 4</RaisedButton>
+            <Button style={raisedButtonStyle} onClick={::this.goToDemo(4)}>go to demo at tab 4</Button>
         </div>
     }
 

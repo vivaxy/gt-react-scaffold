@@ -8,28 +8,50 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
 const webpackConfig = require('../webpack.config');
+const config = require('./config');
 
 const compiler = webpack(webpackConfig);
 
-const server = new WebpackDevServer(compiler, {
-    contentBase: [
-        webpackConfig.RELEASE_PATH,
-        webpackConfig.MOCK_SERVER_BASE,
-    ],
+let opened = false;
+
+const devServerOptions = {
+    proxy: {},
     hot: true,
     historyApiFallback: true,
     stats: {
         colors: true,
     },
-});
+};
 
-server.listen(webpackConfig.DEVELOPMENT_PORT, webpackConfig.DEVELOPMENT_IP, function(err) {
-    if (err) {
-        console.log(err);
-    } else {
+const setProxy = () => {
+    const proxyMap = {
+        '/html': `/${config.RELEASE_PATH}/html`,
+        '/js': `/${config.RELEASE_PATH}/js`,
+        '/images': `/${config.RELEASE_PATH}/images`,
+    };
+    Object.keys(proxyMap).forEach((pKey) => {
+        devServerOptions.proxy[pKey] = {
+            pathRewrite: proxyMap[pKey],
+        };
+    });
+};
+
+setProxy();
+
+const server = new WebpackDevServer(compiler, devServerOptions);
+
+compiler.plugin('done', function() {
+    if (!opened) {
+        opened = true;
         const address = server.listeningApp.address();
         const url = `http://${address.address}:${address.port}`;
         console.log(`server started: ${url}`);
         open(`${url}/html/index.html`);
+    }
+});
+
+server.listen(config.DEVELOPMENT_PORT, config.DEVELOPMENT_IP, function(err) {
+    if (err) {
+        console.log(err);
     }
 });
