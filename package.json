@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "release": "standard-version && git push --follow-tag",
-    "start": "NODE_ENV=development node ./scripts/dev.js",
+    "dev": "NODE_ENV=development node ./scripts/dev.js",
     "beta": "NODE_ENV=beta npm run build",
     "production": "NODE_ENV=production npm run build",
     "build": "npm run build:clean && npm run build:webpack",

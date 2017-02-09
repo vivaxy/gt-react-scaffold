@@ -71,7 +71,7 @@ Built project files will be in the `release` folder. With `build.log`, you can s
 
 ## DEVELOP
 
-- `yarn start`
+- `yarn run dev`
 
 ## BUILD
 
