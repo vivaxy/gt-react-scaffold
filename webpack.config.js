@@ -125,6 +125,7 @@ let webpackConfig = {
     output: {
         path: path.resolve(__dirname, RELEASE_PATH),
         filename: `js/[name].js`,
+        publicPath: '../',
     },
     module: {
         rules: [
@@ -207,7 +208,6 @@ switch (NODE_ENV) {
         });
 
         webpackConfig.devtool = `eval`;
-        webpackConfig.output.publicPath = `../`;
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
@@ -217,7 +217,6 @@ switch (NODE_ENV) {
         break;
     default:
         webpackConfig.devtool = `source-map`;
-        webpackConfig.output.publicPath = `../`;
         webpackConfig.plugins.push(new webpack.BannerPlugin({
             banner: BANNER,
         }));
