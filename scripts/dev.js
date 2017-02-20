@@ -15,7 +15,10 @@ const compiler = webpack(webpackConfig);
 let opened = false;
 
 const devServerOptions = {
-    proxy: {},
+    contentBase: [
+        config.RELEASE_PATH,
+        config.MOCK_SERVER_BASE,
+    ],
     hot: true,
     historyApiFallback: true,
     stats: {
@@ -43,7 +46,7 @@ const openBrowser = () => {
     open(`${url}/html/index.html`);
 };
 
-setProxy();
+// setProxy();
 
 const server = new WebpackDevServer(compiler, devServerOptions);
 
