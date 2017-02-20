@@ -26,27 +26,12 @@ const devServerOptions = {
     },
 };
 
-const setProxy = () => {
-    const proxyMap = {
-        '/html': `/${config.RELEASE_PATH}/html`,
-        '/js': `/${config.RELEASE_PATH}/js`,
-        '/images': `/${config.RELEASE_PATH}/images`,
-    };
-    Object.keys(proxyMap).forEach((pKey) => {
-        devServerOptions.proxy[pKey] = {
-            pathRewrite: proxyMap[pKey],
-        };
-    });
-};
-
 const openBrowser = () => {
     const address = server.listeningApp.address();
     const url = `http://${address.address}:${address.port}`;
     console.log(`   server started: ${url}`);
     open(`${url}/html/index.html`);
 };
-
-// setProxy();
 
 const server = new WebpackDevServer(compiler, devServerOptions);
 

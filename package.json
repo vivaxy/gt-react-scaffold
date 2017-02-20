@@ -33,6 +33,7 @@
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.22.0",
     "css-loader": "^0.24.0",
@@ -67,9 +68,6 @@
     "webpack": "^2.2.1",
     "webpack-dev-server": "next",
     "webpack-visualizer-plugin": "^0.1.5"
-  },
-  "dependencies": {
-    "babel-preset-latest": "^6.22.0"
   },
   "browserslist": [
     "> 1%",
