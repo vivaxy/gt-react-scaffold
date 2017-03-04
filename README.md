@@ -46,6 +46,7 @@ Steps to make contributions
 - postcss
 - autoprefixer
 - less
+- test cases
 
 ## STRUCTURE
 

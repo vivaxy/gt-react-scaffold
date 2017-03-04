@@ -3,7 +3,10 @@
  * @author vivaxy
  */
 
-const path = require('path');
+import test from 'ava';
+import path from 'path';
 
-const paths = path.resolve(__dirname, '..');
-console.log(paths);
+test('project base directory name', (t) => {
+    const paths = path.resolve(__dirname, '..');
+    t.true(paths === process.cwd());
+});
