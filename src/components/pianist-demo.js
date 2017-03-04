@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import React, { Component, PropType } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { VerticalFlexBox, VerticalFlexItem } from 'react-pianist/VerticalFlex';
@@ -16,8 +16,8 @@ import actions from '../actions';
 class PianistDemo extends Component {
 
     static propTypes = {
-        routingPush: PropType.func.isRequired,
-        index: PropType.number.isRequired,
+        routingPush: PropTypes.func.isRequired,
+        index: PropTypes.number.isRequired,
     };
 
     constructor(props) {

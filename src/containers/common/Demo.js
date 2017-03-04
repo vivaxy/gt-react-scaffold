@@ -1,4 +1,4 @@
-import React, { Component, PropType } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import setTitle from '../../lib/setTitle';
@@ -10,7 +10,7 @@ import i18n from '../../i18n';
 class Index extends Component {
 
     static propTypes = {
-        params: PropType.object.isRequired,
+        params: PropTypes.object.isRequired,
     };
 
     componentDidMount() {

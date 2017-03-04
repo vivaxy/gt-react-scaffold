@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import React, { Component, PropType } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from 'react-pianist/Button';
@@ -28,9 +28,9 @@ const raisedButtonStyle = {
 class Index extends Component {
 
     static propTypes = {
-        routingPush: PropType.func.isRequired,
-        buttonState: PropType.bool.isRequired,
-        newsListState: PropType.array.isRequired,
+        routingPush: PropTypes.func.isRequired,
+        buttonState: PropTypes.bool.isRequired,
+        newsListState: PropTypes.array.isRequired,
     };
 
     constructor(props) {

@@ -6,16 +6,14 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { hashHistory } from 'react-router';
-import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import reducers from '../reducers';
 
-const logger = createLogger();
 const routing = routerMiddleware(hashHistory);
 
 const store = createStore(combineReducers(reducers), compose(
-    applyMiddleware(thunk, logger, routing),
+    applyMiddleware(thunk, routing),
     window.devToolsExtension ? window.devToolsExtension() : (f) => f, // eslint-disable-line arrow-body-style
 ));
 

@@ -6,9 +6,12 @@
 import { connect } from 'react-redux';
 
 import Toast from '../../components/Toast';
+import actions from '../../actions';
 
 export default connect((state) => {
     return {
         toastState: state.toast,
     };
-}, {})(Toast);
+}, {
+    hideToastAction: actions.toast.hideToast,
+})(Toast);

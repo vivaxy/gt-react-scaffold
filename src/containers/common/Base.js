@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import actions from '../../actions';
 import Toast from './Toast';
 
 import './Base.less';
@@ -17,16 +16,12 @@ class Base extends Component {
 
     static propTypes = {
         children: PropTypes.node.isRequired,
-        toastState: PropTypes.bool.isRequired,
-        hideToastAction: PropTypes.func.isRequired,
         location: PropTypes.object.isRequired,
     };
 
     render() {
         const {
             children,
-            toastState,
-            hideToastAction,
             location,
         } = this.props;
 
@@ -49,18 +44,12 @@ class Base extends Component {
                         key: pathname,
                     })}
                 </ReactCSSTransitionGroup>
-                <Toast
-                    toastState={toastState}
-                    hideToastAction={hideToastAction}
-                />
+                <Toast />
             </div>
         );
     }
-
 }
 
 export default connect(() => {
     return {};
-}, {
-    hideToastAction: actions.toast.hideToast,
-})(Base);
+}, {})(Base);
