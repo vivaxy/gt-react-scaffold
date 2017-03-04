@@ -28,16 +28,16 @@ Steps to make contributions
 ## FEATURE
 
 - react
-- react router
-- react hot reloading
-- page transition
-- multiple entries
 - redux
+- webpack
+- eslint
+- page navigation animation
+- react router
 - react redux
-- redux logger
 - redux thunk
-- webpack packaging
-- react pianist
+- react hot reload
+- webpack development server
+- multiple entries
 - mock server
 - unified error center
 - internationalization
