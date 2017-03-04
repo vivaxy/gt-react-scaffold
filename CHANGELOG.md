@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.3.0...v1.4.0) (2017-03-04)
+
+
+### Bug Fixes
+
+* :bug:Fix yarn.lock resolved urls; Add missing dependency: redux; ([229ac48](https://github.com/vivaxy/gt-react-scaffold/commit/229ac48))
+* **gt:** :bug:Fix copy `.npmrc` ([baf9a1a](https://github.com/vivaxy/gt-react-scaffold/commit/baf9a1a))
+* **gt:** :bug:Fix template, render file project name ([9b72633](https://github.com/vivaxy/gt-react-scaffold/commit/9b72633))
+* **gt.js:** :bug:Fix gt copy file ([5c24c19](https://github.com/vivaxy/gt-react-scaffold/commit/5c24c19))
+* **gt.js:** :bug:Update gt.js ([565f05d](https://github.com/vivaxy/gt-react-scaffold/commit/565f05d))
+* **scripts:** :bug:Fix release script ([04ece5d](https://github.com/vivaxy/gt-react-scaffold/commit/04ece5d))
+
+
+### Features
+
+* **babel:** :sparkles:Update babel-preset-es2015 babel-preset-latest ([5545282](https://github.com/vivaxy/gt-react-scaffold/commit/5545282))
+* **eslint:** :sparkles:Add eslint, rules based on airbnb/javascript ([2b976e2](https://github.com/vivaxy/gt-react-scaffold/commit/2b976e2))
+* **npmrc:** :art:Add .npmrc to maintain npm registry ([5dac42b](https://github.com/vivaxy/gt-react-scaffold/commit/5dac42b))
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.2.0...v1.3.0) (2017-01-26)
 
