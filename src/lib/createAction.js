@@ -6,5 +6,5 @@
 export default (payload) => {
     return (dispatch) => {
         return dispatch(payload);
-    }
+    };
 };

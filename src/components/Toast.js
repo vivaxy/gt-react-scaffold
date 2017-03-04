@@ -14,28 +14,34 @@ export default class extends Component {
         toastState: PropTypes.shape({
             show: PropTypes.bool.isRequired,
             message: PropTypes.string.isRequired,
-        }),
+        }).isRequired,
         hideToastAction: PropTypes.func.isRequired,
     };
 
-    render() {
-
-        let {
-            toastState,
-        } = this.props;
-
-        return <AutoHideToast
-            show={toastState.show}
-            autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
-            onAutoHide={::this.onClose}
-        >{toastState.message}</AutoHideToast>
+    constructor(props) {
+        super(props);
+        this.onClose = ::this.onClose;
     }
 
     onClose() {
-        let {
+        const {
             hideToastAction,
         } = this.props;
         hideToastAction();
+    }
+
+    render() {
+        const {
+            toastState,
+        } = this.props;
+
+        return (
+            <AutoHideToast
+                show={toastState.show}
+                autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
+                onAutoHide={this.onClose}
+            >{toastState.message}</AutoHideToast>
+        );
     }
 
 }

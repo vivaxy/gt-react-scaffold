@@ -7,6 +7,7 @@ import page from '../pages/index';
 
 page();
 
+/* eslint-disable global-require */
 if (module.hot) {
     module.hot.accept('../pages/index', () => {
         const newPage = require('../pages/index').default;

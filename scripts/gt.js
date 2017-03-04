@@ -14,23 +14,22 @@ const sleep = (timeout) => {
 let data;
 
 const copyFiles = async() => {
-
     const {
         presets,
     } = data;
 
     const files = [
-        `docs`,
-        `mock-server`,
-        `scripts/config.js`,
-        `scripts/dev.js`,
-        `src`,
-        `.babelrc`,
-        `.editorconfig`,
-        `.gitignore`,
-        `.npmrc`,
-        `LICENSE`,
-        `webpack.config.js`,
+        'docs',
+        'mock-server',
+        'scripts/config.js',
+        'scripts/dev.js',
+        'src',
+        '.babelrc',
+        '.editorconfig',
+        '.gitignore',
+        '.npmrc',
+        'LICENSE',
+        'webpack.config.js',
     ];
 
     await sleep(1000);
@@ -38,22 +37,18 @@ const copyFiles = async() => {
 };
 
 const updatePackageJSON = async() => {
-
     const {
         project,
-        scaffold,
         presets,
     } = data;
 
     const projectGit = project.git || {};
 
-    const filename = `package.json`;
+    const filename = 'package.json';
 
     await sleep(1000);
-    await presets.updateJson(filename, (data) => {
-
+    await presets.updateJson(filename, (json) => {
         const {
-            name,
             version,
             description,
             main,
@@ -63,15 +58,14 @@ const updatePackageJSON = async() => {
             author,
             license,
             bugs,
-            homepage,
             dependencies,
             devDependencies,
             peerDependencies,
-        } = data;
+        } = json;
 
         return {
             name: project.name,
-            version: `0.0.0`,
+            version: '0.0.0',
             gtScaffoldVersion: version,
             description,
             main,
@@ -91,24 +85,20 @@ const updatePackageJSON = async() => {
             devDependencies,
             peerDependencies,
         };
-
     });
-
 };
 
 const updateREADME = async() => {
-
     const {
         project,
-        scaffold,
         presets,
     } = data;
 
-    const filename = `README.md`;
+    const filename = 'README.md';
 
     await sleep(1000);
-    await presets.updateFile(filename, (data) => {
-        const projectData = data.split(`----------\n\n`)[1];
+    await presets.updateFile(filename, (content) => {
+        const projectData = content.split('----------\n\n')[1];
         return projectData.replace(/gt-react-scaffold/g, `${project.name}
 
 Initialized by [vivaxy/gt-react-scaffold](https://github.com/vivaxy/gt-react-scaffold)`);
@@ -118,64 +108,61 @@ Initialized by [vivaxy/gt-react-scaffold](https://github.com/vivaxy/gt-react-sca
 const updateTemplate = async() => {
     const {
         project,
-        scaffold,
         presets,
     } = data;
 
-    const filename = `src/html/index.html`;
+    const filename = 'src/html/index.html';
 
     await sleep(1000);
-    await presets.updateFile(filename, (data) => {
-        const projectData = data.split(`----------\n\n`)[1];
-        return projectData.replace(/gt-react-scaffold/g, `${project.name}`);
+    await presets.updateFile(filename, (content) => {
+        const projectData = content.split('----------\n\n')[1];
+        return projectData.replace(/gt-react-scaffold/g, project.name);
     });
 };
 
 const updateRender = async() => {
     const {
         project,
-        scaffold,
         presets,
     } = data;
 
-    const filename = `src/lib/render.js`;
+    const filename = 'src/lib/render.js';
 
     await sleep(1000);
-    await presets.updateFile(filename, (data) => {
-        const projectData = data.split(`----------\n\n`)[1];
-        return projectData.replace(/gt-react-scaffold/g, `${project.name}`);
+    await presets.updateFile(filename, (content) => {
+        const projectData = content.split('----------\n\n')[1];
+        return projectData.replace(/gt-react-scaffold/g, project.name);
     });
 };
 
 export const init = async(options) => {
-
     data = options;
 
     return new Listr([
         {
-            title: `copy files`,
+            title: 'copy files',
             task: copyFiles,
         },
         {
-            title: `update template`,
+            title: 'update template',
             task: updateTemplate,
         },
         {
-            title: `update render`,
+            title: 'update render',
             task: updateRender,
         },
         {
-            title: `update package.json`,
+            title: 'update package.json',
             task: updatePackageJSON,
         },
         {
-            title: `update README.md`,
+            title: 'update README.md',
             task: updateREADME,
         },
     ]);
-
 };
 
+/* eslint-disable no-console */
 export const after = async() => {
     console.log(`
     please exec following command to initialize your project

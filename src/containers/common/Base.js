@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import React, { Component, cloneElement } from 'react';
+import React, { Component, PropTypes, cloneElement } from 'react';
 import { connect } from 'react-redux';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -15,8 +15,14 @@ import './Base.less';
 
 class Base extends Component {
 
-    render() {
+    static propTypes = {
+        children: PropTypes.node.isRequired,
+        toastState: PropTypes.bool.isRequired,
+        hideToastAction: PropTypes.func.isRequired,
+        location: PropTypes.object.isRequired,
+    };
 
+    render() {
         const {
             children,
             toastState,
@@ -34,7 +40,7 @@ class Base extends Component {
         return (
             <div>
                 <ReactCSSTransitionGroup
-                    component='div'
+                    component="div"
                     transitionName={transitionName}
                     transitionEnterTimeout={300}
                     transitionLeaveTimeout={300}
@@ -48,11 +54,13 @@ class Base extends Component {
                     hideToastAction={hideToastAction}
                 />
             </div>
-        )
+        );
     }
 
 }
 
-export default connect(state => ({}), {
+export default connect(() => {
+    return {};
+}, {
     hideToastAction: actions.toast.hideToast,
 })(Base);

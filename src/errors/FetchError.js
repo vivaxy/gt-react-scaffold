@@ -6,7 +6,7 @@
 import * as constant from '../config/errors';
 
 export default class FetchError extends Error {
-    constructor (response) {
+    constructor(response) {
         super(response.statusText);
         this.response = response;
         this.name = constant.FETCH;

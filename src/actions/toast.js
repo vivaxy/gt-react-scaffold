@@ -8,11 +8,15 @@ import createAction from '../lib/createAction';
 import * as actions from '../config/actions';
 
 export default {
-    showToast: message => createAction({
-        message,
-        type: actions.SHOW_TOAST,
-    }),
-    hideToast: () => createAction({
-        type: actions.HIDE_TOAST,
-    }),
+    showToast: (message) => {
+        return createAction({
+            message,
+            type: actions.SHOW_TOAST,
+        });
+    },
+    hideToast: () => {
+        return createAction({
+            type: actions.HIDE_TOAST,
+        });
+    },
 };

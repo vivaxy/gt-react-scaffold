@@ -8,4 +8,4 @@ import routes from '../routes/about';
 
 export default () => {
     return render(routes);
-}
+};

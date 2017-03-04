@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 
 import Toast from '../../components/Toast';
 
-export default connect(state => ({
-    toastState: state.toast,
-}), {})(Toast);
+export default connect((state) => {
+    return {
+        toastState: state.toast,
+    };
+}, {})(Toast);

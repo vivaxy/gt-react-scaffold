@@ -7,22 +7,20 @@ import iconImage from '../images/vivaxy.20150726.jpg';
 import './style.less';
 
 export default () => {
-
-    let style = {
+    const style = {
         margin: '0',
     };
 
-    let body = document.body;
+    const body = document.body;
 
-    for (let key in style) {
+    Object.keys(style).forEach((key) => {
         body.style[key] = style[key];
-    }
+    });
 
-    let head = document.head;
-    var icon = document.createElement('link');
+    const head = document.head;
+    const icon = document.createElement('link');
     icon.type = 'image/png';
     icon.rel = 'shortcut icon';
     icon.href = iconImage;
     head.appendChild(icon);
-
 };

@@ -3,6 +3,7 @@
  * @author vivaxy
  */
 
+/* eslint-disable no-console */
 const open = require('open');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
@@ -26,6 +27,8 @@ const devServerOptions = {
     },
 };
 
+const server = new WebpackDevServer(compiler, devServerOptions);
+
 const openBrowser = () => {
     const address = server.listeningApp.address();
     const url = `http://${address.address}:${address.port}`;
@@ -33,16 +36,14 @@ const openBrowser = () => {
     open(`${url}/html/index.html`);
 };
 
-const server = new WebpackDevServer(compiler, devServerOptions);
-
-compiler.plugin('done', function() {
+compiler.plugin('done', () => {
     if (!opened) {
         opened = true;
         openBrowser();
     }
 });
 
-server.listen(config.DEVELOPMENT_PORT, config.DEVELOPMENT_IP, function(err) {
+server.listen(config.DEVELOPMENT_PORT, config.DEVELOPMENT_IP, (err) => {
     if (err) {
         console.log(err);
     }

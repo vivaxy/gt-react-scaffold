@@ -7,10 +7,14 @@ import createAction from '../lib/createAction';
 import * as actions from '../config/actions';
 
 export default {
-    setButtonDisabled: () => createAction({
-        type: actions.BUTTON_DISABLED,
-    }),
-    setButtonDefault: () => createAction({
-        type: actions.BUTTON_DEFAULT,
-    }),
+    setButtonDisabled: () => {
+        return createAction({
+            type: actions.BUTTON_DISABLED,
+        });
+    },
+    setButtonDefault: () => {
+        return createAction({
+            type: actions.BUTTON_DEFAULT,
+        });
+    },
 };

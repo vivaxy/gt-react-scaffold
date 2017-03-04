@@ -3,4 +3,6 @@
  * @author vivaxy
  */
 
+/* eslint-disable arrow-body-style */
 export const $SOMEONE_S_HOME = (name) => `${name}的个人主页`;
+export const NAME = '姓名';

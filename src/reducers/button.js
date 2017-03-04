@@ -10,10 +10,10 @@ import * as constant from '../config/actions';
 const defaultState = true;
 
 export default createReducer(defaultState, {
-    [constant.BUTTON_DISABLED]: (state, action) => {
+    [constant.BUTTON_DISABLED]: () => {
         return false;
     },
-    [constant.BUTTON_DEFAULT]: (state, action) => {
+    [constant.BUTTON_DEFAULT]: () => {
         return true;
     },
 });

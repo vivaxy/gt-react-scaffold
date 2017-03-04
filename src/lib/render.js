@@ -6,9 +6,9 @@
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
-import { Router, hashHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
-import React, { Component, Children, createElement } from 'react';
+import { Router, hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import React, { Children, createElement } from 'react';
 
 import setStyle from './style';
 import store from './store';
@@ -19,8 +19,8 @@ const history = syncHistoryWithStore(hashHistory, store);
 setStyle();
 
 // hack around https://github.com/gaearon/react-hot-boilerplate/pull/61#issuecomment-211504531
-Router.prototype.componentWillReceiveProps = function (nextProps) {
-    let components = [];
+Router.prototype.componentWillReceiveProps = (nextProps) => {
+    const components = [];
 
     function grabComponents(element) {
         // This only works for JSX routes, adjust accordingly for plain JS config
@@ -37,14 +37,12 @@ Router.prototype.componentWillReceiveProps = function (nextProps) {
 };
 
 export default (routes) => {
-
     return render(
         <AppContainer>
             <Provider store={store}>
-                <Router history={history} routes={routes}/>
+                <Router history={history} routes={routes} />
             </Provider>
         </AppContainer>,
-        document.getElementById(ID_SELECTOR)
+        document.getElementById(ID_SELECTOR),
     );
-
 };

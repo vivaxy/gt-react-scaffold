@@ -3,7 +3,7 @@
  * @author vivaxy
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropType } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from 'react-pianist/Button';
@@ -27,38 +27,25 @@ const raisedButtonStyle = {
 
 class Index extends Component {
 
-    componentDidMount() {
-        this.getMoreNews();
+    static propTypes = {
+        routingPush: PropType.func.isRequired,
+        buttonState: PropType.bool.isRequired,
+        newsListState: PropType.array.isRequired,
+    };
+
+    constructor(props) {
+        super(props);
+        this.goToDemo = ::this.goToDemo;
+        this.getMoreNews = ::this.getMoreNews;
     }
 
-    render() {
-
+    async componentDidMount() {
         setTitle(i18n.$SOMEONE_S_HOME('vivaxy'));
-
-        let {
-            buttonState,
-            newsListState,
-        } = this.props;
-
-        return <div className="page-wrapper">
-            <Logo/>
-            {newsListState.map((news) => {
-                return <div key={`news-${newsIndex++}`}>{news.name}</div>;
-            })}
-            <DemoButton buttonDisabled={!buttonState} onLoadMore={::this.getMoreNews}/>
-            <hr/>
-            <Button style={raisedButtonStyle} onClick={::this.goToDemo(1)}>go to demo at tab 1</Button>
-            <hr/>
-            <Button style={raisedButtonStyle} onClick={::this.goToDemo(2)}>go to demo at tab 2</Button>
-            <hr/>
-            <Button style={raisedButtonStyle} onClick={::this.goToDemo(3)}>go to demo at tab 3</Button>
-            <hr/>
-            <Button style={raisedButtonStyle} onClick={::this.goToDemo(4)}>go to demo at tab 4</Button>
-        </div>
+        await this.getMoreNews();
     }
 
     async getMoreNews() {
-        let {
+        const {
             appendNewsListAction,
             setButtonDefaultAction,
             setButtonDisabledAction,
@@ -66,7 +53,7 @@ class Index extends Component {
         } = this.props;
         try {
             setButtonDisabledAction();
-            let list = await getNews();
+            const list = await getNews();
             appendNewsListAction(list);
             setButtonDefaultAction();
         } catch (ex) {
@@ -89,15 +76,42 @@ class Index extends Component {
         } = this.props;
         return () => {
             routingPush(`/demo/${index}`);
-        }
+        };
+    }
+
+    render() {
+        const {
+            buttonState,
+            newsListState,
+        } = this.props;
+
+        return (
+            <div className="page-wrapper">
+                <Logo />
+                {newsListState.map((news) => {
+                    return <div key={`news-${newsIndex++}`}>{news.name}</div>;
+                })}
+                <DemoButton buttonDisabled={!buttonState} onLoadMore={this.getMoreNews} />
+                <hr />
+                <Button style={raisedButtonStyle} onClick={this.goToDemo(1)}>go to demo at tab 1</Button>
+                <hr />
+                <Button style={raisedButtonStyle} onClick={this.goToDemo(2)}>go to demo at tab 2</Button>
+                <hr />
+                <Button style={raisedButtonStyle} onClick={this.goToDemo(3)}>go to demo at tab 3</Button>
+                <hr />
+                <Button style={raisedButtonStyle} onClick={this.goToDemo(4)}>go to demo at tab 4</Button>
+            </div>
+        );
     }
 
 }
 
-export default connect(state => ({
-    buttonState: state.button,
-    newsListState: state.newsList,
-}), {
+export default connect((state) => {
+    return {
+        buttonState: state.button,
+        newsListState: state.newsList,
+    };
+}, {
     setButtonDisabledAction: actions.button.setButtonDisabled,
     setButtonDefaultAction: actions.button.setButtonDefault,
     appendNewsListAction: actions.newsList.appendNewsList,

@@ -7,8 +7,10 @@ import createAction from '../lib/createAction';
 import * as actions from '../config/actions';
 
 export default {
-    appendNewsList: (list) => createAction({
-        list,
-        type: actions.APPEND_NEWS,
-    }),
+    appendNewsList: (list) => {
+        return createAction({
+            list,
+            type: actions.APPEND_NEWS,
+        });
+    },
 };

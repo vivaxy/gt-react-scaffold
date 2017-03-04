@@ -20,7 +20,7 @@ export default createReducer(defaultState, {
             message: action.message,
         };
     },
-    [actionType.HIDE_TOAST]: (state, action) => {
+    [actionType.HIDE_TOAST]: (state) => {
         return {
             ...state,
             show: false,
