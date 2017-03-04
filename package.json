@@ -4,6 +4,7 @@
   "description": "react gt scaffold",
   "main": "webpack.config.js",
   "scripts": {
+    "test": "ava",
     "lint": "eslint .",
     "release": "standard-version && git push --follow-tag",
     "dev": "NODE_ENV=development node ./scripts/dev.js",
@@ -31,6 +32,7 @@
   "homepage": "https://github.com/vivaxy/gt-react-scaffold#readme",
   "devDependencies": {
     "autoprefixer": "^6.7.0",
+    "ava": "^0.18.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
@@ -78,5 +80,18 @@
   "browserslist": [
     "> 1%",
     "ie >= 9"
-  ]
+  ],
+  "ava": {
+    "files": [
+      "test/*.js"
+    ],
+    "source": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit",
+    "verbose": true
+  }
 }
