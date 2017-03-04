@@ -22,31 +22,30 @@ const basicFetchOptions = {
 };
 
 const sendRequest = async(config) => {
-
     let response = null;
-    let {
+    const {
         method = requestMethodConstant.GET,
         data,
-        url: requestPath,
+        url: passedURL,
     } = config;
 
-    requestPath = getRequestPath(requestPath);
-    method = method.toUpperCase();
+    let requestPath = getRequestPath(passedURL);
+    const requestMethod = method.toUpperCase();
 
-    switch (method) {
+    switch (requestMethod) {
         case requestMethodConstant.GET:
             requestPath = url.format({
                 pathname: requestPath,
-                query: data
+                query: data,
             });
             response = await fetch(requestPath, {
-                ...basicFetchOptions
+                ...basicFetchOptions,
             });
             break;
         case requestMethodConstant.POST:
             response = await fetch(requestPath, {
                 ...basicFetchOptions,
-                method,
+                requestMethod,
                 body: JSON.stringify(data),
             });
             break;
@@ -67,15 +66,12 @@ const timeoutPromise = async(timeout) => {
 };
 
 export default async(config) => {
-
     const {
         timeout = 60000,
-        ...fetchConfig,
+        ...fetchConfig
     } = config;
 
-    let response;
-
-    response = await Promise.race([timeoutPromise(timeout), sendRequest(fetchConfig)]);
+    const response = await Promise.race([timeoutPromise(timeout), sendRequest(fetchConfig)]);
 
     if (response.status < SUCCESS_CODE_LOWER_BOUND || response.status >= SUCCESS_CODE_HIGHER_BOUND) {
         throw new FetchError(response);
@@ -87,5 +83,4 @@ export default async(config) => {
             return resp.data;
         }
     }
-
 };

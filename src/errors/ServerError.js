@@ -6,7 +6,7 @@
 import * as constant from '../config/errors';
 
 export default class ServerError extends Error {
-    constructor (response) {
+    constructor(response) {
         super(response.message);
         this.response = response;
         this.name = constant.SERVER;

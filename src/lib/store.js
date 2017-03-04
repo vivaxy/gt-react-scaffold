@@ -3,28 +3,24 @@
  * @author vivaxy
  */
 
-'use strict';
-
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import { routerMiddleware } from 'react-router-redux'
-import { hashHistory } from 'react-router'
-import createLogger from 'redux-logger';
+import { routerMiddleware } from 'react-router-redux';
+import { hashHistory } from 'react-router';
 import thunk from 'redux-thunk';
 
 import reducers from '../reducers';
 
-const logger = createLogger();
 const routing = routerMiddleware(hashHistory);
 
 const store = createStore(combineReducers(reducers), compose(
-    applyMiddleware(thunk, logger, routing),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    applyMiddleware(thunk, routing),
+    window.devToolsExtension ? window.devToolsExtension() : (f) => f, // eslint-disable-line arrow-body-style
 ));
 
 if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
-        const nextRootReducer = require('../reducers').default;
+        const nextRootReducer = require('../reducers').default; // eslint-disable-line global-require
         store.replaceReducer(combineReducers(nextRootReducer));
     });
 }

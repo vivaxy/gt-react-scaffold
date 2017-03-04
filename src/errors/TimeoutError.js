@@ -6,8 +6,8 @@
 import * as constant from '../config/errors';
 
 export default class TimeoutError extends Error {
-    constructor (timeout) {
-        super(`timeout`);
+    constructor(timeout) {
+        super('timeout');
         this.timeout = timeout;
         this.name = constant.TIMEOUT;
     }

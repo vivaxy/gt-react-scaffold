@@ -27,7 +27,7 @@ export default createReducer(defaultState, {
             rowCount: action.rowCount,
             needMore: action.pageIndex !== action.pageCount,
         };
-    }
+    },
 });
 
 export const propTypes = PropTypes.shape({

@@ -5,13 +5,11 @@
 
 import fetch from '../lib/fetch';
 
-export default async () => {
-
-    let result = await fetch({
+export default async() => {
+    const result = await fetch({
         url: '/newsByPage',
-        data: Math.random()
+        data: Math.random(),
     });
 
     return result.list;
-
 };

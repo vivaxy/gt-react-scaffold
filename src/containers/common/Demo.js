@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import setTitle from '../../lib/setTitle';
@@ -9,19 +9,28 @@ import i18n from '../../i18n';
 
 class Index extends Component {
 
-    render () {
+    static propTypes = {
+        params: PropTypes.object.isRequired,
+    };
 
+    componentDidMount() {
+        setTitle(i18n.$SOMEONE_S_HOME('react-pianist'));
+    }
+
+    render() {
         const {
             params,
         } = this.props;
 
-        setTitle(i18n.$SOMEONE_S_HOME('react-pianist'));
-
-        return <div className="page-wrapper">
-            <PianistDemo index={Number(params.index)}/>
-        </div>
+        return (
+            <div className="page-wrapper">
+                <PianistDemo index={Number(params.index)} />
+            </div>
+        );
     }
 
 }
 
-export default connect(state => ({}), {})(Index);
+export default connect(() => {
+    return {};
+}, {})(Index);

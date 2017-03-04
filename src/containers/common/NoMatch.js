@@ -3,25 +3,32 @@
  * @author vivaxy
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 class NoMatch extends Component {
 
-    render() {
+    static propTypes = {
+        params: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+    };
 
-        let {
+    render() {
+        const {
             params,
             location,
         } = this.props;
 
-        return <div>
-            {JSON.stringify(params)}
-            {JSON.stringify(location)}
-        </div>
+        return (
+            <div>
+                {JSON.stringify(params)}
+                {JSON.stringify(location)}
+            </div>
+        );
     }
 
 }
 
-export default connect(state => ({}), {
-})(NoMatch);
+export default connect(() => {
+    return {};
+}, {})(NoMatch);

@@ -13,20 +13,24 @@ export default class extends Component {
         onLoadMore: PropTypes.func.isRequired,
     };
 
-    render() {
-
-        let {
-            buttonDisabled,
-        } = this.props;
-
-        return <Button disabled={buttonDisabled} primary={true} onClick={::this.onClick}>{'load more'}</Button>
+    constructor(props) {
+        super(props);
+        this.onClick = ::this.onClick;
     }
 
     onClick() {
-
-        let {
+        const {
             onLoadMore,
         } = this.props;
         onLoadMore();
     }
+
+    render() {
+        const {
+            buttonDisabled,
+        } = this.props;
+
+        return <Button disabled={buttonDisabled} primary onClick={this.onClick}>{'load more'}</Button>;
+    }
+
 }
