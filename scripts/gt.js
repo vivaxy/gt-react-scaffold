@@ -115,8 +115,7 @@ const updateTemplate = async() => {
 
     await sleep(1000);
     await presets.updateFile(filename, (content) => {
-        const projectData = content.split('----------\n\n')[1];
-        return projectData.replace(/gt-react-scaffold/g, project.name);
+        return content.replace(/gt-react-scaffold/g, project.name);
     });
 };
 
@@ -130,8 +129,7 @@ const updateRender = async() => {
 
     await sleep(1000);
     await presets.updateFile(filename, (content) => {
-        const projectData = content.split('----------\n\n')[1];
-        return projectData.replace(/gt-react-scaffold/g, project.name);
+        return content.replace(/gt-react-scaffold/g, project.name);
     });
 };
 
