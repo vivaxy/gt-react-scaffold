@@ -4,6 +4,7 @@
  */
 
 import Listr from 'listr';
+import execa from 'execa';
 
 const sleep = (timeout) => {
     return new Promise((resolve) => {
@@ -133,6 +134,10 @@ const updateRender = async() => {
     });
 };
 
+const yarnInstall = async() => {
+    await execa('yarn', ['install']);
+};
+
 export const init = async(options) => {
     data = options;
 
@@ -157,18 +162,18 @@ export const init = async(options) => {
             title: 'update README.md',
             task: updateREADME,
         },
+        {
+            title: 'run yarn install',
+            task: yarnInstall,
+        },
     ]);
 };
 
 /* eslint-disable no-console */
 export const after = async() => {
     console.log(`
-    please exec following command to initialize your project
+    please run following command to start dev server
 
-    - yarn install
-
-    then exec following command to start dev server
-
-    - yarn start
+    - yarn run dev
 `);
 };
