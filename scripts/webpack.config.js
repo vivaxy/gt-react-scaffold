@@ -12,7 +12,7 @@ const autoprefixer = require('autoprefixer');
 const Visualizer = require('webpack-visualizer-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const config = require('./scripts/config');
+const config = require('./config');
 
 const DEVELOPMENT_IP = config.DEVELOPMENT_IP;
 const DEVELOPMENT_PORT = config.DEVELOPMENT_PORT;
@@ -26,6 +26,7 @@ const HTML_FOLDER = 'html';
 const COMMON_CHUNK_NAME = 'common';
 
 const BANNER = '@2016 vivaxy';
+const baseDir = path.join(__dirname, '..');
 
 const NODE_ENV = process.env.NODE_ENV || PRODUCTION;
 
@@ -43,7 +44,7 @@ const postcssLoader = {
 const jsRule = {
     test: /\.js$/,
     include: [
-        path.resolve(__dirname, SOURCE_PATH),
+        path.resolve(baseDir, SOURCE_PATH),
     ],
     use: [
         'babel-loader',
@@ -53,7 +54,7 @@ const jsRule = {
 const cssRule = {
     test: /\.css$/,
     include: [
-        path.resolve(__dirname, SOURCE_PATH),
+        path.resolve(baseDir, SOURCE_PATH),
     ],
     use: [
         'style-loader',
@@ -65,7 +66,7 @@ const cssRule = {
 const cssModuleRule = {
     test: /\.css$/,
     include: [
-        path.resolve(__dirname, NODE_MODULES),
+        path.resolve(baseDir, NODE_MODULES),
     ],
     use: [
         'style-loader',
@@ -77,7 +78,7 @@ const cssModuleRule = {
 const lessRule = {
     test: /\.less$/,
     include: [
-        path.resolve(__dirname, SOURCE_PATH),
+        path.resolve(baseDir, SOURCE_PATH),
     ],
     use: [
         'style-loader',
@@ -90,7 +91,7 @@ const lessRule = {
 const lessModuleRule = {
     test: /\.less$/,
     include: [
-        path.resolve(__dirname, NODE_MODULES),
+        path.resolve(baseDir, NODE_MODULES),
     ],
     use: [
         'style-loader',
@@ -121,7 +122,7 @@ const webpackConfig = {
         ],
     },
     output: {
-        path: path.resolve(__dirname, RELEASE_PATH),
+        path: path.resolve(baseDir, RELEASE_PATH),
         filename: 'js/[name].js',
         publicPath: '../',
     },
@@ -147,6 +148,9 @@ const webpackConfig = {
         }),
         new Visualizer(),
         new webpack.NamedModulesPlugin(),
+        new webpack.ProgressPlugin((percentage, msg) => {
+            logUpdate('     progress:', numeral(percentage).format('00.00%'), msg);
+        }),
     ],
 };
 
@@ -165,7 +169,7 @@ const htmlNameList = htmlFileNameList.map((htmlFileName) => {
 // set entry
 entryNameList.forEach((entryName) => {
     webpackConfig.entry[entryName] = [
-        path.join(__dirname, `./${SOURCE_PATH}/${ENTRIES_FOLDER}/${entryName}.js`),
+        path.join(baseDir, `./${SOURCE_PATH}/${ENTRIES_FOLDER}/${entryName}.js`),
     ];
 
     let htmlTemplateName = 'index';
@@ -209,9 +213,6 @@ switch (NODE_ENV) {
 
         webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
         webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
-        webpackConfig.plugins.push(new webpack.ProgressPlugin((percentage, msg) => {
-            logUpdate('     progress:', numeral(percentage).format('00.00%'), msg);
-        }));
         break;
     default:
         webpackConfig.devtool = 'source-map';

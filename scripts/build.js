@@ -1,8 +1,8 @@
 /**
- * @since 2017-01-12 17:35
+ * @since 2017-04-01 16:33:06
  * @author vivaxy
  */
 
 require('babel-polyfill');
 require('babel-register');
-require('./dev/index');
+require('./build/index');

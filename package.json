@@ -12,7 +12,7 @@
     "production": "NODE_ENV=production npm run build",
     "build": "npm run build:clean && npm run build:webpack",
     "build:clean": "rm -rf ./release && mkdir ./release",
-    "build:webpack": "webpack --progress --display-chunks --display-reasons --display-error-details --display-modules --display-exclude --display-depth --display-used-exports --display-max-modules > ./release/build.log"
+    "build:webpack": "node ./scripts/build.js"
   },
   "repository": {
     "type": "git",
