@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/vivaxy/gt-react-scaffold/compare/v1.5.0...v1.5.1) (2017-04-01)
+
+
+### Bug Fixes
+
+* **gt:** :bug:Fix gt after message; Add yarn install in gt; Update webpack-dev-server to 2.x in pack ([8849562](https://github.com/vivaxy/gt-react-scaffold/commit/8849562))
+* **gt:** :bug:Fix gt.js ([e84665d](https://github.com/vivaxy/gt-react-scaffold/commit/e84665d))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.4.0...v1.5.0) (2017-03-04)
 
