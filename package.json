@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "ava",
-    "lint": "eslint .",
+    "lint": "eslint ./src",
     "release": "standard-version && git push --follow-tag",
     "dev": "NODE_ENV=development node ./scripts/dev.js",
     "beta": "NODE_ENV=beta npm run build",

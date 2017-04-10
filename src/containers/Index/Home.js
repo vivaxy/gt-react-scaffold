@@ -15,9 +15,12 @@ import getNews from '../../api/news';
 import Logo from '../../components/Logo';
 import DemoButton from '../../components/DemoButton';
 
-import i18n from '../../i18n';
+import i18n from '../../i18n/index';
 import * as errorType from '../../config/errors';
-import actions from '../../actions';
+import { setButtonDisabled, setButtonDefault } from '../../redux/button';
+import { appendNewsList } from '../../redux/newsList';
+import { push } from '../../redux/routing';
+import { showToast } from '../../redux/toast';
 
 let newsIndex = 0;
 
@@ -25,7 +28,7 @@ const raisedButtonStyle = {
     padding: '0 8px',
 };
 
-class Index extends Component {
+class Home extends Component {
 
     static propTypes = {
         routingPush: PropTypes.func.isRequired,
@@ -112,9 +115,9 @@ export default connect((state) => {
         newsListState: state.newsList,
     };
 }, {
-    setButtonDisabledAction: actions.button.setButtonDisabled,
-    setButtonDefaultAction: actions.button.setButtonDefault,
-    appendNewsListAction: actions.newsList.appendNewsList,
-    routingPush: actions.routing.push,
-    showToastAction: actions.toast.showToast,
-})(Index);
+    setButtonDisabledAction: setButtonDisabled,
+    setButtonDefaultAction: setButtonDefault,
+    appendNewsListAction: appendNewsList,
+    routingPush: push,
+    showToastAction: showToast,
+})(Home);

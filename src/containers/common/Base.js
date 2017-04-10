@@ -50,6 +50,4 @@ class Base extends Component {
     }
 }
 
-export default connect(() => {
-    return {};
-}, {})(Base);
+export default connect(null, {})(Base);

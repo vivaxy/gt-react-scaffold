@@ -6,12 +6,14 @@
 import { connect } from 'react-redux';
 
 import Toast from '../../components/Toast';
-import actions from '../../actions';
+import { hideToast } from '../../redux/toast';
 
-export default connect((state) => {
+const mapStateToProps = (state) => {
     return {
         toastState: state.toast,
     };
-}, {
-    hideToastAction: actions.toast.hideToast,
+};
+
+export default connect(mapStateToProps, {
+    hideToastAction: hideToast,
 })(Toast);

@@ -8,7 +8,7 @@ import { routerMiddleware } from 'react-router-redux';
 import { hashHistory } from 'react-router';
 import thunk from 'redux-thunk';
 
-import reducers from '../reducers';
+import reducers from '../redux/reducers';
 
 const routing = routerMiddleware(hashHistory);
 
@@ -19,8 +19,8 @@ const store = createStore(combineReducers(reducers), compose(
 
 if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-        const nextRootReducer = require('../reducers').default; // eslint-disable-line global-require
+    module.hot.accept('../redux/reducers', () => {
+        const nextRootReducer = require('../redux/reducers').default; // eslint-disable-line global-require
         store.replaceReducer(combineReducers(nextRootReducer));
     });
 }

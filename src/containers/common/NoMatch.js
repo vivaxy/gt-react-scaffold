@@ -29,6 +29,4 @@ class NoMatch extends Component {
 
 }
 
-export default connect(() => {
-    return {};
-}, {})(NoMatch);
+export default connect(null, {})(NoMatch);

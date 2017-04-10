@@ -5,7 +5,8 @@
 
 import createReducer from '../lib/createReducer';
 
-import * as actionType from '../config/actions';
+const SHOW_TOAST = 'SHOW_TOAST';
+const HIDE_TOAST = 'HIDE_TOAST';
 
 const defaultState = {
     show: false,
@@ -13,14 +14,14 @@ const defaultState = {
 };
 
 export default createReducer(defaultState, {
-    [actionType.SHOW_TOAST]: (state, action) => {
+    [SHOW_TOAST]: (state, action) => {
         return {
             ...state,
             show: true,
             message: action.message,
         };
     },
-    [actionType.HIDE_TOAST]: (state) => {
+    [HIDE_TOAST]: (state) => {
         return {
             ...state,
             show: false,
@@ -28,3 +29,16 @@ export default createReducer(defaultState, {
         };
     },
 });
+
+export const showToast = (message) => {
+    return {
+        message,
+        type: SHOW_TOAST,
+    };
+};
+
+export const hideToast = () => {
+    return {
+        type: HIDE_TOAST,
+    };
+};

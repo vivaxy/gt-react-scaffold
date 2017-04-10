@@ -5,12 +5,19 @@
 
 import createReducer from '../lib/createReducer';
 
-import * as constant from '../config/actions';
+const APPEND_NEWS = 'APPEND_NEWS';
 
 const defaultState = [];
 
 export default createReducer(defaultState, {
-    [constant.APPEND_NEWS]: (state, action) => {
+    [APPEND_NEWS]: (state, action) => {
         return [...state, ...action.list];
     },
 });
+
+export const appendNewsList = (list) => {
+    return {
+        list,
+        type: APPEND_NEWS,
+    };
+};

@@ -5,8 +5,8 @@
 
 import Base from '../containers/common/Base';
 import NoMatch from '../containers/common/NoMatch';
-import Index from '../containers/common/Index';
-import Demo from '../containers/common/Demo';
+import Index from '../containers/Index/Home';
+import Demo from '../containers/Demo/PianistDemo';
 
 const demoRoute = {
     path: 'demo/:index',

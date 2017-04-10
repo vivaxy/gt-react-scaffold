@@ -7,7 +7,7 @@ import { PropTypes } from 'react';
 
 import createReducer from '../lib/createReducer';
 
-import * as constant from '../config/actions';
+const SETUP_PAGINATION = 'SETUP_PAGINATION';
 
 const defaultState = {
     pageIndex: 0,
@@ -18,7 +18,7 @@ const defaultState = {
 };
 
 export default createReducer(defaultState, {
-    [constant.SETUP_PAGINATION]: (state, action) => {
+    [SETUP_PAGINATION]: (state, action) => {
         return {
             ...state,
             pageSize: action.pageSize,
