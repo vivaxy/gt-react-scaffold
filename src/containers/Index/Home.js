@@ -10,15 +10,11 @@ import { Button } from 'react-pianist/Button';
 
 import setTitle from '../../lib/setTitle';
 
-import getNews from '../../api/news';
-
 import Logo from '../../components/Logo';
 import DemoButton from '../../components/DemoButton';
 
 import i18n from '../../i18n/index';
-import * as errorType from '../../config/errors';
-import { setButtonDisabled, setButtonDefault } from '../../redux/button';
-import { appendNewsList } from '../../redux/newsList';
+import { getMoreNews } from '../../redux/newsList';
 import { push } from '../../redux/routing';
 import { showToast } from '../../redux/toast';
 
@@ -34,43 +30,18 @@ class Home extends Component {
         routingPush: PropTypes.func.isRequired,
         buttonState: PropTypes.bool.isRequired,
         newsListState: PropTypes.array.isRequired,
+        getMoreNewsAction: PropTypes.func.isRequired,
     };
 
     constructor(props) {
         super(props);
         this.goToDemo = ::this.goToDemo;
-        this.getMoreNews = ::this.getMoreNews;
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        const { getMoreNewsAction } = this.props;
         setTitle(i18n.$SOMEONE_S_HOME('vivaxy'));
-        await this.getMoreNews();
-    }
-
-    async getMoreNews() {
-        const {
-            appendNewsListAction,
-            setButtonDefaultAction,
-            setButtonDisabledAction,
-            showToastAction,
-        } = this.props;
-        try {
-            setButtonDisabledAction();
-            const list = await getNews();
-            appendNewsListAction(list);
-            setButtonDefaultAction();
-        } catch (ex) {
-            switch (ex.name) {
-                case errorType.FETCH:
-                    showToastAction(ex.message);
-                    break;
-                case errorType.SERVER:
-                    showToastAction(ex.message);
-                    break;
-                default:
-                    throw ex;
-            }
-        }
+        getMoreNewsAction();
     }
 
     goToDemo(index) {
@@ -86,6 +57,7 @@ class Home extends Component {
         const {
             buttonState,
             newsListState,
+            getMoreNewsAction,
         } = this.props;
 
         return (
@@ -94,7 +66,7 @@ class Home extends Component {
                 {newsListState.map((news) => {
                     return <div key={`news-${newsIndex++}`}>{news.name}</div>;
                 })}
-                <DemoButton buttonDisabled={!buttonState} onLoadMore={this.getMoreNews} />
+                <DemoButton buttonDisabled={!buttonState} onLoadMore={getMoreNewsAction} />
                 <hr />
                 <Button style={raisedButtonStyle} onClick={this.goToDemo(1)}>go to demo at tab 1</Button>
                 <hr />
@@ -115,9 +87,7 @@ export default connect((state) => {
         newsListState: state.newsList,
     };
 }, {
-    setButtonDisabledAction: setButtonDisabled,
-    setButtonDefaultAction: setButtonDefault,
-    appendNewsListAction: appendNewsList,
+    getMoreNewsAction: getMoreNews,
     routingPush: push,
     showToastAction: showToast,
 })(Home);

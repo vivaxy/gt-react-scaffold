@@ -4,9 +4,7 @@
  */
 
 import createReducer from '../lib/createReducer';
-
-const SHOW_TOAST = 'SHOW_TOAST';
-const HIDE_TOAST = 'HIDE_TOAST';
+import { HIDE_TOAST, SHOW_TOAST } from '../config/actionTypes';
 
 const defaultState = {
     show: false,

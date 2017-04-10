@@ -4,9 +4,7 @@
  */
 
 import createReducer from '../lib/createReducer';
-
-const BUTTON_DISABLED = 'BUTTON_DISABLED';
-const BUTTON_DEFAULT = 'BUTTON_DEFAULT';
+import { BUTTON_DEFAULT, BUTTON_DISABLED, APPEND_NEWS } from '../config/actionTypes';
 
 const defaultState = true;
 
@@ -15,6 +13,9 @@ export default createReducer(defaultState, {
         return false;
     },
     [BUTTON_DEFAULT]: () => {
+        return true;
+    },
+    [APPEND_NEWS]: () => {
         return true;
     },
 });

@@ -4,8 +4,11 @@
  */
 
 import createReducer from '../lib/createReducer';
+import processErrors from '../lib/processErrors';
 
-const APPEND_NEWS = 'APPEND_NEWS';
+import { APPEND_NEWS } from '../config/actionTypes';
+import { setButtonDisabled, setButtonDefault } from './button';
+import getNewsAPI from '../api/news';
 
 const defaultState = [];
 
@@ -15,9 +18,18 @@ export default createReducer(defaultState, {
     },
 });
 
-export const appendNewsList = (list) => {
-    return {
-        list,
-        type: APPEND_NEWS,
+export const getMoreNews = () => {
+    return async(dispatch) => {
+        try {
+            dispatch(setButtonDisabled());
+            const list = await getNewsAPI();
+            dispatch({
+                list,
+                type: APPEND_NEWS,
+            });
+        } catch (ex) {
+            dispatch(setButtonDefault());
+            processErrors(ex);
+        }
     };
 };
