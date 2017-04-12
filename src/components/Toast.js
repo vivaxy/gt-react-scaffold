@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { AutoHideToast } from 'react-pianist/Toast';
 
 import * as toastConfig from '../config/toast';

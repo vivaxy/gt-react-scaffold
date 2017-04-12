@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import React, { Component, PropTypes, cloneElement } from 'react';
+import React, { Component, cloneElement } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';

@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { VerticalFlexBox, VerticalFlexItem } from 'react-pianist/VerticalFlex';
