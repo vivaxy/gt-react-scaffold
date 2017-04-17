@@ -4,7 +4,7 @@
  */
 
 /* eslint-disable no-console */
-import open from 'open';
+import open from 'react-dev-utils/openBrowser';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
