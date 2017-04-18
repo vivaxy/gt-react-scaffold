@@ -41,7 +41,9 @@ export default class extends Component {
                 show={toastState.show}
                 autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
                 onAutoHide={this.onClose}
-            >{toastState.message}</AutoHideToast>
+            >
+                {toastState.message}
+            </AutoHideToast>
         );
     }
 
