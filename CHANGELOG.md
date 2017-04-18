@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.5.2...v1.6.0) (2017-04-18)
+
+
+### Features
+
+* **dep:** :alien:Upgrade react to 15.5, and react-dom to 15.5 ([230e3e1](https://github.com/vivaxy/gt-react-scaffold/commit/230e3e1))
+* **eslint:** :sparkles:Add eslint-loader, Upgrade react-pianist and react-router because of prop-ty ([7d695c3](https://github.com/vivaxy/gt-react-scaffold/commit/7d695c3))
+* **openBrowser:** :sparkles:Optimize open browser ([cb55563](https://github.com/vivaxy/gt-react-scaffold/commit/cb55563))
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/vivaxy/gt-react-scaffold/compare/v1.5.1...v1.5.2) (2017-04-10)
 

@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { AutoHideToast } from 'react-pianist/Toast';
 
 import * as toastConfig from '../config/toast';
@@ -40,7 +41,9 @@ export default class extends Component {
                 show={toastState.show}
                 autoHideDuration={toastConfig.AUTO_HIDE_DURATION}
                 onAutoHide={this.onClose}
-            >{toastState.message}</AutoHideToast>
+            >
+                {toastState.message}
+            </AutoHideToast>
         );
     }
 

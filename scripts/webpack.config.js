@@ -41,6 +41,15 @@ const postcssLoader = {
     },
 };
 
+const eslintRule = {
+    enforce: 'pre',
+    test: /\.js$/,
+    include: [
+        path.resolve(baseDir, SOURCE_PATH),
+    ],
+    loader: 'eslint-loader',
+};
+
 const jsRule = {
     test: /\.js$/,
     include: [
@@ -128,6 +137,7 @@ const webpackConfig = {
     },
     module: {
         rules: [
+            eslintRule,
             jsRule,
             cssRule,
             lessRule,
