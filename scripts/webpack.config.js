@@ -126,9 +126,6 @@ const fileRule = {
 // default webpack config
 const webpackConfig = {
     entry: {
-        [COMMON_CHUNK_NAME]: [
-            'babel-polyfill',
-        ],
     },
     output: {
         path: path.resolve(baseDir, RELEASE_PATH),
