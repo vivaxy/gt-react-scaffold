@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.6.1...v1.7.0) (2017-05-03)
+
+
+### Features
+
+* **babel:** :sparkles:Using babel-runtime instead of babel-polyfill, reduce the release files' size ([f2b729a](https://github.com/vivaxy/gt-react-scaffold/commit/f2b729a))
+
+
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/vivaxy/gt-react-scaffold/compare/v1.6.0...v1.6.1) (2017-05-03)
 
