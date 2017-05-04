@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.7.0...v1.8.0) (2017-05-04)
+
+
+### Features
+
+* **dependencies:** :arrow_up:Move react react-dom redux redux-thunk into dependencies ([20b4304](https://github.com/vivaxy/gt-react-scaffold/commit/20b4304))
+* **report:** :sparkles:Replace `webpack-visualizer-plugin` with `webpack-bundle-analyzer` ([8057b69](https://github.com/vivaxy/gt-react-scaffold/commit/8057b69))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/vivaxy/gt-react-scaffold/compare/v1.6.1...v1.7.0) (2017-05-03)
 
