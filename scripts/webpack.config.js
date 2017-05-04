@@ -9,8 +9,8 @@ const webpack = require('webpack');
 const numeral = require('numeral');
 const logUpdate = require('log-update');
 const autoprefixer = require('autoprefixer');
-const Visualizer = require('webpack-visualizer-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = require('./config');
 
@@ -153,7 +153,11 @@ const webpackConfig = {
             filename: 'js/[name].js',
             minChunks: 2, // Infinity
         }),
-        new Visualizer(),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: 'report.html',
+            openAnalyzer: false,
+        }),
         new webpack.NamedModulesPlugin(),
         new webpack.ProgressPlugin((percentage, msg) => {
             logUpdate('     progress:', numeral(percentage).format('00.00%'), msg);
