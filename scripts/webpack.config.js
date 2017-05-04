@@ -123,10 +123,105 @@ const fileRule = {
     ],
 };
 
+const createEntryAndPlugins = () => {
+    const entry = {};
+    const plugins = [];
+
+    // get entry
+    const entryFileNameList = glob.sync(`${path.join(SOURCE_PATH, ENTRIES_FOLDER)}/*.js`);
+    const entryNameList = entryFileNameList.map((entryFileName) => {
+        return path.basename(entryFileName, '.js');
+    });
+
+    // get corresponding html template
+    const htmlFileNameList = glob.sync(`${path.join(SOURCE_PATH, HTML_FOLDER)}/*.html`);
+    const htmlNameList = htmlFileNameList.map((htmlFileName) => {
+        return path.basename(htmlFileName, '.html');
+    });
+
+    // set entry
+    entryNameList.forEach((entryName) => {
+        entry[entryName] = [
+            path.join(baseDir, `./${SOURCE_PATH}/${ENTRIES_FOLDER}/${entryName}.js`),
+        ];
+
+        let htmlTemplateName = 'index';
+        if (htmlNameList.indexOf(entryName) !== -1) {
+            htmlTemplateName = entryName;
+        }
+
+        plugins.push(new HtmlWebpackPlugin({
+            template: `${SOURCE_PATH}/${HTML_FOLDER}/${htmlTemplateName}.html`,
+            filename: `${HTML_FOLDER}/${entryName}.html`,
+            hash: true,
+            inject: 'body',
+            chunks: [
+                COMMON_CHUNK_NAME,
+                entryName,
+            ],
+        }));
+    });
+    return {
+        entry,
+        plugins,
+    };
+};
+
+const addDevToEntry = (entry) => {
+    const newEntry = {};
+    Object.keys(entry).forEach((entryName) => {
+        const ent = entry[entryName];
+        newEntry[entryName] = [
+            `webpack-dev-server/client?http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}`,
+            'webpack/hot/log-apply-result',
+            // webpackConfig.entry[entryName].unshift('webpack/hot/dev-server');
+            'webpack/hot/only-dev-server',
+            // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
+            'react-hot-loader/patch',
+            ...ent,
+        ];
+    });
+    return newEntry;
+};
+
+let { entry, plugins } = createEntryAndPlugins();
+let devtool = 'source-map';
+
+// set config according to environment
+switch (NODE_ENV) {
+    case DEVELOPMENT:
+        devtool = 'eval';
+        // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
+        jsRule.use.push('react-hot-loader/webpack');
+        entry = addDevToEntry(entry);
+        plugins = [
+            ...plugins,
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NoEmitOnErrorsPlugin(),
+        ];
+        break;
+    default:
+        devtool = 'source-map';
+        plugins = [
+            ...plugins,
+            new webpack.BannerPlugin({
+                banner: BANNER,
+            }),
+            new webpack.optimize.UglifyJsPlugin({
+                sourceMap: true,
+            }),
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static',
+                reportFilename: 'report.html',
+                openAnalyzer: false,
+            }),
+        ];
+        break;
+}
+
 // default webpack config
-const webpackConfig = {
-    entry: {
-    },
+module.exports = {
+    entry,
     output: {
         path: path.resolve(baseDir, RELEASE_PATH),
         filename: 'js/[name].js',
@@ -144,6 +239,7 @@ const webpackConfig = {
         ],
     },
     plugins: [
+        ...plugins,
         new webpack.EnvironmentPlugin([
             'NODE_ENV',
         ]),
@@ -153,87 +249,10 @@ const webpackConfig = {
             filename: 'js/[name].js',
             minChunks: 2, // Infinity
         }),
-        new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            reportFilename: 'report.html',
-            openAnalyzer: false,
-        }),
         new webpack.NamedModulesPlugin(),
         new webpack.ProgressPlugin((percentage, msg) => {
             logUpdate('     progress:', numeral(percentage).format('00.00%'), msg);
         }),
     ],
+    devtool,
 };
-
-// get entry
-const entryFileNameList = glob.sync(`${path.join(SOURCE_PATH, ENTRIES_FOLDER)}/*.js`);
-const entryNameList = entryFileNameList.map((entryFileName) => {
-    return path.basename(entryFileName, '.js');
-});
-
-// get corresponding html template
-const htmlFileNameList = glob.sync(`${path.join(SOURCE_PATH, HTML_FOLDER)}/*.html`);
-const htmlNameList = htmlFileNameList.map((htmlFileName) => {
-    return path.basename(htmlFileName, '.html');
-});
-
-// set entry
-entryNameList.forEach((entryName) => {
-    webpackConfig.entry[entryName] = [
-        path.join(baseDir, `./${SOURCE_PATH}/${ENTRIES_FOLDER}/${entryName}.js`),
-    ];
-
-    let htmlTemplateName = 'index';
-    if (htmlNameList.indexOf(entryName) !== -1) {
-        htmlTemplateName = entryName;
-    }
-
-    webpackConfig.plugins.push(new HtmlWebpackPlugin({
-        template: `${SOURCE_PATH}/${HTML_FOLDER}/${htmlTemplateName}.html`,
-        filename: `${HTML_FOLDER}/${entryName}.html`,
-        hash: true,
-        inject: 'body',
-        chunks: [
-            COMMON_CHUNK_NAME,
-            entryName,
-        ],
-    }));
-});
-
-// set config according to environment
-switch (NODE_ENV) {
-    case DEVELOPMENT:
-
-        // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
-        jsRule.use.push('react-hot-loader/webpack');
-
-        entryNameList.forEach((entryName) => {
-            webpackConfig.entry[entryName]
-                .unshift(`webpack-dev-server/client?http://${DEVELOPMENT_IP}:${DEVELOPMENT_PORT}`);
-            webpackConfig.entry[entryName].unshift('webpack/hot/log-apply-result');
-
-            // hot reload
-            // webpackConfig.entry[entryName].unshift('webpack/hot/dev-server');
-            webpackConfig.entry[entryName].unshift('webpack/hot/only-dev-server');
-
-            // support react-hot-loader@3, @see https://github.com/gaearon/react-hot-loader/tree/next-docs
-            webpackConfig.entry[entryName].unshift('react-hot-loader/patch');
-        });
-
-        webpackConfig.devtool = 'eval';
-
-        webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-        webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
-        break;
-    default:
-        webpackConfig.devtool = 'source-map';
-        webpackConfig.plugins.push(new webpack.BannerPlugin({
-            banner: BANNER,
-        }));
-        webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-        }));
-        break;
-}
-
-module.exports = webpackConfig;
