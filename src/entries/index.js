@@ -3,6 +3,7 @@
  * @author vivaxy
  */
 
+import 'babel-polyfill';
 import page from '../pages/index';
 
 page();
