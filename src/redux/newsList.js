@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import createReducer from '../lib/createReducer';
+import { createReducer } from 'redux-create-reducer';
+
 import processErrors from '../lib/processErrors';
 
 import { APPEND_NEWS } from '../config/actionTypes';

@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import createReducer from '../lib/createReducer';
+import { createReducer } from 'redux-create-reducer';
+
 import { HIDE_TOAST, SHOW_TOAST } from '../config/actionTypes';
 
 const defaultState = {

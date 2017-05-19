@@ -4,8 +4,7 @@
  */
 
 import PropTypes from 'prop-types';
-
-import createReducer from '../lib/createReducer';
+import { createReducer } from 'redux-create-reducer';
 
 const SETUP_PAGINATION = 'SETUP_PAGINATION';
 

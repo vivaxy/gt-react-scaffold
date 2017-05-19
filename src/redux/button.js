@@ -3,7 +3,8 @@
  * @author vivaxy
  */
 
-import createReducer from '../lib/createReducer';
+import { createReducer } from 'redux-create-reducer';
+
 import { BUTTON_DEFAULT, BUTTON_DISABLED, APPEND_NEWS } from '../config/actionTypes';
 
 const defaultState = true;

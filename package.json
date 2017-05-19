@@ -96,6 +96,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "redux": "^3.6.0",
+    "redux-create-reducer": "^1.1.1",
     "redux-thunk": "^2.2.0"
   }
 }
