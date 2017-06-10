@@ -30,7 +30,6 @@ const copyFiles = async() => {
         '.gitignore',
         '.npmrc',
         'LICENSE',
-        'webpack.config.js',
     ];
 
     await sleep(1000);
