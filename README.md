@@ -1,31 +1,24 @@
-## INITIALIZE
+## Initializing
 
-- install nodejs
-- install [gt](https://github.com/vivaxy/granturismo)
+- Install nodejs.
+- Install [gt](https://github.com/vivaxy/granturismo).
 
     `yarn global add granturismo`
 
-- add scaffold into gt `gt config add vivaxy/gt-react-scaffold https://github.com/vivaxy/gt-react-scaffold.git`
-- create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`
-- run `gt init`
-- select `vivaxy/gt-react-scaffold`
+- Add scaffold to gt `gt config add vivaxy/gt-react-scaffold https://github.com/vivaxy/gt-react-scaffold.git`.
+- Create your project directory `mkdir my-project-name && cd my-project-name` or `git clone ...`.
+- Run `gt init`.
+- Select `vivaxy/gt-react-scaffold`.
 
-## CONTRIBUTE
+## Contributing
 
-Feel free to submit any issue.
-
-Steps to make contributions
-
-- update codes
-- submit your changes by [`gacp`](https://github.com/vivaxy/gacp)
-- run `yarn run release` to update `CHANGELOG.md` and bump version
-- run [`gacp`](https://github.com/vivaxy/gacp) to push changes into origin
+[Contributing](CONTRIBUTING.md)
 
 ----------
 
 # gt-react-scaffold
 
-## FEATURE
+## Feature
 
 - react
 - redux
@@ -48,7 +41,7 @@ Steps to make contributions
 - less
 - test cases
 
-## STRUCTURE
+## Concept
 
 ![flowchart](./docs/flowchart.png)
 
@@ -70,15 +63,15 @@ We store every string in `i18n` for better internationalization.
 
 Built project files will be in the `release` folder. With `build.log`, you can see every build details. With `stats.html`, you can optimize your dependencies to make project smaller.
 
-## DEVELOP
+## Developing
 
 - `yarn run dev`
 
-## BUILD
+## Building
 
 - `yarn run build`
 
-## REFERENCE
+## Reference
 
 - https://github.com/webpack/docs/wiki/webpack-dev-server
 - https://github.com/gaearon/react-hot-loader/tree/master/docs
