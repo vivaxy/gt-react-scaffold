@@ -12,13 +12,8 @@ const sleep = (timeout) => {
     });
 };
 
-let data;
-
-const copyFiles = async() => {
-    const {
-        presets,
-    } = data;
-
+const copyFiles = (options) => {
+    const { presets } = options;
     const files = [
         'docs',
         'mock-server',
@@ -31,148 +26,140 @@ const copyFiles = async() => {
         '.npmrc',
         'LICENSE',
     ];
-
-    await sleep(1000);
-    await presets.copyFiles(files);
+    return async() => {
+        await sleep(500);
+        await presets.copyFiles(files);
+    };
 };
 
-const updatePackageJSON = async() => {
-    const {
-        project,
-        presets,
-    } = data;
-
+const updatePackageJSON = (options) => {
+    const { project, presets } = options;
     const projectGit = project.git || {};
-
     const filename = 'package.json';
 
-    await sleep(1000);
-    await presets.updateJson(filename, (json) => {
-        const {
-            version,
-            description,
-            main,
-            scripts,
-            repository,
-            keywords,
-            author,
-            license,
-            bugs,
-            dependencies,
-            devDependencies,
-            peerDependencies,
-        } = json;
+    return async() => {
+        await sleep(500);
+        await presets.updateJson(filename, (data) => {
+            const {
+                version,
+                description,
+                main,
+                scripts,
+                repository,
+                keywords,
+                author,
+                license,
+                bugs,
+                dependencies,
+                devDependencies,
+                peerDependencies,
+            } = data;
 
-        return {
-            name: project.name,
-            version: '0.0.0',
-            gtScaffoldVersion: version,
-            description,
-            main,
-            scripts,
-            repository: {
-                ...repository,
-                url: projectGit.repositoryURL,
-            },
-            keywords,
-            author,
-            license,
-            bugs: {
-                ...bugs,
-                url: undefined,
-            },
-            dependencies,
-            devDependencies,
-            peerDependencies,
-        };
-    });
+            return {
+                name: project.name,
+                version: '0.0.0',
+                gtScaffoldVersion: version,
+                description,
+                main,
+                scripts,
+                repository: {
+                    ...repository,
+                    url: projectGit.repositoryURL,
+                },
+                keywords,
+                author: projectGit.username,
+                license,
+                bugs: {
+                    ...bugs,
+                    url: undefined,
+                },
+                dependencies,
+                devDependencies,
+                peerDependencies,
+            };
+        });
+    };
 };
 
-const updateREADME = async() => {
-    const {
-        project,
-        presets,
-    } = data;
-
+const updateREADME = (options) => {
+    const { project, presets } = options;
     const filename = 'README.md';
 
-    await sleep(1000);
-    await presets.updateFile(filename, (content) => {
-        const projectData = content.split('----------\n\n')[1];
-        return projectData.replace(/gt-react-scaffold/g, `${project.name}
+    return async() => {
+        await sleep(500);
+        await presets.updateFile(filename, (content) => {
+            const projectData = content.split('----------\n\n')[1];
+            return projectData.replace(/gt-react-scaffold/g, `${project.name}
 
 Initialized by [vivaxy/gt-react-scaffold](https://github.com/vivaxy/gt-react-scaffold)`);
-    });
+        });
+    };
 };
 
-const updateTemplate = async() => {
-    const {
-        project,
-        presets,
-    } = data;
-
+const updateTemplate = (options) => {
+    const { project, presets } = options;
     const filename = 'src/html/index.html';
 
-    await sleep(1000);
-    await presets.updateFile(filename, (content) => {
-        return content.replace(/gt-react-scaffold/g, project.name);
-    });
+    return async() => {
+        await sleep(1000);
+        await presets.updateFile(filename, (content) => {
+            return content.replace(/gt-react-scaffold/g, project.name);
+        });
+    };
 };
 
-const updateRender = async() => {
-    const {
-        project,
-        presets,
-    } = data;
-
+const updateRender = (options) => {
+    const { project, presets } = options;
     const filename = 'src/lib/render.js';
 
-    await sleep(1000);
-    await presets.updateFile(filename, (content) => {
-        return content.replace(/gt-react-scaffold/g, project.name);
-    });
+    return async() => {
+        await sleep(1000);
+        await presets.updateFile(filename, (content) => {
+            return content.replace(/gt-react-scaffold/g, project.name);
+        });
+    };
 };
 
-const yarnInstall = async() => {
-    await execa('yarn', ['install']);
+const yarnInstall = () => {
+    return async() => {
+        await execa('yarn', ['install']);
+    };
 };
 
-export const init = async(options) => {
-    data = options;
-
+export const init = (options) => {
     return new Listr([
         {
             title: 'copy files',
-            task: copyFiles,
+            task: copyFiles(options),
         },
         {
             title: 'update template',
-            task: updateTemplate,
+            task: updateTemplate(options),
         },
         {
             title: 'update render',
-            task: updateRender,
+            task: updateRender(options),
         },
         {
             title: 'update package.json',
-            task: updatePackageJSON,
+            task: updatePackageJSON(options),
         },
         {
             title: 'update README.md',
-            task: updateREADME,
+            task: updateREADME(options),
         },
         {
             title: 'run yarn install',
-            task: yarnInstall,
+            task: yarnInstall(options),
         },
     ]);
 };
 
 /* eslint-disable no-console */
-export const after = async() => {
+export const after = () => {
     console.log(`
     please run following command to start dev server
 
-    - yarn run dev
+        - yarn run dev
 `);
 };
