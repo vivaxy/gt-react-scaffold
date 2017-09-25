@@ -17,8 +17,7 @@ const copyFiles = (options) => {
     const files = [
         'docs',
         'mock-server',
-        'scripts/config.js',
-        'scripts/dev.js',
+        'scripts',
         'src',
         '.babelrc',
         '.editorconfig',
