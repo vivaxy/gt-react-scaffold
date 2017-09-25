@@ -21,6 +21,7 @@ const copyFiles = (options) => {
         'src',
         '.babelrc',
         '.editorconfig',
+        '.eslintrc',
         '.gitignore',
         '.npmrc',
         'LICENSE',
